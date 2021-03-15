@@ -1,7 +1,8 @@
 package top.zxpdmw.graduationproject.util;
 
-import retrofit2.Retrofit;
+import okhttp3.OkHttpClient;
 
 public class HttpUtil {
-    public static final Retrofit builder=new Retrofit.Builder().baseUrl("http://127.0.0.1:80/").build();
+    public static final OkHttpClient OK_HTTP_CLIENT = new OkHttpClient();
+    public static final String BASE_URL = "http://39.96.113.190/";
 }

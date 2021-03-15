@@ -21,7 +21,7 @@
             android:textSize="100sp" />
 
         <EditText
-            android:id="@+id/username"
+            android:id="@+id/login_username"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:background="#ffffffff"
@@ -44,7 +44,7 @@
             android:background="#11000000" />
 
         <EditText
-            android:id="@+id/password"
+            android:id="@+id/login_password"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:background="#ffffffff"

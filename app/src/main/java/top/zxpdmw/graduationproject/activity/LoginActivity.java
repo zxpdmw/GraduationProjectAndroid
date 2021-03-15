@@ -10,24 +10,22 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.gson.Gson;
-
-import org.jetbrains.annotations.NotNull;
+import org.json.JSONObject;
 
 import java.io.IOException;
+import java.sql.Time;
+import java.time.chrono.ChronoLocalDate;
+import java.util.Objects;
+import java.util.concurrent.TimeUnit;
 
 import okhttp3.FormBody;
-import okhttp3.OkHttpClient;
 import okhttp3.Request;
+import okhttp3.Response;
 import okhttp3.ResponseBody;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 import top.zxpdmw.graduationproject.R;
-import top.zxpdmw.graduationproject.service.UserService;
 import top.zxpdmw.graduationproject.util.ConstUtil;
 import top.zxpdmw.graduationproject.util.HttpUtil;
-import top.zxpdmw.graduationproject.util.UrlUtil;
+import top.zxpdmw.graduationproject.util.ToastUtil;
 
 
 public class LoginActivity extends AppCompatActivity {
@@ -37,8 +35,8 @@ public class LoginActivity extends AppCompatActivity {
     private EditText password;
 
     private void initView() {
-        username = findViewById(R.id.username);
-        password = findViewById(R.id.password);
+        username = findViewById(R.id.login_username);
+        password = findViewById(R.id.login_password);
         newUser = findViewById(R.id.new_user);
         login = findViewById(R.id.login_button);
     }
@@ -53,41 +51,9 @@ public class LoginActivity extends AppCompatActivity {
         newUser.setOnClickListener(v -> {
             newUser();
         });
-        
+
         login.setOnClickListener(v -> {
-            new Thread(()->{
-                UserService userService = HttpUtil.builder.create(UserService.class);
-                Call<ResponseBody> responseBodyCall = userService.checkLogin(username.getText().toString(), password.getText().toString());
-                responseBodyCall.enqueue(new Callback<ResponseBody>() {
-                    @Override
-                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                        if (response.isSuccessful()) {
-                            try {
-                                if (response.body() != null) {
-                                    if (response.body().string().equals("true")) {
-                                        Log.println(Log.DEBUG, "success", "请求成功");
-                                        loginSuccess();
-                                    } else {
-                                        Toast.makeText(LoginActivity.this, ConstUtil.USERNAME_PASSWORD_ERROR, Toast.LENGTH_LONG).show();
-                                    }
-                                }
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            }
-                        } else {
-                            Toast.makeText(LoginActivity.this, ConstUtil.SYSTEM_EXCEPTION, Toast.LENGTH_LONG).show();
-
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(Call<ResponseBody> call, Throwable t) {
-                        Log.println(Log.DEBUG, "http", t.toString());
-                        Log.println(Log.DEBUG, "http", call.toString());
-                    }
-                });
-            }).start();
-
+            checkLogin();
         });
     }
 
@@ -100,6 +66,47 @@ public class LoginActivity extends AppCompatActivity {
     private void loginSuccess() {
         Intent intent = new Intent(LoginActivity.this, SystemMainActivity.class);
         startActivity(intent);
+    }
+
+    private void checkLogin() {
+        new Thread(() -> {
+            try {
+                String uname=username.getText().toString();
+                String upwd=password.getText().toString();
+                Request request = new Request.Builder()
+                        .url(HttpUtil.BASE_URL + "user/login?username="+uname+"&password="+upwd)
+                        .build();
+                System.out.println(request.url());
+                Response response = HttpUtil.OK_HTTP_CLIENT.newCall(request).execute();
+                JSONObject jsonObject = new JSONObject(response.body().string());
+                String code = jsonObject.getString("code");
+                String message = jsonObject.getString("message");
+                if (code.equals("666")) {
+                    runOnUiThread(() -> {
+                        ToastUtil toastUtil = new ToastUtil(this, message);
+                        toastUtil.show(500);
+                        loginSuccess();
+                    });
+                } else if (code.equals("5551")) {
+                    runOnUiThread(() -> {
+                        ToastUtil toastUtil = new ToastUtil(this, message);
+                        toastUtil.show(500);
+                    });
+                } else if (code.equals("5552")) {
+                    runOnUiThread(() -> {
+                        ToastUtil toastUtil = new ToastUtil(this, message);
+                        toastUtil.show(500);
+                    });
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+                runOnUiThread(() -> {
+                    ToastUtil toastUtil = new ToastUtil(this, ConstUtil.SYSTEM_EXCEPTION);
+                    toastUtil.show(500);
+                });
+            }
+        }).start();
+
     }
 
 }

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">GraduationProject</string>
+    <string name="app_name">便民社区</string>
     <string name="login">登 录</string>
     <string name="register">注 册</string>
     <string name="title">社区通</string>
