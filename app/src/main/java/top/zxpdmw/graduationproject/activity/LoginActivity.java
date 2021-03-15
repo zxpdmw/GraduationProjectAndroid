@@ -76,27 +76,25 @@ public class LoginActivity extends AppCompatActivity {
                 Request request = new Request.Builder()
                         .url(HttpUtil.BASE_URL + "user/login?username="+uname+"&password="+upwd)
                         .build();
-                System.out.println(request.url());
                 Response response = HttpUtil.OK_HTTP_CLIENT.newCall(request).execute();
                 JSONObject jsonObject = new JSONObject(response.body().string());
                 String code = jsonObject.getString("code");
                 String message = jsonObject.getString("message");
-                if (code.equals("666")) {
-                    runOnUiThread(() -> {
-                        ToastUtil toastUtil = new ToastUtil(this, message);
-                        toastUtil.show(500);
-                        loginSuccess();
-                    });
-                } else if (code.equals("5551")) {
-                    runOnUiThread(() -> {
-                        ToastUtil toastUtil = new ToastUtil(this, message);
-                        toastUtil.show(500);
-                    });
-                } else if (code.equals("5552")) {
-                    runOnUiThread(() -> {
-                        ToastUtil toastUtil = new ToastUtil(this, message);
-                        toastUtil.show(500);
-                    });
+                switch (code) {
+                    case "666":
+                        runOnUiThread(() -> {
+                            ToastUtil toastUtil = new ToastUtil(this, message);
+                            toastUtil.show(500);
+                            loginSuccess();
+                        });
+                        break;
+                    case "5551":
+                    case "5552":
+                        runOnUiThread(() -> {
+                            ToastUtil toastUtil = new ToastUtil(this, message);
+                            toastUtil.show(500);
+                        });
+                        break;
                 }
             } catch (Exception e) {
                 e.printStackTrace();

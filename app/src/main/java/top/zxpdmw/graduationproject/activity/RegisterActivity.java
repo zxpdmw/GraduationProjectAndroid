@@ -73,14 +73,8 @@ public class RegisterActivity extends AppCompatActivity {
                 String message=jsonObject.getString("message");
                 if (code.equals("666")){
                     runOnUiThread(() -> {
-//                        Toast.makeText(RegisterActivity.this,message+ConstUtil.TO_LOGIN_ACTIVITY,Toast.LENGTH_LONG).show();
                         ToastUtil toastUtil = new ToastUtil(RegisterActivity.this, message + ConstUtil.TO_LOGIN_ACTIVITY);
                         toastUtil.show(300);
-//                        try {
-//                            TimeUnit.SECONDS.sleep(1);
-//                        } catch (InterruptedException e) {
-//                            e.printStackTrace();
-//                        }
                         registerSuccessToLogin();
                     });
                 }else {
