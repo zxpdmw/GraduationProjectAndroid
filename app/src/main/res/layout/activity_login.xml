@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@drawable/mainbg">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -25,10 +27,14 @@
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:background="#ffffffff"
-            android:hint="账号"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            android:hint="@string/username"
             android:paddingLeft="20dp"
             android:textColor="#ff000000"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            android:paddingStart="20dp"
+            tools:ignore="RtlSymmetry" />
 
     </LinearLayout>
 
@@ -48,10 +54,15 @@
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:background="#ffffffff"
-            android:hint="密码"
+            android:hint="@string/password"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            android:inputType="textPassword"
             android:paddingLeft="20dp"
             android:textColor="#ff000000"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            android:paddingStart="20dp"
+            tools:ignore="RtlSymmetry" />
 
 
     </LinearLayout>
@@ -67,8 +78,8 @@
             android:id="@+id/login_button"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
             android:gravity="center"
             android:text="@string/login"
             android:textColor="#ffffffff"

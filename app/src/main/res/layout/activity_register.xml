@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -16,7 +17,7 @@
             android:layout_width="311dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_margin="100dp"
+            android:layout_margin="75dp"
             android:text="@string/title"
             android:textSize="100sp" />
 
@@ -25,10 +26,14 @@
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:background="#ffffffff"
-            android:hint="昵称"
+            android:hint="@string/nickname"
             android:paddingLeft="20dp"
             android:textColor="#ff000000"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            android:paddingStart="20dp"
+            tools:ignore="RtlSymmetry" />
 
     </LinearLayout>
 
@@ -48,10 +53,15 @@
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:background="#ffffffff"
-            android:hint="账户"
+            android:hint="@string/username"
             android:paddingLeft="20dp"
             android:textColor="#ff000000"
-            android:textSize="14sp" />
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+
+            android:textSize="14sp"
+            android:paddingStart="20dp"
+            tools:ignore="RtlSymmetry" />
 
 
     </LinearLayout>
@@ -71,10 +81,15 @@
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:background="#ffffffff"
-            android:hint="密码"
+            android:hint="@string/password"
             android:paddingLeft="20dp"
             android:textColor="#ff000000"
-            android:textSize="14sp" />
+            android:layout_marginLeft="50dp"
+            android:inputType="textPassword"
+            android:layout_marginRight="50dp"
+            android:textSize="14sp"
+            android:paddingStart="20dp"
+            tools:ignore="RtlSymmetry" />
 
 
     </LinearLayout>
@@ -93,8 +108,10 @@
             android:id="@+id/register_houseId"
             android:layout_width="match_parent"
             android:layout_height="60dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
             android:background="#ffffffff"
-            android:hint="房屋号"
+            android:hint="@string/houseId"
             android:paddingLeft="20dp"
             android:textColor="#ff000000"
             android:textSize="14sp" />
@@ -113,8 +130,9 @@
             android:id="@+id/register_button"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+
             android:gravity="center"
             android:text="@string/register"
             android:textColor="#ffffffff"

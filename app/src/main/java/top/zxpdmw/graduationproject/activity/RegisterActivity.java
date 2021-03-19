@@ -4,28 +4,22 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.Objects;
-import java.util.concurrent.TimeUnit;
 
 import okhttp3.MediaType;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
-import okhttp3.ResponseBody;
 import top.zxpdmw.graduationproject.R;
-import top.zxpdmw.graduationproject.model.RegisterUser;
 import top.zxpdmw.graduationproject.util.ConstUtil;
 import top.zxpdmw.graduationproject.util.HttpUtil;
-import top.zxpdmw.graduationproject.util.JsonUtil;
 import top.zxpdmw.graduationproject.util.ToastUtil;
 
 public class RegisterActivity extends AppCompatActivity {
@@ -40,9 +34,7 @@ public class RegisterActivity extends AppCompatActivity {
 
         initView();
 
-        register.setOnClickListener(v -> {
-            register();
-        });
+        register.setOnClickListener(v -> register());
 
     }
 
@@ -62,10 +54,14 @@ public class RegisterActivity extends AppCompatActivity {
     public void register() {
         new Thread(()->{
             try {
-                RegisterUser user=new RegisterUser(nickname.getText().toString(),username.getText().toString(),password.getText().toString(),houseId.getText().toString());
+                JSONObject user=new JSONObject();
+                user.put("nickname",nickname.getText().toString());
+                user.put("username",username.getText().toString());
+                user.put("password",password.getText().toString());
+                user.put("house_id",houseId.getText().toString());
                 Request request =new Request.Builder()
                         .url(HttpUtil.BASE_URL+"user/register")
-                        .post(RequestBody.create(MediaType.parse("application/json"), JsonUtil.BeanToJson(user)))
+                        .post(RequestBody.create(user.toString(),MediaType.parse("application/json")))
                         .build();
                 Response response=HttpUtil.OK_HTTP_CLIENT.newCall(request).execute();
                 JSONObject jsonObject = new JSONObject(Objects.requireNonNull(response.body()).string());

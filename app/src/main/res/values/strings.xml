@@ -4,4 +4,8 @@
     <string name="register">注 册</string>
     <string name="title">社区通</string>
     <string name="newuser">新用户</string>
+    <string name="username">用户名</string>
+    <string name="password">密码</string>
+    <string name="houseId">房屋号</string>
+    <string name="nickname">昵称</string>
 </resources>
