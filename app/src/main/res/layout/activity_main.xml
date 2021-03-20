@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background = "@drawable/mainbg"
+    android:background = "@drawable/background"
     android:orientation="vertical">
 
 
@@ -13,21 +13,27 @@
         android:layout_gravity="center_horizontal"
         android:layout_margin="100dp"
         android:text="@string/title"
-        android:textSize="100sp" />
+        android:textSize="100sp"
+        android:shadowRadius="3.0"
+        android:shadowColor="#F9F900"
+        android:shadowDx="15.0"
+        android:shadowDy="15.0"/>
 
     <Button
         android:id="@+id/login"
         android:layout_width="150dp"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:layout_gravity="center_horizontal"
+        android:background="@color/xui_btn_blue_select_color"
         android:layout_margin="50dp"
         android:text="@string/login" />
 
     <Button
         android:id="@+id/register"
         android:layout_width="150dp"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:layout_gravity="center_horizontal"
         android:layout_margin="20dp"
+        android:background="@color/xui_btn_blue_select_color"
         android:text="@string/register" />
 </LinearLayout>

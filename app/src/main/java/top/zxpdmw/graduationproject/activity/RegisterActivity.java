@@ -59,11 +59,7 @@ public class RegisterActivity extends AppCompatActivity {
                 user.put("username",username.getText().toString());
                 user.put("password",password.getText().toString());
                 user.put("house_id",houseId.getText().toString());
-                Request request =new Request.Builder()
-                        .url(HttpUtil.BASE_URL+"user/register")
-                        .post(RequestBody.create(user.toString(),MediaType.parse("application/json")))
-                        .build();
-                Response response=HttpUtil.OK_HTTP_CLIENT.newCall(request).execute();
+                Response response = HttpUtil.PostJson(user);
                 JSONObject jsonObject = new JSONObject(Objects.requireNonNull(response.body()).string());
                 String code = jsonObject.getString("code");
                 String message=jsonObject.getString("message");

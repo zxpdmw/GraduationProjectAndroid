@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@drawable/mainbg">
+    android:background="@drawable/background">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -20,7 +20,11 @@
             android:layout_gravity="center_horizontal"
             android:layout_margin="100dp"
             android:text="@string/title"
-            android:textSize="100sp" />
+            android:textSize="100sp"
+            android:shadowRadius="3.0"
+            android:shadowColor="#F9F900"
+            android:shadowDx="15.0"
+            android:shadowDy="15.0"/>
 
         <EditText
             android:id="@+id/login_username"
@@ -34,6 +38,7 @@
             android:textColor="#ff000000"
             android:textSize="14sp"
             android:paddingStart="20dp"
+            android:singleLine="true"
             tools:ignore="RtlSymmetry" />
 
     </LinearLayout>
@@ -61,6 +66,7 @@
             android:paddingLeft="20dp"
             android:textColor="#ff000000"
             android:textSize="14sp"
+            android:singleLine="true"
             android:paddingStart="20dp"
             tools:ignore="RtlSymmetry" />
 
@@ -83,7 +89,9 @@
             android:gravity="center"
             android:text="@string/login"
             android:textColor="#ffffffff"
-            android:textSize="16sp" />
+            android:background="@color/xui_btn_blue_select_color"
+            android:textSize="16sp"
+            android:layout_marginBottom="10dp"/>
     </LinearLayout>
 
     <LinearLayout
@@ -95,7 +103,6 @@
             android:id="@+id/new_user"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="20dp"
             android:layout_gravity="center_horizontal"
             android:gravity="center_horizontal"
             android:text="@string/newuser" />

@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
+import com.xuexiang.xui.XUI;
 
 import okhttp3.OkHttp;
 import okhttp3.OkHttpClient;
@@ -23,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        XUI.initTheme(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initView();
