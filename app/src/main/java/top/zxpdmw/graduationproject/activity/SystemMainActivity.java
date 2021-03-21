@@ -1,58 +1,122 @@
 package top.zxpdmw.graduationproject.activity;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
-import java.util.Objects;
 
 import okhttp3.Response;
 import top.zxpdmw.graduationproject.R;
-import top.zxpdmw.graduationproject.adapter.NoticeAdapter;
-import top.zxpdmw.graduationproject.model.Notice;
+import top.zxpdmw.graduationproject.adapter.SystemMainAdapter;
+import top.zxpdmw.graduationproject.model.Module;
+import top.zxpdmw.graduationproject.util.ConstUtil;
 import top.zxpdmw.graduationproject.util.HttpUtil;
-import top.zxpdmw.graduationproject.util.JsonUtil;
+import top.zxpdmw.graduationproject.util.ToastUtil;
 
 
-public class SystemMainActivity extends AppCompatActivity {
-    private List<Notice> data = null;
+public class SystemMainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
+    private List<Module> moduleList = null;
+    private String code;
+    private String data;
     private Context context;
-    private NoticeAdapter noticeAdapter = null;
-    private ListView list_notice;
+    private SystemMainAdapter adapter = null;
+    private ListView listView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_systemmain);
-        getData();
-//        context = SystemMainActivity.this;
-//        list_notice = findViewById(R.id.list_item);
-//        noticeAdapter = new NoticeAdapter((ArrayList<Notice>) data, context);
-//        list_notice.setAdapter(noticeAdapter);
+        init();
+        adapter = new SystemMainAdapter(moduleList, context);
+        listView.setAdapter(adapter);
+        listView.setOnItemClickListener(this);
     }
 
-    private void getData(){
-        new Thread(()->{
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
+
+    public void init() {
+        context = SystemMainActivity.this;
+        listView = findViewById(R.id.list_main);
+        moduleList=Arrays.asList(Module.NOTICE,Module.PAGE,Module.PROPERTY,Module.COMPLAIN,Module.REPAIR,Module.HOUSE_KEEPING,Module.HOUSE_RENT_SALE,Module.MY_INFO);
+    }
+
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        new ToastUtil(this,""+position).show(1000);
+        switch (position){
+            case 0:{
+                new Thread(()->{
+                    getRecommendNotice();
+                    if (data!=""){
+                        Intent intent = new Intent(SystemMainActivity.this, NoticeActivity.class);
+                        intent.putExtra("data",data);
+                        startActivity(intent);
+                    }else{
+                        runOnUiThread(() -> {
+                            new ToastUtil(this,ConstUtil.SYSTEM_EXCEPTION).show(500);
+                        });
+                    }
+                }).start();
+            }
+            case 1:{
+                Intent intent = new Intent(SystemMainActivity.this, TestActivity.class);
+                startActivity(intent);
+            }
+        }
+//        if (position==0){
+//                new Thread(()->{
+//                    getRecommendNotice();
+//                    if (data!=""){
+//                        Intent intent = new Intent(SystemMainActivity.this, NoticeActivity.class);
+//                        intent.putExtra("data",data);
+//                        startActivity(intent);
+//                    }else{
+//                        runOnUiThread(() -> {
+//                            new ToastUtil(this,ConstUtil.SYSTEM_EXCEPTION).show(500);
+//                        });
+//                    }
+//                }).start();
+//
+//        }else{
+//
+//        }
+    }
+
+    private void getRecommendNotice() {
+            Response response = HttpUtil.GetNoParam(ConstUtil.NOTICE_RECOMMEND);
             try {
-                Response response = HttpUtil.GetNoParam("notice/recommend");
-                JSONObject jsonObject=new JSONObject(Objects.requireNonNull(response.body()).string());
-                if (jsonObject.getString("code").equals("666")){
-                    data = JsonUtil.getNoticeList(jsonObject.getJSONArray("data"));
-                    System.out.println(data);
+                JSONObject jsonObject = new JSONObject(response.body().string());
+                code = jsonObject.getString("code");
+                if (code.equals("666")){
+                    JSONArray jsonArray=jsonObject.getJSONArray("data");
+                    data=jsonArray.toString();
                 }
+
             } catch (JSONException e) {
                 e.printStackTrace();
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        }).start();
     }
 }

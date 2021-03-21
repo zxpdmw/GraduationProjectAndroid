@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.util.Map;
 import java.util.Set;
 
+import lombok.SneakyThrows;
 import okhttp3.Call;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
@@ -18,31 +19,23 @@ import okhttp3.Response;
 
 public class HttpUtil {
     public static final OkHttpClient OK_HTTP_CLIENT = new OkHttpClient();
-    public static final String BASE_URL = "http://39.96.113.190:8080/";
 
-    public static Response GetNoParam(String requestPath){
-        Response response= null;
-        try {
-            Request request=new Request.Builder().url(BASE_URL+requestPath).build();
-            response = OK_HTTP_CLIENT.newCall(request).execute();
-
-        }catch (IOException e){
-            e.printStackTrace();
-        }
+    @SneakyThrows
+    public static Response GetNoParam(String requestPath) {
+        Response response = null;
+        Request request = new Request.Builder().url(ConstUtil.BASE_URL + requestPath).build();
+        response = OK_HTTP_CLIENT.newCall(request).execute();
         return response;
     }
 
-    public static Response PostJson(JSONObject jsonObject){
-        Response response=null;
-        try {
-            Request request =new Request.Builder()
-                    .url(HttpUtil.BASE_URL+"user/register")
-                    .post(RequestBody.create(jsonObject.toString(), MediaType.parse("application/json")))
-                    .build();
-             response=HttpUtil.OK_HTTP_CLIENT.newCall(request).execute();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    @SneakyThrows
+    public static Response PostJson(JSONObject jsonObject) {
+        Response response = null;
+        Request request = new Request.Builder()
+                .url(ConstUtil.BASE_URL + "user/register")
+                .post(RequestBody.create(jsonObject.toString(), MediaType.parse("application/json")))
+                .build();
+        response = HttpUtil.OK_HTTP_CLIENT.newCall(request).execute();
         return response;
     }
 }

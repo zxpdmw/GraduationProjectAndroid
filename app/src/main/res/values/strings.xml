@@ -3,9 +3,17 @@
     <string name="login">登 录</string>
     <string name="register">注 册</string>
     <string name="title">社区通</string>
-    <string name="newuser">新用户</string>
+    <string name="new_user">新用户</string>
     <string name="username">用户名</string>
     <string name="password">密码</string>
     <string name="houseId">房屋号</string>
     <string name="nickname">昵称</string>
+    <string name="houseKeeping">"家 政 服 务                                                                    "</string>
+    <string name="notice">"社 区 公 告                                                                          "</string>
+    <string name="page">"社 区 黄 页                                                                             "</string>
+    <string name="complain">"投 诉                                                                               "</string>
+    <string name="repair">"报 修                                                                                  "</string>
+    <string name="houseRentSale">"房 屋 租 售                                                                      "</string>
+    <string name="me">"我 的                                                                                      "</string>
+    <string name="property">"物 业 费                                                                                              "</string>
 </resources>

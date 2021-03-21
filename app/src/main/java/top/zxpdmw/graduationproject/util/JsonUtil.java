@@ -31,6 +31,18 @@ public class JsonUtil{
         return list;
     }
 
+    public static List<HouseRentSale> getHouseRentList(@NotNull JSONArray jsonArray) throws JSONException {
+        Type type = new TypeToken<List<HouseRentSale>>() {}.getType();
+        List<HouseRentSale> list = new Gson().fromJson(jsonArray.toString(), type);
+        return list;
+    }
+
+    public static List<HouseRentSale> getHouseSaleList(@NotNull JSONArray jsonArray) throws JSONException {
+        Type type = new TypeToken<List<HouseRentSale>>() {}.getType();
+        List<HouseRentSale> list = new Gson().fromJson(jsonArray.toString(), type);
+        return list;
+    }
+
     public static List<HouseKeeping> getHouseKeepingList(@NotNull JSONArray jsonArray) throws JSONException {
         Type type = new TypeToken<List<HouseKeeping>>() {}.getType();
         List<HouseKeeping> list = new Gson().fromJson(jsonArray.toString(), type);

@@ -71,10 +71,10 @@ public class LoginActivity extends AppCompatActivity {
     private void checkLogin() {
         new Thread(() -> {
             try {
-                String uname=username.getText().toString();
-                String upwd=password.getText().toString();
+                String uname = username.getText().toString();
+                String upwd = password.getText().toString();
                 Request request = new Request.Builder()
-                        .url(HttpUtil.BASE_URL + "user/login?username="+uname+"&password="+upwd)
+                        .url(ConstUtil.BASE_URL + ConstUtil.USER_LOGIN + "?username=" + uname + "&password=" + upwd)
                         .build();
                 Response response = HttpUtil.OK_HTTP_CLIENT.newCall(request).execute();
                 JSONObject jsonObject = new JSONObject(response.body().string());
@@ -104,7 +104,5 @@ public class LoginActivity extends AppCompatActivity {
                 });
             }
         }).start();
-
     }
-
 }

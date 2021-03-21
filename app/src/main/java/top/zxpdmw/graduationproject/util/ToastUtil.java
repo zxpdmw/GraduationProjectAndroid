@@ -15,10 +15,8 @@ public class ToastUtil {
 
     public ToastUtil(Context context, String msg) {
         message = msg;
-        Log.i("ToastUtil", "Toast start...");
         if (mToast == null) {
             mToast =Toast.makeText(context,message,Toast.LENGTH_SHORT);
-            Log.i("ToastUtil", "Toast create...");
         }
     }
 
@@ -27,7 +25,6 @@ public class ToastUtil {
      */
     public void show() {
         mToast.show();
-        Log.i("ToastUtil", "Toast show...");
     }
 
     /**
@@ -36,7 +33,6 @@ public class ToastUtil {
      */
     public void show(int duration) {
         timeCount = new TimeCount(duration, 100);
-        Log.i("ToastUtil", "Toast show...");
         if (canceled) {
             timeCount.start();
             show();
@@ -52,7 +48,6 @@ public class ToastUtil {
             mToast.cancel();
         }
         canceled = true;
-        Log.i("ToastUtil", "Toast that customed duration hide...");
     }
 
 
@@ -67,7 +62,6 @@ public class ToastUtil {
 
         @Override
         public void onTick(long millisUntilFinished) {
-            Log.e(TAG,  ": " + millisUntilFinished / 100 + "后消失" );
         }
 
         @Override
