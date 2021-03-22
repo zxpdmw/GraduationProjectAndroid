@@ -21,7 +21,7 @@ public class HttpUtil {
     public static final OkHttpClient OK_HTTP_CLIENT = new OkHttpClient();
 
     @SneakyThrows
-    public static Response GetNoParam(String requestPath) {
+    public static Response Get(String requestPath) {
         Response response = null;
         Request request = new Request.Builder().url(ConstUtil.BASE_URL + requestPath).build();
         response = OK_HTTP_CLIENT.newCall(request).execute();
@@ -29,10 +29,10 @@ public class HttpUtil {
     }
 
     @SneakyThrows
-    public static Response PostJson(JSONObject jsonObject) {
+    public static Response PostJson(JSONObject jsonObject,String requestPath) {
         Response response = null;
         Request request = new Request.Builder()
-                .url(ConstUtil.BASE_URL + "user/register")
+                .url(ConstUtil.BASE_URL + requestPath)
                 .post(RequestBody.create(jsonObject.toString(), MediaType.parse("application/json")))
                 .build();
         response = HttpUtil.OK_HTTP_CLIENT.newCall(request).execute();

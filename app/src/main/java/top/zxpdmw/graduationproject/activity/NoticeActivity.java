@@ -1,6 +1,7 @@
 package top.zxpdmw.graduationproject.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.Context;
 import android.content.Intent;
@@ -22,6 +23,7 @@ public class NoticeActivity extends AppCompatActivity {
     private Context context;
     private NoticeAdapter noticeAdapter;
     private ListView listView;
+    private Toolbar toolbar;
 
 
     @Override
@@ -35,6 +37,11 @@ public class NoticeActivity extends AppCompatActivity {
 
     @SneakyThrows
     private void init(){
+        toolbar=findViewById(R.id.toolbar);
+        toolbar.setTitle("社区公告");
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        toolbar.setNavigationOnClickListener(v -> finish());
         listView=findViewById(R.id.list_notice);
         context = NoticeActivity.this;
         Intent intent = getIntent();

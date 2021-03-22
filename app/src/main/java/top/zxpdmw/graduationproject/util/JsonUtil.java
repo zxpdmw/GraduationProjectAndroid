@@ -18,40 +18,48 @@ import top.zxpdmw.graduationproject.model.HouseKeeping;
 import top.zxpdmw.graduationproject.model.HouseRentSale;
 import top.zxpdmw.graduationproject.model.Notice;
 
-public class JsonUtil{
+public class JsonUtil {
+    public static final Gson GSON = new Gson();
+
     public static List<Notice> getNoticeList(@NotNull JSONArray jsonArray) throws JSONException {
-        Type type = new TypeToken<List<Notice>>() {}.getType();
-        List<Notice> list = new Gson().fromJson(jsonArray.toString(), type);
+        Type type = new TypeToken<List<Notice>>() {
+        }.getType();
+        List<Notice> list = GSON.fromJson(jsonArray.toString(), type);
         return list;
     }
 
     public static List<HouseRentSale> getHouseRentSaleList(@NotNull JSONArray jsonArray) throws JSONException {
-        Type type = new TypeToken<List<HouseRentSale>>() {}.getType();
-        List<HouseRentSale> list = new Gson().fromJson(jsonArray.toString(), type);
+        Type type = new TypeToken<List<HouseRentSale>>() {
+        }.getType();
+        List<HouseRentSale> list = GSON.fromJson(jsonArray.toString(), type);
         return list;
     }
 
     public static List<HouseRentSale> getHouseRentList(@NotNull JSONArray jsonArray) throws JSONException {
-        Type type = new TypeToken<List<HouseRentSale>>() {}.getType();
-        List<HouseRentSale> list = new Gson().fromJson(jsonArray.toString(), type);
+        Type type = new TypeToken<List<HouseRentSale>>() {
+        }.getType();
+        List<HouseRentSale> list = GSON.fromJson(jsonArray.toString(), type);
         return list;
     }
 
     public static List<HouseRentSale> getHouseSaleList(@NotNull JSONArray jsonArray) throws JSONException {
-        Type type = new TypeToken<List<HouseRentSale>>() {}.getType();
-        List<HouseRentSale> list = new Gson().fromJson(jsonArray.toString(), type);
+        Type type = new TypeToken<List<HouseRentSale>>() {
+        }.getType();
+        List<HouseRentSale> list = GSON.fromJson(jsonArray.toString(), type);
         return list;
     }
 
     public static List<HouseKeeping> getHouseKeepingList(@NotNull JSONArray jsonArray) throws JSONException {
-        Type type = new TypeToken<List<HouseKeeping>>() {}.getType();
-        List<HouseKeeping> list = new Gson().fromJson(jsonArray.toString(), type);
+        Type type = new TypeToken<List<HouseKeeping>>() {
+        }.getType();
+        List<HouseKeeping> list = GSON.fromJson(jsonArray.toString(), type);
         return list;
     }
 
     public static List<ComplainRepair> getComplainRepairList(@NotNull JSONArray jsonArray) throws JSONException {
-        Type type = new TypeToken<List<ComplainRepair>>() {}.getType();
-        List<ComplainRepair> list = new Gson().fromJson(jsonArray.toString(), type);
+        Type type = new TypeToken<List<ComplainRepair>>() {
+        }.getType();
+        List<ComplainRepair> list = GSON.fromJson(jsonArray.toString(), type);
         return list;
     }
 }

@@ -5,7 +5,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
-    <include layout="@layout/title"/>
+    <include layout="@layout/toolbar"
+        android:id="@+id/toolbar"/>
 
     <ListView
         android:id="@+id/list_notice"

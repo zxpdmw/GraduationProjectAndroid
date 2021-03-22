@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
@@ -33,6 +34,7 @@ public class LoginActivity extends AppCompatActivity {
     private Button login;
     private EditText username;
     private EditText password;
+    private String houseId;
 
     private void initView() {
         username = findViewById(R.id.login_username);
@@ -53,6 +55,7 @@ public class LoginActivity extends AppCompatActivity {
         });
 
         login.setOnClickListener(v -> {
+            getHouseId();
             checkLogin();
         });
     }
@@ -65,6 +68,8 @@ public class LoginActivity extends AppCompatActivity {
 
     private void loginSuccess() {
         Intent intent = new Intent(LoginActivity.this, SystemMainActivity.class);
+        intent.putExtra("houseId",houseId);
+        intent.putExtra("username",username.getText().toString());
         startActivity(intent);
     }
 
@@ -73,10 +78,7 @@ public class LoginActivity extends AppCompatActivity {
             try {
                 String uname = username.getText().toString();
                 String upwd = password.getText().toString();
-                Request request = new Request.Builder()
-                        .url(ConstUtil.BASE_URL + ConstUtil.USER_LOGIN + "?username=" + uname + "&password=" + upwd)
-                        .build();
-                Response response = HttpUtil.OK_HTTP_CLIENT.newCall(request).execute();
+                Response response = HttpUtil.Get(ConstUtil.USER_LOGIN + "?username=" + uname + "&password=" + upwd);
                 JSONObject jsonObject = new JSONObject(response.body().string());
                 String code = jsonObject.getString("code");
                 String message = jsonObject.getString("message");
@@ -91,18 +93,38 @@ public class LoginActivity extends AppCompatActivity {
                     case "5551":
                     case "5552":
                         runOnUiThread(() -> {
-                            ToastUtil toastUtil = new ToastUtil(this, message);
-                            toastUtil.show(500);
+                            new ToastUtil(this, message).show(500);
                         });
                         break;
                 }
             } catch (Exception e) {
                 e.printStackTrace();
                 runOnUiThread(() -> {
-                    ToastUtil toastUtil = new ToastUtil(this, ConstUtil.SYSTEM_EXCEPTION);
-                    toastUtil.show(500);
+                    new ToastUtil(this, ConstUtil.SYSTEM_EXCEPTION).show(500);
                 });
             }
+        }).start();
+    }
+
+    private void getHouseId() {
+        new Thread(()->{
+            Response response = HttpUtil.Get(ConstUtil.USER_GET_HOUSEID + "?username=" + username.getText().toString());
+            try {
+                JSONObject jsonObject=new JSONObject(response.body().string());
+                if (jsonObject.getString("code").equals("666")){
+                    houseId=jsonObject.getString("data");
+                }else{
+                    runOnUiThread(() -> {
+                        new ToastUtil(this, ConstUtil.SYSTEM_EXCEPTION).show(500);
+                    });
+                }
+            } catch (IOException | JSONException e) {
+                e.printStackTrace();
+                runOnUiThread(() -> {
+                    new ToastUtil(this, ConstUtil.SYSTEM_EXCEPTION).show(500);
+                });
+            }
+
         }).start();
     }
 }

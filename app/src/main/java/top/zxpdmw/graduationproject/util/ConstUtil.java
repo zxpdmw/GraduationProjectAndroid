@@ -35,13 +35,14 @@ public class ConstUtil {
     public static final String NOTICE_PUBLISH="notice/publish";
     //物业费模块
     public static final String PROPERTY_GET="property/get";
-    public static final String PROPERTY_ADD="property/add";
+    public static final String PROPERTY_ADD="property/pay";
     //用户模块
     public static final String USER_LOGIN="user/login";
     public static final String USER_REGISTER="user/register";
     public static final String USER_PASSWORD="user/password";
     public static final String USER_INFO="user/info";
     public static final String USER_GET_INFO="user/get";
+    public static final String USER_GET_HOUSEID="user/houseid";
 
 
 
