@@ -6,6 +6,8 @@ import androidx.appcompat.widget.Toolbar;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import org.json.JSONArray;
@@ -16,9 +18,11 @@ import lombok.SneakyThrows;
 import top.zxpdmw.graduationproject.R;
 import top.zxpdmw.graduationproject.adapter.NoticeAdapter;
 import top.zxpdmw.graduationproject.model.Notice;
+import top.zxpdmw.graduationproject.util.ConstUtil;
 import top.zxpdmw.graduationproject.util.JsonUtil;
+import top.zxpdmw.graduationproject.util.ToastUtil;
 
-public class NoticeActivity extends AppCompatActivity {
+public class NoticeActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
     private List<Notice> noticeList;
     private Context context;
     private NoticeAdapter noticeAdapter;
@@ -33,6 +37,7 @@ public class NoticeActivity extends AppCompatActivity {
         init();
         noticeAdapter = new NoticeAdapter(noticeList, context);
         listView.setAdapter(noticeAdapter);
+        listView.setOnItemClickListener(this);
     }
 
     @SneakyThrows
@@ -49,5 +54,17 @@ public class NoticeActivity extends AppCompatActivity {
         noticeList = JsonUtil.getNoticeList(new JSONArray(data));
     }
 
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                toDetailNotice(position);
+    }
+
+    private void toDetailNotice(int position){
+        runOnUiThread(()->{
+            Intent intent=new Intent(NoticeActivity.this,DetailNoticeActivity.class);
+            intent.putExtra("notice",noticeList.get(position));
+            startActivity(intent);
+        });
+    }
 }
 

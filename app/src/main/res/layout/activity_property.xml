@@ -58,6 +58,7 @@
         android:layout_height="wrap_content"
         android:hint="请输入缴纳金额           "
         android:layout_marginTop="20dp"
+        android:inputType="number"
         android:layout_gravity="center"
         android:background="#ffff"/>
 

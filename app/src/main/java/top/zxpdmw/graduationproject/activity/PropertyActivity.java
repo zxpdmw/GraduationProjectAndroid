@@ -40,7 +40,11 @@ public class PropertyActivity extends AppCompatActivity {
         init();
         button.setOnClickListener(v -> {
             String add = editText.getText().toString();
-            AddProperty(add);
+            if (add.equals("")) {
+                new ToastUtil(this, "请输入缴纳金额").show(500);
+            } else {
+                AddProperty(add);
+            }
         });
     }
 
@@ -73,7 +77,6 @@ public class PropertyActivity extends AppCompatActivity {
                 if (code.equals("666")) {
                     runOnUiThread(() -> {
                         balance.setText(String.valueOf(Integer.parseInt(add) + Integer.parseInt(balance.getText().toString())));
-                        balance.clearComposingText();
                         new ToastUtil(this, "缴费成功").show(500);
                     });
 
@@ -86,9 +89,8 @@ public class PropertyActivity extends AppCompatActivity {
         }).start();
     }
 
-    public void getNickName(){
-        new Thread(()->{
-
+    public void getNickName() {
+        new Thread(() -> {
         }).start();
     }
 

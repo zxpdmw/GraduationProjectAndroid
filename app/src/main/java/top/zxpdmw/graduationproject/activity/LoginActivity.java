@@ -36,7 +36,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText password;
     private String houseId;
 
-    private void initView() {
+    private void init() {
         username = findViewById(R.id.login_username);
         password = findViewById(R.id.login_password);
         newUser = findViewById(R.id.new_user);
@@ -48,7 +48,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        initView();
+        init();
 
         newUser.setOnClickListener(v -> {
             newUser();

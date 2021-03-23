@@ -1,5 +1,7 @@
 package top.zxpdmw.graduationproject.model;
 
+import java.io.Serializable;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -7,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ComplainRepair {
+public class ComplainRepair implements Serializable {
     private Integer id;
     private String cr_type;
     private String phone;
