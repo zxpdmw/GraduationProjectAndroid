@@ -16,4 +16,15 @@
     <string name="houseRentSale">"房 屋 租 售                                                                      "</string>
     <string name="me">"我 的                                                                                      "</string>
     <string name="property">"物 业 费                                                                                              "</string>
+   <string name="sale">房 屋 买 卖                                                                                   </string>
+    <string name="rent">房 屋 租 售                                                                                   </string>
+    <string name="rent_ale">房 屋 租 售                                                                                   </string>
+    <string name="tab_menu_alert">提醒</string>
+    <string name="tab_menu_profile">信息</string>
+    <string name="tab_menu_pay">我的</string>
+    <string name="tab_menu_setting">设置</string>
+
+
+
+
 </resources>

@@ -24,5 +24,7 @@ public class Module implements Serializable {
     public static final Module COMPLAIN=new Module(R.drawable.complain, R.string.complain);
     public static final Module REPAIR=new Module(R.drawable.repair, R.string.repair);
     public static final Module HOUSE_KEEPING=new Module(R.drawable.housekeeping,R.string.houseKeeping);
-    public static final Module HOUSE_RENT_SALE=new Module(R.drawable.houserentsale, R.string.houseRentSale);
+    public static final Module HOUSE_RENT=new Module(R.drawable.houserentsale, R.string.rent);
+    public static final Module HOUSE_SALE=new Module(R.drawable.houserentsale, R.string.sale);
+    public static final Module HOUSE_RENT_SALE=new Module(R.drawable.houserentsale, R.string.rent);
 }

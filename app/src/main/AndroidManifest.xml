@@ -18,8 +18,22 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="n">
         <activity
-            android:name=".activity.CommunityPage"
-            android:exported="true"></activity>
+            android:name=".activity.HouseRentSaleActivity"
+            android:exported="true" />
+        <activity
+            android:name=".activity.HouseKeepingActivity"
+            android:exported="true" />
+        <activity android:name=".activity.RepairActivity"
+            android:exported="true"/>
+        <activity
+            android:name=".activity.ComplainActivity"
+            android:exported="true" />
+        <activity
+            android:name=".activity.MyInfoActivity"
+            android:exported="true" />
+        <activity
+            android:name=".activity.CommunityPageActivity"
+            android:exported="true" />
         <activity
             android:name=".activity.DetailNoticeActivity"
             android:exported="true" />

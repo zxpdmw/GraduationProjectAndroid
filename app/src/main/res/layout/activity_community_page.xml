@@ -4,20 +4,59 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.CommunityPage">
+    tools:context=".activity.CommunityPageActivity">
     <include layout="@layout/toolbar"
         android:id="@+id/toolbar"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/title"
+        android:id="@+id/community_title"
         android:text="汤臣一品"
         android:layout_below="@+id/toolbar"
         android:layout_marginLeft="100dp"
         android:gravity="center"
         android:layout_marginTop="10dp"
         android:textSize="50sp"/>
+
+    <TextView
+        android:id="@+id/community_introduce"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/community_title"
+        android:text="简介:汤臣一品(英语:Tomson Riviera)是位于中国上海市浦东新区陆家嘴金融贸易区的一个高级住宅,该公寓由2幢40层和2幢44层的超高层组成,由汤臣集团开发.由于开售时为110000元/平方米,被誉为中国第一豪宅,至2009年，该公寓均价已升至130000元/平方米。"
+        android:textSize="25sp"
+        android:layout_marginLeft="15dp"/>
+
+    <TextView
+        android:id="@+id/community_name"
+        android:layout_width="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="20dp"
+        android:text="汤臣一品物业总部"
+        android:layout_marginRight="40dp"
+        android:textSize="20sp"/>
+    <TextView
+        android:id="@+id/community_phone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/community_name"
+        android:text="电话:17375352129"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="30dp"
+        android:textSize="20sp"/>
+    <TextView
+        android:id="@+id/community_address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/community_phone"
+        android:text="地址:上海市浦东新区"
+        android:textSize="20sp"
+        android:layout_marginRight="15dp"
+        android:layout_alignParentRight="true"/>
+
 
 
 

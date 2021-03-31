@@ -5,16 +5,31 @@
       <map>
         <entry key="..\:/projects/GraduationProjectAndroid/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.21979166666666666" />
         <entry key="..\:/projects/GraduationProjectAndroid/app/src/main/res/drawable/ic_launcher_background.xml" value="0.21979166666666666" />
-        <entry key="..\:/projects/GraduationProjectAndroid/app/src/main/res/layout/activity_community_page.xml" value="0.1890625" />
+        <entry key="..\:/projects/GraduationProjectAndroid/app/src/main/res/drawable/tab_menu_better.xml" value="0.21979166666666666" />
+        <entry key="..\:/projects/GraduationProjectAndroid/app/src/main/res/drawable/tab_menu_bg.xml" value="0.21979166666666666" />
+        <entry key="..\:/projects/GraduationProjectAndroid/app/src/main/res/drawable/tab_menu_message.xml" value="0.21979166666666666" />
+        <entry key="..\:/projects/GraduationProjectAndroid/app/src/main/res/drawable/tab_menu_text.xml" value="0.21979166666666666" />
+        <entry key="..\:/projects/GraduationProjectAndroid/app/src/main/res/layout/activity_community_page.xml" value="0.22" />
+        <entry key="..\:/projects/GraduationProjectAndroid/app/src/main/res/layout/activity_complain.xml" value="0.1634963768115942" />
         <entry key="..\:/projects/GraduationProjectAndroid/app/src/main/res/layout/activity_detail_notice.xml" value="0.20364583333333333" />
+        <entry key="..\:/projects/GraduationProjectAndroid/app/src/main/res/layout/activity_house_keeping.xml" value="0.1634963768115942" />
+        <entry key="..\:/projects/GraduationProjectAndroid/app/src/main/res/layout/activity_house_rent_sale.xml" value="0.1634963768115942" />
         <entry key="..\:/projects/GraduationProjectAndroid/app/src/main/res/layout/activity_login.xml" value="0.25" />
         <entry key="..\:/projects/GraduationProjectAndroid/app/src/main/res/layout/activity_main.xml" value="0.20364583333333333" />
+        <entry key="..\:/projects/GraduationProjectAndroid/app/src/main/res/layout/activity_my_info.xml" value="0.20364583333333333" />
         <entry key="..\:/projects/GraduationProjectAndroid/app/src/main/res/layout/activity_notice.xml" value="0.20364583333333333" />
         <entry key="..\:/projects/GraduationProjectAndroid/app/src/main/res/layout/activity_property.xml" value="0.22" />
         <entry key="..\:/projects/GraduationProjectAndroid/app/src/main/res/layout/activity_register.xml" value="0.22" />
+        <entry key="..\:/projects/GraduationProjectAndroid/app/src/main/res/layout/activity_repair.xml" value="0.20364583333333333" />
         <entry key="..\:/projects/GraduationProjectAndroid/app/src/main/res/layout/activity_systemmain.xml" value="0.22" />
         <entry key="..\:/projects/GraduationProjectAndroid/app/src/main/res/layout/activity_test.xml" value="0.22" />
         <entry key="..\:/projects/GraduationProjectAndroid/app/src/main/res/layout/bottom.xml" value="0.22" />
+        <entry key="..\:/projects/GraduationProjectAndroid/app/src/main/res/layout/fg_content.xml" value="0.20364583333333333" />
+        <entry key="..\:/projects/GraduationProjectAndroid/app/src/main/res/layout/fg_house_list.xml" value="0.20364583333333333" />
+        <entry key="..\:/projects/GraduationProjectAndroid/app/src/main/res/layout/fg_rs_content.xml" value="0.1634963768115942" />
+        <entry key="..\:/projects/GraduationProjectAndroid/app/src/main/res/layout/fragment_item_house_rent_sale.xml" value="0.1634963768115942" />
+        <entry key="..\:/projects/GraduationProjectAndroid/app/src/main/res/layout/fragment_item_house_rent_sale_list.xml" value="0.1634963768115942" />
+        <entry key="..\:/projects/GraduationProjectAndroid/app/src/main/res/layout/fs_rs_title.xml" value="0.1634963768115942" />
         <entry key="..\:/projects/GraduationProjectAndroid/app/src/main/res/layout/item_complainrepair.xml" value="0.17391304347826086" />
         <entry key="..\:/projects/GraduationProjectAndroid/app/src/main/res/layout/item_grid.xml" value="0.1" />
         <entry key="..\:/projects/GraduationProjectAndroid/app/src/main/res/layout/item_housekeeping.xml" value="0.17391304347826086" />
@@ -25,6 +40,8 @@
         <entry key="..\:/projects/GraduationProjectAndroid/app/src/main/res/layout/item_list_main.xml" value="0.20364583333333333" />
         <entry key="..\:/projects/GraduationProjectAndroid/app/src/main/res/layout/item_list_notice.xml" value="0.17391304347826086" />
         <entry key="..\:/projects/GraduationProjectAndroid/app/src/main/res/layout/item_list_people.xml" value="0.1" />
+        <entry key="..\:/projects/GraduationProjectAndroid/app/src/main/res/layout/item_list_rent.xml" value="0.1634963768115942" />
+        <entry key="..\:/projects/GraduationProjectAndroid/app/src/main/res/layout/item_list_rent_sale.xml" value="0.15896739130434784" />
         <entry key="..\:/projects/GraduationProjectAndroid/app/src/main/res/layout/title.xml" value="0.1" />
         <entry key="..\:/projects/GraduationProjectAndroid/app/src/main/res/layout/toolbar.xml" value="0.22" />
         <entry key="..\:/projects/GraduationProjectAndroid/app/src/main/res/layout/toolbar_.xml" value="0.14266304347826086" />
@@ -45,7 +62,7 @@
   <component name="VisualizationToolProject">
     <option name="state">
       <ProjectState>
-        <option name="scale" value="0.22" />
+        <option name="scale" value="0.20364583333333333" />
       </ProjectState>
     </option>
   </component>
