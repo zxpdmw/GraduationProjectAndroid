@@ -23,10 +23,8 @@
         <activity
             android:name=".activity.HouseKeepingActivity"
             android:exported="true" />
-        <activity android:name=".activity.RepairActivity"
-            android:exported="true"/>
         <activity
-            android:name=".activity.ComplainActivity"
+            android:name=".activity.ComplainRepairActivity"
             android:exported="true" />
         <activity
             android:name=".activity.MyInfoActivity"

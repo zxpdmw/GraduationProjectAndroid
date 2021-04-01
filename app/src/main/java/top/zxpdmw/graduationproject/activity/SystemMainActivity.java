@@ -18,13 +18,12 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
+import java.util.concurrent.TimeUnit;
 
 import lombok.SneakyThrows;
 import okhttp3.Response;
 import top.zxpdmw.graduationproject.R;
 import top.zxpdmw.graduationproject.adapter.SystemMainAdapter;
-import top.zxpdmw.graduationproject.model.HouseRentSale;
 import top.zxpdmw.graduationproject.model.Module;
 import top.zxpdmw.graduationproject.model.User;
 import top.zxpdmw.graduationproject.util.ConstUtil;
@@ -46,8 +45,8 @@ public class SystemMainActivity extends AppCompatActivity implements AdapterView
     private String username;
     private String propertyBalance;
     private User user;
-    private String listRent, listSale, listMy;
 
+    @SneakyThrows
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,76 +62,71 @@ public class SystemMainActivity extends AppCompatActivity implements AdapterView
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        getPropertyBalance();
+        getRecommendNotice();
+        getUserInfo();
+    }
+
+    @Override
     public void onBackPressed() {
         super.onBackPressed();
     }
 
-    public void init() {
+    public void init() throws InterruptedException {
         intent = getIntent();
         houseId = intent.getStringExtra("houseId");
         username = intent.getStringExtra("username");
         toolbar = findViewById(R.id.toolbar);
         context = SystemMainActivity.this;
         listView = findViewById(R.id.list_main);
-        moduleList = Arrays.asList(Module.NOTICE, Module.PAGE, Module.PROPERTY, Module.COMPLAIN, Module.REPAIR, Module.HOUSE_KEEPING, Module.HOUSE_RENT_SALE, Module.MY_INFO);
+        moduleList = Arrays.asList(Module.NOTICE, Module.PAGE, Module.PROPERTY, Module.COMPLAIN_REPAIR, Module.HOUSE_KEEPING, Module.HOUSE_RENT_SALE, Module.MY_INFO);
         getUserInfo();
-        getSaleHouseInfo();
-        getRentHouseInfo();
-        getMyHouseInfo();
+        getRecommendNotice();
+        getPropertyBalance();
+        TimeUnit.SECONDS.sleep(1);
     }
 
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         if (position == 0) {
-            new Thread(() -> {
-                getRecommendNotice();
-                if (data != "") {
-                    Intent intent = new Intent(SystemMainActivity.this, NoticeActivity.class);
-                    intent.putExtra("data", data);
-                    startActivity(intent);
-                } else {
-                    runOnUiThread(() -> {
-                        new ToastUtil(this, ConstUtil.SYSTEM_EXCEPTION).show(500);
-                    });
-                }
-            }).start();
-
+            if (data != "") {
+                Intent intent = new Intent(SystemMainActivity.this, NoticeActivity.class);
+                intent.putExtra("data", data);
+                startActivity(intent);
+            } else {
+                runOnUiThread(() -> {
+                    new ToastUtil(this, ConstUtil.SYSTEM_EXCEPTION).show(500);
+                });
+            }
         } else if (position == 1) {
             Intent intent = new Intent(SystemMainActivity.this, CommunityPageActivity.class);
             startActivity(intent);
 
         } else if (position == 2) {
-            new Thread(() -> {
-                getPropertyBalance();
-                if (propertyBalance != "") {
-                    Intent intent = new Intent(SystemMainActivity.this, PropertyActivity.class);
-                    intent.putExtra("property", propertyBalance);
-                    intent.putExtra("houseId", houseId);
-                    intent.putExtra("nickname", user.getNickname());
-                    startActivity(intent);
-                } else {
-                    runOnUiThread(() -> {
-                        new ToastUtil(this, ConstUtil.SYSTEM_EXCEPTION).show(500);
-                    });
-                }
-            }).start();
+            if (propertyBalance != "") {
+                Intent intent = new Intent(SystemMainActivity.this, PropertyActivity.class);
+                intent.putExtra("property", propertyBalance);
+                intent.putExtra("houseId", houseId);
+                intent.putExtra("nickname", user.getNickname());
+                startActivity(intent);
+            } else {
+                runOnUiThread(() -> {
+                    new ToastUtil(this, ConstUtil.SYSTEM_EXCEPTION).show(500);
+                });
+            }
         } else if (position == 3) {
-            Intent intent = new Intent(SystemMainActivity.this, ComplainActivity.class);
+            Intent intent = new Intent(SystemMainActivity.this, ComplainRepairActivity.class);
             startActivity(intent);
         } else if (position == 4) {
-            Intent intent = new Intent(SystemMainActivity.this, RepairActivity.class);
-            startActivity(intent);
-        } else if (position == 5) {
             Intent intent = new Intent(SystemMainActivity.this, HouseKeepingActivity.class);
             startActivity(intent);
-        } else if (position == 6) {
+        } else if (position == 5) {
             Intent intent = new Intent(SystemMainActivity.this, HouseRentSaleActivity.class);
-            intent.putExtra("rent",listRent);
-            intent.putExtra("sale",listSale);
-            intent.putExtra("my",listMy);
             startActivity(intent);
-        } else if (position == 7) {
+        } else if (position == 6) {
             Intent intent = new Intent(SystemMainActivity.this, MyInfoActivity.class);
             intent.putExtra("user", user);
             startActivity(intent);
@@ -140,35 +134,39 @@ public class SystemMainActivity extends AppCompatActivity implements AdapterView
     }
 
     private void getRecommendNotice() {
-        Response response = HttpUtil.Get(ConstUtil.NOTICE_RECOMMEND);
-        try {
-            JSONObject jsonObject = new JSONObject(response.body().string());
-            code = jsonObject.getString("code");
-            if (code.equals("666")) {
-                JSONArray jsonArray = jsonObject.getJSONArray("data");
-                data = jsonArray.toString();
-            }
+        new Thread(() -> {
+            Response response = HttpUtil.Get(ConstUtil.NOTICE_RECOMMEND);
+            try {
+                JSONObject jsonObject = new JSONObject(response.body().string());
+                code = jsonObject.getString("code");
+                if (code.equals("666")) {
+                    JSONArray jsonArray = jsonObject.getJSONArray("data");
+                    data = jsonArray.toString();
+                }
 
-        } catch (JSONException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }).start();
     }
 
     private void getPropertyBalance() {
-
-        Response get = HttpUtil.Get(ConstUtil.PROPERTY_GET + "?houseId=" + houseId);
-        try {
-            JSONObject jsonObject = new JSONObject(get.body().string());
-            if (jsonObject.getString("code").equals("666")) {
-                propertyBalance = jsonObject.getString("data");
+        new Thread(() -> {
+            Response get = HttpUtil.Get(ConstUtil.PROPERTY_GET + "?houseId=" + houseId);
+            try {
+                JSONObject jsonObject = new JSONObject(get.body().string());
+                if (jsonObject.getString("code").equals("666")) {
+                    propertyBalance = jsonObject.getString("data");
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-        } catch (JSONException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        }).start();
+
     }
 
     private void getUserInfo() {
@@ -186,53 +184,5 @@ public class SystemMainActivity extends AppCompatActivity implements AdapterView
             }
         }).start();
     }
-    private void getSaleHouseInfo() {
-        new Thread(() -> {
-            Response get = HttpUtil.Get(ConstUtil.HOUSE_SALE);
-            try {
-                JSONObject jsonObject = new JSONObject(Objects.requireNonNull(get.body()).string());
-                if (jsonObject.getString("code").equals("666")) {
-                    listSale = jsonObject.getJSONArray("data").toString();
-                }
-            } catch (JSONException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }).start();
-    }
 
-    private void getRentHouseInfo() {
-        new Thread(() -> {
-            Response get = HttpUtil.Get(ConstUtil.HOUSE_RENT);
-            try {
-                JSONObject jsonObject = new JSONObject(Objects.requireNonNull(get.body()).string());
-                if (jsonObject.getString("code").equals("666")) {
-                    listRent = jsonObject.getJSONArray("data").toString();
-                }
-            } catch (JSONException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }).start();
-
-    }
-
-
-    private void getMyHouseInfo() {
-        new Thread(() -> {
-            Response get = HttpUtil.Get(ConstUtil.HOUSE_RENT);
-            try {
-                JSONObject jsonObject = new JSONObject(Objects.requireNonNull(get.body()).string());
-                if (jsonObject.getString("code").equals("666")) {
-                    listMy = jsonObject.getJSONArray("data").toString();
-                }
-            } catch (JSONException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }).start();
-    }
 }

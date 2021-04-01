@@ -88,10 +88,4 @@ public class PropertyActivity extends AppCompatActivity {
             }
         }).start();
     }
-
-    public void getNickName() {
-        new Thread(() -> {
-        }).start();
-    }
-
 }

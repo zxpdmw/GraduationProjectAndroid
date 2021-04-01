@@ -113,6 +113,8 @@ public class HouseRentSaleActivity extends AppCompatActivity implements View.OnC
                     rent = HouseListFragment.newInstance(listRent);
                     fTransaction.add(R.id.ly_content, rent);
                 } else {
+                    getRentHouseInfo();
+                    sale.setListRent(listRent);
                     fTransaction.show(rent);
                 }
                 break;
@@ -123,6 +125,8 @@ public class HouseRentSaleActivity extends AppCompatActivity implements View.OnC
                     sale = HouseListFragment.newInstance(listSale);
                     fTransaction.add(R.id.ly_content, sale);
                 } else {
+                    getSaleHouseInfo();
+                    sale.setListSale(listSale);
                     fTransaction.show(sale);
                 }
                 break;
@@ -133,6 +137,8 @@ public class HouseRentSaleActivity extends AppCompatActivity implements View.OnC
                     my = HouseListFragment.newInstance(listMy);
                     fTransaction.add(R.id.ly_content, my);
                 } else {
+                    getRentHouseInfo();
+                    my.setListMy(listMy);
                     fTransaction.show(my);
                 }
                 break;

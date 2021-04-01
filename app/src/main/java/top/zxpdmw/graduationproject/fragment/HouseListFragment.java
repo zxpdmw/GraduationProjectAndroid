@@ -6,10 +6,12 @@ import android.provider.ContactsContract;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
 import android.widget.Adapter;
 import android.widget.ListView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import org.jetbrains.annotations.NotNull;
@@ -36,13 +38,20 @@ import top.zxpdmw.graduationproject.util.ToastUtil;
 
 
 public class HouseListFragment extends Fragment {
-    private static List<HouseRentSale> rent,sale,my;
-    @Override
-    public void onAttach(@NonNull @NotNull Context context) {
-        super.onAttach(context);
-        getSaleHouseInfo();
-        getRentHouseInfo();
-        getMyHouseInfo();
+    private boolean isGetData = false;
+    private String listRent,listSale,listMy;
+    private ListView listView;
+
+    public void setListRent(String listRent) {
+        this.listRent = listRent;
+    }
+
+    public void setListSale(String listSale) {
+        this.listSale = listSale;
+    }
+
+    public void setListMy(String listMy) {
+        this.listMy = listMy;
     }
 
     public static HouseListFragment newInstance(String list){
@@ -57,7 +66,7 @@ public class HouseListFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fg_house_list,container,false);
-        ListView listView=view.findViewById(R.id.house_list);
+        listView=view.findViewById(R.id.house_list);
         if (getArguments()!=null){
             final Bundle arguments = getArguments();
             final String list = arguments.getString("list");
@@ -67,17 +76,16 @@ public class HouseListFragment extends Fragment {
         }else{
             new ToastUtil(getActivity(),ConstUtil.SYSTEM_EXCEPTION).show(500);
         }
-
         return view;
     }
 
-    private  void getSaleHouseInfo() {
+    private void getSaleHouseInfo() {
         new Thread(() -> {
             Response get = HttpUtil.Get(ConstUtil.HOUSE_SALE);
             try {
                 JSONObject jsonObject = new JSONObject(Objects.requireNonNull(get.body()).string());
                 if (jsonObject.getString("code").equals("666")) {
-                     rent=JsonUtil.getHouseRentSaleList(jsonObject.getJSONArray("data"));
+                    listSale =jsonObject.getJSONArray("data").toString();
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -87,13 +95,13 @@ public class HouseListFragment extends Fragment {
         }).start();
     }
 
-    private  void getRentHouseInfo() {
+    private void getRentHouseInfo() {
         new Thread(() -> {
             Response get = HttpUtil.Get(ConstUtil.HOUSE_RENT);
             try {
                 JSONObject jsonObject = new JSONObject(Objects.requireNonNull(get.body()).string());
                 if (jsonObject.getString("code").equals("666")) {
-                    sale=JsonUtil.getHouseRentSaleList(jsonObject.getJSONArray("data"));
+                    listRent = jsonObject.getJSONArray("data").toString();
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -105,13 +113,13 @@ public class HouseListFragment extends Fragment {
     }
 
 
-    private  void getMyHouseInfo() {
+    private void getMyHouseInfo() {
         new Thread(() -> {
             Response get = HttpUtil.Get(ConstUtil.HOUSE_RENT);
             try {
                 JSONObject jsonObject = new JSONObject(Objects.requireNonNull(get.body()).string());
                 if (jsonObject.getString("code").equals("666")) {
-                   my=JsonUtil.getHouseRentSaleList(jsonObject.getJSONArray("data"));
+                    listMy=jsonObject.getJSONArray("data").toString();
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -120,5 +128,4 @@ public class HouseListFragment extends Fragment {
             }
         }).start();
     }
-
 }
