@@ -193,7 +193,6 @@ public class SystemMainActivity extends AppCompatActivity implements AdapterView
                 JSONObject jsonObject = new JSONObject(Objects.requireNonNull(get.body()).string());
                 if (jsonObject.getString("code").equals("666")) {
                     listSale = jsonObject.getJSONArray("data").toString();
-                    System.out.println(listSale);
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -210,7 +209,6 @@ public class SystemMainActivity extends AppCompatActivity implements AdapterView
                 JSONObject jsonObject = new JSONObject(Objects.requireNonNull(get.body()).string());
                 if (jsonObject.getString("code").equals("666")) {
                     listRent = jsonObject.getJSONArray("data").toString();
-                    System.out.println(listRent);
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -229,7 +227,6 @@ public class SystemMainActivity extends AppCompatActivity implements AdapterView
                 JSONObject jsonObject = new JSONObject(Objects.requireNonNull(get.body()).string());
                 if (jsonObject.getString("code").equals("666")) {
                     listMy = jsonObject.getJSONArray("data").toString();
-                    System.out.println(listMy);
                 }
             } catch (JSONException e) {
                 e.printStackTrace();

@@ -1,5 +1,6 @@
 package top.zxpdmw.graduationproject.fragment;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.view.LayoutInflater;
@@ -8,8 +9,11 @@ import android.view.ViewGroup;
 import android.widget.Adapter;
 import android.widget.ListView;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import org.jetbrains.annotations.NotNull;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -28,30 +32,93 @@ import top.zxpdmw.graduationproject.model.HouseRentSale;
 import top.zxpdmw.graduationproject.util.ConstUtil;
 import top.zxpdmw.graduationproject.util.HttpUtil;
 import top.zxpdmw.graduationproject.util.JsonUtil;
+import top.zxpdmw.graduationproject.util.ToastUtil;
 
 
 public class HouseListFragment extends Fragment {
-    private List<HouseRentSale> list;
-    public HouseListFragment(List<HouseRentSale> list){
-        this.list=list;
-        System.out.println(list+"构造方法");
+    private static List<HouseRentSale> rent,sale,my;
+    @Override
+    public void onAttach(@NonNull @NotNull Context context) {
+        super.onAttach(context);
+        getSaleHouseInfo();
+        getRentHouseInfo();
+        getMyHouseInfo();
     }
 
-    public void setList(List<HouseRentSale> list) {
-        this.list = list;
+    public static HouseListFragment newInstance(String list){
+        HouseListFragment houseListFragment=new HouseListFragment();
+        Bundle bundle = new Bundle();
+        bundle.putString("list",list);
+        houseListFragment.setArguments(bundle);
+        return houseListFragment;
     }
 
-    public List<HouseRentSale> getList() {
-        return list;
-    }
-
+    @SneakyThrows
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fg_house_list,container,false);
         ListView listView=view.findViewById(R.id.house_list);
-        HouseRentSaleAdapter houseRentSaleAdapter = new HouseRentSaleAdapter(list,getActivity());
-        listView.setAdapter(houseRentSaleAdapter);
+        if (getArguments()!=null){
+            final Bundle arguments = getArguments();
+            final String list = arguments.getString("list");
+            final List<HouseRentSale> houseRentSaleList = JsonUtil.getHouseRentSaleList(new JSONArray(list));
+            HouseRentSaleAdapter houseRentSaleAdapter = new HouseRentSaleAdapter(houseRentSaleList,getActivity());
+            listView.setAdapter(houseRentSaleAdapter);
+        }else{
+            new ToastUtil(getActivity(),ConstUtil.SYSTEM_EXCEPTION).show(500);
+        }
+
         return view;
+    }
+
+    private  void getSaleHouseInfo() {
+        new Thread(() -> {
+            Response get = HttpUtil.Get(ConstUtil.HOUSE_SALE);
+            try {
+                JSONObject jsonObject = new JSONObject(Objects.requireNonNull(get.body()).string());
+                if (jsonObject.getString("code").equals("666")) {
+                     rent=JsonUtil.getHouseRentSaleList(jsonObject.getJSONArray("data"));
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }).start();
+    }
+
+    private  void getRentHouseInfo() {
+        new Thread(() -> {
+            Response get = HttpUtil.Get(ConstUtil.HOUSE_RENT);
+            try {
+                JSONObject jsonObject = new JSONObject(Objects.requireNonNull(get.body()).string());
+                if (jsonObject.getString("code").equals("666")) {
+                    sale=JsonUtil.getHouseRentSaleList(jsonObject.getJSONArray("data"));
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }).start();
+
+    }
+
+
+    private  void getMyHouseInfo() {
+        new Thread(() -> {
+            Response get = HttpUtil.Get(ConstUtil.HOUSE_RENT);
+            try {
+                JSONObject jsonObject = new JSONObject(Objects.requireNonNull(get.body()).string());
+                if (jsonObject.getString("code").equals("666")) {
+                   my=JsonUtil.getHouseRentSaleList(jsonObject.getJSONArray("data"));
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }).start();
     }
 
 }
