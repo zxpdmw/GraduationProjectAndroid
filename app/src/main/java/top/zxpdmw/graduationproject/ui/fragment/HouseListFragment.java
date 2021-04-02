@@ -1,0 +1,121 @@
+package top.zxpdmw.graduationproject.ui.fragment;
+
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ListView;
+
+import androidx.fragment.app.Fragment;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.util.List;
+import java.util.Objects;
+
+import lombok.SneakyThrows;
+import okhttp3.Response;
+import top.zxpdmw.graduationproject.R;
+import top.zxpdmw.graduationproject.ui.adapter.HouseRentSaleAdapter;
+import top.zxpdmw.graduationproject.bean.HouseRentSale;
+import top.zxpdmw.graduationproject.util.ConstUtil;
+import top.zxpdmw.graduationproject.util.HttpUtil;
+import top.zxpdmw.graduationproject.util.JsonUtil;
+import top.zxpdmw.graduationproject.util.ToastUtil;
+
+
+public class HouseListFragment extends Fragment {
+    private boolean isGetData = false;
+    private String listRent,listSale,listMy;
+    private ListView listView;
+
+    public void setListRent(String listRent) {
+        this.listRent = listRent;
+    }
+
+    public void setListSale(String listSale) {
+        this.listSale = listSale;
+    }
+
+    public void setListMy(String listMy) {
+        this.listMy = listMy;
+    }
+
+    public static HouseListFragment newInstance(String list){
+        HouseListFragment houseListFragment=new HouseListFragment();
+        Bundle bundle = new Bundle();
+        bundle.putString("list",list);
+        houseListFragment.setArguments(bundle);
+        return houseListFragment;
+    }
+
+    @SneakyThrows
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fg_house_list,container,false);
+        listView=view.findViewById(R.id.house_list);
+        if (getArguments()!=null){
+            final Bundle arguments = getArguments();
+            final String list = arguments.getString("list");
+            final List<HouseRentSale> houseRentSaleList = JsonUtil.getHouseRentSaleList(new JSONArray(list));
+            HouseRentSaleAdapter houseRentSaleAdapter = new HouseRentSaleAdapter(houseRentSaleList,getActivity());
+            listView.setAdapter(houseRentSaleAdapter);
+        }else{
+            new ToastUtil(getActivity(),ConstUtil.SYSTEM_EXCEPTION).show(500);
+        }
+        return view;
+    }
+
+    private void getSaleHouseInfo() {
+        new Thread(() -> {
+            Response get = HttpUtil.Get(ConstUtil.HOUSE_SALE);
+            try {
+                JSONObject jsonObject = new JSONObject(Objects.requireNonNull(get.body()).string());
+                if (jsonObject.getString("code").equals("666")) {
+                    listSale =jsonObject.getJSONArray("data").toString();
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }).start();
+    }
+
+    private void getRentHouseInfo() {
+        new Thread(() -> {
+            Response get = HttpUtil.Get(ConstUtil.HOUSE_RENT);
+            try {
+                JSONObject jsonObject = new JSONObject(Objects.requireNonNull(get.body()).string());
+                if (jsonObject.getString("code").equals("666")) {
+                    listRent = jsonObject.getJSONArray("data").toString();
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }).start();
+
+    }
+
+
+    private void getMyHouseInfo() {
+        new Thread(() -> {
+            Response get = HttpUtil.Get(ConstUtil.HOUSE_RENT);
+            try {
+                JSONObject jsonObject = new JSONObject(Objects.requireNonNull(get.body()).string());
+                if (jsonObject.getString("code").equals("666")) {
+                    listMy=jsonObject.getJSONArray("data").toString();
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }).start();
+    }
+}

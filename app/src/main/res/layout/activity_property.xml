@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/xui_config_color_main_theme"
     android:orientation="vertical"
-    tools:context=".activity.PropertyActivity">
+    tools:context=".ui.activity.PropertyActivity">
 
     <include
         android:id="@+id/toolbar"

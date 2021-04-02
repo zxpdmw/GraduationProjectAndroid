@@ -18,34 +18,34 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="n">
         <activity
-            android:name=".activity.HouseRentSaleActivity"
+            android:name=".ui.activity.HouseRentSaleActivity"
             android:exported="true" />
         <activity
-            android:name=".activity.HouseKeepingActivity"
+            android:name=".ui.activity.HouseKeepingActivity"
             android:exported="true" />
         <activity
-            android:name=".activity.ComplainRepairActivity"
+            android:name=".ui.activity.ComplainRepairActivity"
             android:exported="true" />
         <activity
-            android:name=".activity.MyInfoActivity"
+            android:name=".ui.activity.MyInfoActivity"
             android:exported="true" />
         <activity
-            android:name=".activity.CommunityPageActivity"
+            android:name=".ui.activity.CommunityPageActivity"
             android:exported="true" />
         <activity
-            android:name=".activity.DetailNoticeActivity"
+            android:name=".ui.activity.DetailNoticeActivity"
             android:exported="true" />
         <activity
-            android:name=".activity.PropertyActivity"
+            android:name=".ui.activity.PropertyActivity"
             android:exported="true" />
         <activity
-            android:name=".activity.NoticeActivity"
+            android:name=".ui.activity.NoticeActivity"
             android:exported="true"
-            android:parentActivityName=".activity.SystemMainActivity" />
-        <activity android:name=".activity.RegisterActivity" />
-        <activity android:name=".activity.SystemMainActivity" />
-        <activity android:name=".activity.LoginActivity" />
-        <activity android:name=".activity.MainActivity">
+            android:parentActivityName=".ui.activity.SystemMainActivity" />
+        <activity android:name=".ui.activity.RegisterActivity" />
+        <activity android:name=".ui.activity.SystemMainActivity" />
+        <activity android:name=".ui.activity.LoginActivity" />
+        <activity android:name=".ui.activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

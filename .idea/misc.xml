@@ -5,6 +5,7 @@
       <map>
         <entry key="..\:/projects/GraduationProjectAndroid/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.21979166666666666" />
         <entry key="..\:/projects/GraduationProjectAndroid/app/src/main/res/drawable/ic_launcher_background.xml" value="0.21979166666666666" />
+        <entry key="..\:/projects/GraduationProjectAndroid/app/src/main/res/drawable/ic_launcher_myinfo_background.xml" value="0.21979166666666666" />
         <entry key="..\:/projects/GraduationProjectAndroid/app/src/main/res/drawable/tab_menu_better.xml" value="0.21979166666666666" />
         <entry key="..\:/projects/GraduationProjectAndroid/app/src/main/res/drawable/tab_menu_bg.xml" value="0.21979166666666666" />
         <entry key="..\:/projects/GraduationProjectAndroid/app/src/main/res/drawable/tab_menu_message.xml" value="0.21979166666666666" />
@@ -15,7 +16,7 @@
         <entry key="..\:/projects/GraduationProjectAndroid/app/src/main/res/layout/activity_detail_notice.xml" value="0.20364583333333333" />
         <entry key="..\:/projects/GraduationProjectAndroid/app/src/main/res/layout/activity_house_keeping.xml" value="0.1634963768115942" />
         <entry key="..\:/projects/GraduationProjectAndroid/app/src/main/res/layout/activity_house_rent_sale.xml" value="0.1634963768115942" />
-        <entry key="..\:/projects/GraduationProjectAndroid/app/src/main/res/layout/activity_login.xml" value="0.25" />
+        <entry key="..\:/projects/GraduationProjectAndroid/app/src/main/res/layout/activity_login.xml" value="0.20364583333333333" />
         <entry key="..\:/projects/GraduationProjectAndroid/app/src/main/res/layout/activity_main.xml" value="0.20364583333333333" />
         <entry key="..\:/projects/GraduationProjectAndroid/app/src/main/res/layout/activity_my_info.xml" value="0.20364583333333333" />
         <entry key="..\:/projects/GraduationProjectAndroid/app/src/main/res/layout/activity_notice.xml" value="0.20364583333333333" />

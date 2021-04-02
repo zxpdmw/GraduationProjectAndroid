@@ -146,6 +146,7 @@
             android:gravity="center"
             android:text="@string/register"
             android:textColor="#ffffffff"
+            android:background="@color/xui_btn_blue_select_color"
             android:textSize="16sp" />
     </LinearLayout>
 

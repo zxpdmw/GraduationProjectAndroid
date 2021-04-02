@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.DetailNoticeActivity"
+    tools:context=".ui.activity.DetailNoticeActivity"
     android:orientation="vertical">
     <include layout="@layout/toolbar"
         android:id="@+id/toolbar"/>

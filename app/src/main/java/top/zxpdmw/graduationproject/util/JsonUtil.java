@@ -12,11 +12,11 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
-import top.zxpdmw.graduationproject.adapter.NoticeAdapter;
-import top.zxpdmw.graduationproject.model.ComplainRepair;
-import top.zxpdmw.graduationproject.model.HouseKeeping;
-import top.zxpdmw.graduationproject.model.HouseRentSale;
-import top.zxpdmw.graduationproject.model.Notice;
+import top.zxpdmw.graduationproject.bean.ComplainRepair;
+import top.zxpdmw.graduationproject.bean.HouseKeeping;
+import top.zxpdmw.graduationproject.bean.HouseRentSale;
+import top.zxpdmw.graduationproject.bean.Notice;
+
 
 public class JsonUtil {
     public static final Gson GSON = new Gson();
