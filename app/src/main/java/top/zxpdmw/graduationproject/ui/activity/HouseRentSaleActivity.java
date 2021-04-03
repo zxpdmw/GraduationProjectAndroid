@@ -7,6 +7,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
@@ -15,31 +16,34 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.nio.channels.InterruptedByTimeoutException;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import lombok.SneakyThrows;
 import okhttp3.Response;
 import top.zxpdmw.graduationproject.R;
 
 import top.zxpdmw.graduationproject.ui.fragment.HouseListFragment;
 import top.zxpdmw.graduationproject.util.ConstUtil;
-import top.zxpdmw.graduationproject.util.HttpUtil;
 
 public class HouseRentSaleActivity extends AppCompatActivity implements View.OnClickListener {
-    private Toolbar toolbar;
-    //UI Object
-    private TextView house_rent;
-    private TextView house_sale;
-    private TextView house_my;
-    private FrameLayout ly_content;
-    private String listRent;
-    private String listSale;
-    private String listMy;
+    @BindView(R.id.toolbar)
+     Toolbar toolbar;
+    @BindView(R.id.house_rent)
+     TextView house_rent;
+    @BindView(R.id.house_sale)
+     TextView house_sale;
+    @BindView(R.id.house_my)
+     TextView house_my;
+    @BindView(R.id.ly_content)
+     FrameLayout ly_content;
 
-    private Intent intent;
+    Intent intent;
+    Bundle bundle;
 
-    //Fragment Object
     private HouseListFragment rent, sale, my;
     private FragmentManager fManager;
 
@@ -49,27 +53,20 @@ public class HouseRentSaleActivity extends AppCompatActivity implements View.OnC
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_house_rent_sale);
+        ButterKnife.bind(this);
         init();
         fManager = getSupportFragmentManager();
-        TimeUnit.SECONDS.sleep(1);
         house_rent.performClick();   //模拟一次点击，既进去后选择第一项
     }
 
     @SneakyThrows
     private void init() {
-        getMyHouseInfo();
-        getSaleHouseInfo();
-        getRentHouseInfo();
-        toolbar = findViewById(R.id.toolbar);
+        intent=getIntent();
+        bundle=intent.getBundleExtra("bundle");
         toolbar.setTitle("房 屋 租 售");
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         toolbar.setNavigationOnClickListener(v -> finish());
-
-        house_rent = findViewById(R.id.house_rent);
-        house_sale = findViewById(R.id.house_sale);
-        house_my = findViewById(R.id.house_my);
-        ly_content = findViewById(R.id.ly_content);
 
         house_sale.setOnClickListener(this);
         house_rent.setOnClickListener(this);
@@ -79,9 +76,6 @@ public class HouseRentSaleActivity extends AppCompatActivity implements View.OnC
 
     //重置所有文本的选中状态
     private void setSelected() {
-        getMyHouseInfo();
-        getSaleHouseInfo();
-        getRentHouseInfo();
         house_rent.setSelected(false);
         house_my.setSelected(false);
         house_sale.setSelected(false);
@@ -104,11 +98,9 @@ public class HouseRentSaleActivity extends AppCompatActivity implements View.OnC
                 setSelected();
                 house_rent.setSelected(true);
                 if (rent == null) {
-                    rent = HouseListFragment.newInstance(listRent);
+                    rent = HouseListFragment.newInstance(1);
                     fTransaction.add(R.id.ly_content, rent);
                 } else {
-                    getRentHouseInfo();
-                    sale.setListRent(listRent);
                     fTransaction.show(rent);
                 }
                 break;
@@ -116,11 +108,9 @@ public class HouseRentSaleActivity extends AppCompatActivity implements View.OnC
                 setSelected();
                 house_sale.setSelected(true);
                 if (sale == null) {
-                    sale = HouseListFragment.newInstance(listSale);
+                    sale = HouseListFragment.newInstance(2);
                     fTransaction.add(R.id.ly_content, sale);
                 } else {
-                    getSaleHouseInfo();
-                    sale.setListSale(listSale);
                     fTransaction.show(sale);
                 }
                 break;
@@ -128,65 +118,14 @@ public class HouseRentSaleActivity extends AppCompatActivity implements View.OnC
                 setSelected();
                 house_my.setSelected(true);
                 if (my == null) {
-                    my = HouseListFragment.newInstance(listMy);
+                    Log.d("zwy", "onClick: "+bundle.getString("username"));
+                    my = HouseListFragment.newInstance(3,bundle.getString("username"));
                     fTransaction.add(R.id.ly_content, my);
                 } else {
-                    getRentHouseInfo();
-                    my.setListMy(listMy);
                     fTransaction.show(my);
                 }
                 break;
         }
         fTransaction.commit();
-    }
-
-    private void getSaleHouseInfo() {
-        new Thread(() -> {
-            Response get = HttpUtil.Get(ConstUtil.HOUSE_SALE);
-            try {
-                JSONObject jsonObject = new JSONObject(Objects.requireNonNull(get.body()).string());
-                if (jsonObject.getString("code").equals("666")) {
-                    listSale =jsonObject.getJSONArray("data").toString();
-                }
-            } catch (JSONException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }).start();
-    }
-
-    private void getRentHouseInfo() {
-        new Thread(() -> {
-            Response get = HttpUtil.Get(ConstUtil.HOUSE_RENT);
-            try {
-                JSONObject jsonObject = new JSONObject(Objects.requireNonNull(get.body()).string());
-                if (jsonObject.getString("code").equals("666")) {
-                    listRent = jsonObject.getJSONArray("data").toString();
-                }
-            } catch (JSONException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }).start();
-
-    }
-
-
-    private void getMyHouseInfo() {
-        new Thread(() -> {
-            Response get = HttpUtil.Get(ConstUtil.HOUSE_RENT);
-            try {
-                JSONObject jsonObject = new JSONObject(Objects.requireNonNull(get.body()).string());
-                if (jsonObject.getString("code").equals("666")) {
-                    listMy=jsonObject.getJSONArray("data").toString();
-                }
-            } catch (JSONException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }).start();
     }
 }

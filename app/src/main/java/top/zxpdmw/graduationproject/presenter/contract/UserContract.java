@@ -6,7 +6,7 @@ import top.zxpdmw.graduationproject.ui.BaseView;
 
 public interface UserContract {
      interface View extends BaseView{
-
+         void LoadUser(User user);
      }
 
      interface Presenter extends BasePresenter{

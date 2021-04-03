@@ -12,7 +12,6 @@ public interface NoticeContract {
     }
 
     interface Presenter extends BasePresenter{
-        void DetailNotice(String title);
         void RecommendNotice();
     }
 

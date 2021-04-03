@@ -4,26 +4,15 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.IOException;
-import java.util.Objects;
-
 import butterknife.BindView;
-import butterknife.BindViews;
 import butterknife.ButterKnife;
-import okhttp3.Response;
 import top.zxpdmw.graduationproject.R;
 import top.zxpdmw.graduationproject.bean.User;
 import top.zxpdmw.graduationproject.presenter.UserPresenter;
 import top.zxpdmw.graduationproject.presenter.contract.UserContract;
-import top.zxpdmw.graduationproject.util.ConstUtil;
-import top.zxpdmw.graduationproject.util.HttpUtil;
 import top.zxpdmw.graduationproject.util.ToastUtil;
 
 public class RegisterActivity extends AppCompatActivity implements UserContract.View {
@@ -73,5 +62,10 @@ public class RegisterActivity extends AppCompatActivity implements UserContract.
     @Override
     public void showMsg(String message) {
         new ToastUtil(this,message).show(500);
+    }
+
+    @Override
+    public void LoadUser(User user) {
+
     }
 }

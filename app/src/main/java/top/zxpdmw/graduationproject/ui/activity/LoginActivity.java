@@ -8,25 +8,18 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.IOException;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import okhttp3.Response;
 import top.zxpdmw.graduationproject.R;
 import top.zxpdmw.graduationproject.bean.User;
 import top.zxpdmw.graduationproject.presenter.UserPresenter;
 import top.zxpdmw.graduationproject.presenter.contract.UserContract;
-import top.zxpdmw.graduationproject.util.ConstUtil;
-import top.zxpdmw.graduationproject.util.HttpUtil;
 import top.zxpdmw.graduationproject.util.ToastUtil;
 
 
 public class LoginActivity extends AppCompatActivity implements UserContract.View {
+    private static final String TAG = "zwy-LoginActivity";
     @BindView(R.id.new_user)
     TextView newUser;
     @BindView(R.id.login_button)
@@ -52,6 +45,7 @@ public class LoginActivity extends AppCompatActivity implements UserContract.Vie
         Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
         startActivity(intent);
     }
+
     @OnClick(R.id.login_button)
     void loginUser(){
         presenter.LoginUser(username.getText().toString(), password.getText().toString());
@@ -63,10 +57,14 @@ public class LoginActivity extends AppCompatActivity implements UserContract.Vie
     }
 
     @Override
+    public void LoadUser(User user) {
+        this.user=user;
+    }
+
+    @Override
     public void jumpView(AppCompatActivity activity) {
         final Intent intent = new Intent(LoginActivity.this, SystemMainActivity.class);
-        final Bundle bundle = new Bundle();
-        bundle.putSerializable("user", user);
+        intent.putExtra("user",user);
         startActivity(intent);
     }
 

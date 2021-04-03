@@ -9,80 +9,79 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import org.json.JSONException;
-import org.json.JSONObject;
+import com.xuexiang.xui.widget.dialog.materialdialog.internal.ThemeSingleton;
 
-import java.io.IOException;
-
-import okhttp3.Request;
-import okhttp3.Response;
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import top.zxpdmw.graduationproject.R;
-import top.zxpdmw.graduationproject.util.ConstUtil;
-import top.zxpdmw.graduationproject.util.HttpUtil;
+import top.zxpdmw.graduationproject.presenter.PropertyPresenter;
+import top.zxpdmw.graduationproject.presenter.contract.PropertyContract;
 import top.zxpdmw.graduationproject.util.ToastUtil;
 
-public class PropertyActivity extends AppCompatActivity {
-    private Toolbar toolbar;
-    private Button button;
-    private TextView nickname, balance;
-    private EditText editText;
+public class PropertyActivity extends AppCompatActivity implements PropertyContract.View {
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
+    @BindView(R.id.addProperty)
+    Button button;
+    @BindView(R.id.property_nickname)
+    TextView nickname;
+    @BindView(R.id.property_balance)
+    TextView balance;
+    @BindView(R.id.property_add)
+    EditText editText;
     private Intent intent;
-    private String beforeBalance;
     private String houseId;
+    PropertyPresenter presenter=new PropertyPresenter(this);
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_property);
+        ButterKnife.bind(this);
         init();
-        button.setOnClickListener(v -> {
-            String add = editText.getText().toString();
-            if (add.equals("")) {
-                new ToastUtil(this, "请输入缴纳金额").show(500);
-            } else {
-                AddProperty(add);
-            }
-        });
     }
+
+    @OnClick(R.id.addProperty)
+    public void addProperty(){
+        String add = editText.getText().toString();
+        if (add.equals("")) {
+            new ToastUtil(this, "请输入缴纳金额").show(500);
+        } else {
+            presenter.AddProperty(houseId,editText.getText().toString());
+        }
+    }
+
 
     private void init() {
         intent = getIntent();
-        beforeBalance = intent.getStringExtra("property");
         houseId = intent.getStringExtra("houseId");
-        toolbar = findViewById(R.id.toolbar);
-        button = findViewById(R.id.addProperty);
-        nickname = findViewById(R.id.property_nickname);
-        balance = findViewById(R.id.property_balance);
-        editText = findViewById(R.id.property_add);
-        balance.setText(beforeBalance);
+        nickname.setText(intent.getStringExtra("nickname"));
+        presenter.GetProperty(houseId);
         toolbar.setTitle("物 业 费");
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         toolbar.setNavigationOnClickListener(v -> finish());
-        nickname.setText(intent.getStringExtra("nickname"));
     }
 
-    private void AddProperty(String add) {
-        new Thread(() -> {
-            Request build = new Request.Builder()
-                    .url(ConstUtil.BASE_URL + ConstUtil.PROPERTY_ADD + "?houseId=" + houseId + "&property=" + add)
-                    .get().build();
-            try {
-                Response execute = HttpUtil.OK_HTTP_CLIENT.newCall(build).execute();
-                JSONObject jsonObject = new JSONObject(execute.body().string());
-                String code = jsonObject.getString("code");
-                if (code.equals("666")) {
-                    runOnUiThread(() -> {
-                        balance.setText(String.valueOf(Integer.parseInt(add) + Integer.parseInt(balance.getText().toString())));
-                        new ToastUtil(this, "缴费成功").show(500);
-                    });
+    @Override
+    public void LoadData(String value) {
+        balance.setText(value);
+    }
 
-                } else {
-                    runOnUiThread(() -> new ToastUtil(this, ConstUtil.SYSTEM_EXCEPTION).show(500));
-                }
-            } catch (IOException | JSONException e) {
-                e.printStackTrace();
-            }
-        }).start();
+    @Override
+    public void showError(String msg) {
+        new ToastUtil(this,msg).show(500);
+    }
+
+    @Override
+    public void jumpView(AppCompatActivity activity) {
+
+    }
+
+    @Override
+    public void showMsg(String msg) {
+        new ToastUtil(this,msg).show(500);
     }
 }

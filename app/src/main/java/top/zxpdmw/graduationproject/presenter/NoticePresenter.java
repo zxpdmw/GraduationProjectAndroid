@@ -28,28 +28,6 @@ public class NoticePresenter implements NoticeContract.Presenter {
         noticeModel=new NoticeModel();
     }
 
-
-
-    @Override
-    public void DetailNotice(String title) {
-        noticeModel.DetailNotice(title,new Callback<CommonResult<Notice>>() {
-            @Override
-            public void onResponse(Call<CommonResult<Notice>> call, Response<CommonResult<Notice>> response) {
-                int code=response.body().getCode();
-                final List<Notice> data = response.body().getData();
-                if (code==666){
-                    view.showResult(data);
-                    view.jumpView(new DetailNoticeActivity());
-                }
-            }
-
-            @Override
-            public void onFailure(Call<CommonResult<Notice>> call, Throwable t) {
-
-            }
-        });
-    }
-
     @Override
     public void RecommendNotice() {
         noticeModel.RecommendNotice(new Callback<CommonResult<Notice>>() {

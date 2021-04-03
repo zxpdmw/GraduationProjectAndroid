@@ -1,11 +1,13 @@
 package top.zxpdmw.graduationproject.ui.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import org.json.JSONArray;
@@ -16,40 +18,43 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
 
+import butterknife.BindView;
 import lombok.SneakyThrows;
 import okhttp3.Response;
 import top.zxpdmw.graduationproject.R;
+import top.zxpdmw.graduationproject.presenter.HouseRSPresenter;
+import top.zxpdmw.graduationproject.presenter.contract.HouseRSContract;
 import top.zxpdmw.graduationproject.ui.adapter.HouseRentSaleAdapter;
 import top.zxpdmw.graduationproject.bean.HouseRentSale;
 import top.zxpdmw.graduationproject.util.ConstUtil;
-import top.zxpdmw.graduationproject.util.HttpUtil;
 import top.zxpdmw.graduationproject.util.JsonUtil;
 import top.zxpdmw.graduationproject.util.ToastUtil;
 
 
-public class HouseListFragment extends Fragment {
-    private boolean isGetData = false;
-    private String listRent,listSale,listMy;
-    private ListView listView;
+public class HouseListFragment extends Fragment implements HouseRSContract.View {
+    ListView listView;
+    HouseRSPresenter houseRSPresenter=new HouseRSPresenter(this);
 
-    public void setListRent(String listRent) {
-        this.listRent = listRent;
-    }
-
-    public void setListSale(String listSale) {
-        this.listSale = listSale;
-    }
-
-    public void setListMy(String listMy) {
-        this.listMy = listMy;
-    }
-
-    public static HouseListFragment newInstance(String list){
+    public static HouseListFragment newInstance(int type){
         HouseListFragment houseListFragment=new HouseListFragment();
         Bundle bundle = new Bundle();
-        bundle.putString("list",list);
+        bundle.putInt("type",type);
         houseListFragment.setArguments(bundle);
         return houseListFragment;
+    }
+
+    public static HouseListFragment newInstance(int type,String username){
+        HouseListFragment houseListFragment=new HouseListFragment();
+        Bundle bundle = new Bundle();
+        bundle.putInt("type",type);
+        bundle.putString("username",username);
+        houseListFragment.setArguments(bundle);
+        return houseListFragment;
+    }
+
+    @Override
+    public void showNoData() {
+        new ToastUtil(getActivity(),"没有数据").show(500);
     }
 
     @SneakyThrows
@@ -59,63 +64,42 @@ public class HouseListFragment extends Fragment {
         listView=view.findViewById(R.id.house_list);
         if (getArguments()!=null){
             final Bundle arguments = getArguments();
-            final String list = arguments.getString("list");
-            final List<HouseRentSale> houseRentSaleList = JsonUtil.getHouseRentSaleList(new JSONArray(list));
-            HouseRentSaleAdapter houseRentSaleAdapter = new HouseRentSaleAdapter(houseRentSaleList,getActivity());
-            listView.setAdapter(houseRentSaleAdapter);
+            final int type = arguments.getInt("type");
+            if (type==1){
+                houseRSPresenter.HouseRent();
+            }else if (type==2){
+                houseRSPresenter.HouseSale();
+            }else if (type==3){
+                houseRSPresenter.HouseByUsername(arguments.getString("username"));
+            }
         }else{
             new ToastUtil(getActivity(),ConstUtil.SYSTEM_EXCEPTION).show(500);
         }
         return view;
     }
 
-    private void getSaleHouseInfo() {
-        new Thread(() -> {
-            Response get = HttpUtil.Get(ConstUtil.HOUSE_SALE);
-            try {
-                JSONObject jsonObject = new JSONObject(Objects.requireNonNull(get.body()).string());
-                if (jsonObject.getString("code").equals("666")) {
-                    listSale =jsonObject.getJSONArray("data").toString();
-                }
-            } catch (JSONException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }).start();
+    void initListView(List<HouseRentSale> list){
+        HouseRentSaleAdapter houseRentSaleAdapter = new HouseRentSaleAdapter(list,getActivity());
+        listView.setAdapter(houseRentSaleAdapter);
     }
 
-    private void getRentHouseInfo() {
-        new Thread(() -> {
-            Response get = HttpUtil.Get(ConstUtil.HOUSE_RENT);
-            try {
-                JSONObject jsonObject = new JSONObject(Objects.requireNonNull(get.body()).string());
-                if (jsonObject.getString("code").equals("666")) {
-                    listRent = jsonObject.getJSONArray("data").toString();
-                }
-            } catch (JSONException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }).start();
+    @Override
+    public void showResult(List<HouseRentSale> list) {
+        initListView(list);
+    }
+
+    @Override
+    public void showError(String msg) {
 
     }
 
+    @Override
+    public void jumpView(AppCompatActivity activity) {
 
-    private void getMyHouseInfo() {
-        new Thread(() -> {
-            Response get = HttpUtil.Get(ConstUtil.HOUSE_RENT);
-            try {
-                JSONObject jsonObject = new JSONObject(Objects.requireNonNull(get.body()).string());
-                if (jsonObject.getString("code").equals("666")) {
-                    listMy=jsonObject.getJSONArray("data").toString();
-                }
-            } catch (JSONException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }).start();
+    }
+
+    @Override
+    public void showMsg(String msg) {
+
     }
 }

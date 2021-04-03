@@ -1,16 +1,16 @@
 package top.zxpdmw.graduationproject.presenter.contract;
 
-import java.util.List;
-
 import top.zxpdmw.graduationproject.presenter.BasePresenter;
 import top.zxpdmw.graduationproject.ui.BaseView;
 
-public interface MainContract {
+public interface PropertyContract {
+
     interface View extends BaseView{
-        void showData(String list);
+        void LoadData(String property);
     }
 
     interface Presenter extends BasePresenter{
-        void RecommendNotice();
+        void GetProperty(String houseId);
+        void AddProperty(String houseId,String property);
     }
 }
