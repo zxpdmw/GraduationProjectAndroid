@@ -98,7 +98,6 @@ public class SystemMainActivity extends AppCompatActivity implements AdapterView
             Intent intent = new Intent(SystemMainActivity.this, HouseRentSaleActivity.class);
             final Bundle bundle = new Bundle();
             bundle.putString("username",user.getUsername());
-            Log.d(TAG, user.toString());
             intent.putExtra("bundle",bundle);
             startActivity(intent);
         } else if (position == 6) {
@@ -107,41 +106,4 @@ public class SystemMainActivity extends AppCompatActivity implements AdapterView
             startActivity(intent);
         }
     }
-
-//    private void getRecommendNotice() {
-//        new Thread(() -> {
-//            Response response = HttpUtil.Get(ConstUtil.NOTICE_RECOMMEND);
-//            try {
-//                JSONObject jsonObject = new JSONObject(response.body().string());
-//                code = jsonObject.getString("code");
-//                if (code.equals("666")) {
-//                    JSONArray jsonArray = jsonObject.getJSONArray("data");
-//                    data = jsonArray.toString();
-//                }
-//
-//            } catch (JSONException e) {
-//                e.printStackTrace();
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//        }).start();
-//    }
-//
-//    private void getPropertyBalance() {
-//        new Thread(() -> {
-//            Response get = HttpUtil.Get(ConstUtil.PROPERTY_GET + "?houseId=" + user.getHouse_id());
-//            try {
-//                JSONObject jsonObject = new JSONObject(get.body().string());
-//                if (jsonObject.getString("code").equals("666")) {
-//                    propertyBalance = jsonObject.getString("data");
-//                }
-//            } catch (JSONException e) {
-//                e.printStackTrace();
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//        }).start();
-//
-//    }
-
 }

@@ -1,41 +1,42 @@
 package top.zxpdmw.graduationproject.ui.fragment;
 
-import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toolbar;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
+import com.xuexiang.xui.widget.popupwindow.ViewTooltip;
 
-import java.io.IOException;
+import java.time.temporal.ValueRange;
 import java.util.List;
-import java.util.Objects;
 
-import butterknife.BindView;
 import lombok.SneakyThrows;
-import okhttp3.Response;
 import top.zxpdmw.graduationproject.R;
-import top.zxpdmw.graduationproject.presenter.HouseRSPresenter;
-import top.zxpdmw.graduationproject.presenter.contract.HouseRSContract;
+import top.zxpdmw.graduationproject.presenter.HouseRentSalePresenter;
+import top.zxpdmw.graduationproject.presenter.contract.HouseRentSaleContract;
 import top.zxpdmw.graduationproject.ui.adapter.HouseRentSaleAdapter;
 import top.zxpdmw.graduationproject.bean.HouseRentSale;
 import top.zxpdmw.graduationproject.util.ConstUtil;
-import top.zxpdmw.graduationproject.util.JsonUtil;
 import top.zxpdmw.graduationproject.util.ToastUtil;
 
 
-public class HouseListFragment extends Fragment implements HouseRSContract.View {
+public class HouseListFragment extends Fragment implements HouseRentSaleContract.View, AdapterView.OnItemClickListener {
     ListView listView;
-    HouseRSPresenter houseRSPresenter=new HouseRSPresenter(this);
+    HouseRentSalePresenter houseRentSalePresenter =new HouseRentSalePresenter(this);
+    FragmentManager fManager;
+    List<HouseRentSale> list;
 
-    public static HouseListFragment newInstance(int type){
+    public static HouseListFragment newInstance(int type,FragmentManager fManager){
         HouseListFragment houseListFragment=new HouseListFragment();
         Bundle bundle = new Bundle();
         bundle.putInt("type",type);
@@ -62,15 +63,16 @@ public class HouseListFragment extends Fragment implements HouseRSContract.View 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fg_house_list,container,false);
         listView=view.findViewById(R.id.house_list);
+        fManager= getActivity().getSupportFragmentManager();
         if (getArguments()!=null){
             final Bundle arguments = getArguments();
             final int type = arguments.getInt("type");
             if (type==1){
-                houseRSPresenter.HouseRent();
+                houseRentSalePresenter.HouseRent();
             }else if (type==2){
-                houseRSPresenter.HouseSale();
+                houseRentSalePresenter.HouseSale();
             }else if (type==3){
-                houseRSPresenter.HouseByUsername(arguments.getString("username"));
+                houseRentSalePresenter.HouseByUsername(arguments.getString("username"));
             }
         }else{
             new ToastUtil(getActivity(),ConstUtil.SYSTEM_EXCEPTION).show(500);
@@ -84,7 +86,8 @@ public class HouseListFragment extends Fragment implements HouseRSContract.View 
     }
 
     @Override
-    public void showResult(List<HouseRentSale> list) {
+    public void showList(List<HouseRentSale> list) {
+        this.list=list;
         initListView(list);
     }
 
@@ -101,5 +104,22 @@ public class HouseListFragment extends Fragment implements HouseRSContract.View 
     @Override
     public void showMsg(String msg) {
 
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        FragmentTransaction fTransaction = fManager.beginTransaction();
+        HouseMessageFragment ncFragment = new HouseMessageFragment();
+        Bundle bd = new Bundle();
+        bd.putSerializable("content", list.get(position));
+        ncFragment.setArguments(bd);
+        //获取Activity的控件
+
+        //加上Fragment替换动画
+        fTransaction.setCustomAnimations(R.anim.fragment_slide_left_enter, R.anim.fragment_slide_left_exit);
+        fTransaction.replace(R.id.ly_content, ncFragment);
+        //调用addToBackStack将Fragment添加到栈中
+        fTransaction.addToBackStack(null);
+        fTransaction.commit();
     }
 }

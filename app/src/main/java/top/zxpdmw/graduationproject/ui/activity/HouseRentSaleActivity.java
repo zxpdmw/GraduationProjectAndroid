@@ -98,7 +98,7 @@ public class HouseRentSaleActivity extends AppCompatActivity implements View.OnC
                 setSelected();
                 house_rent.setSelected(true);
                 if (rent == null) {
-                    rent = HouseListFragment.newInstance(1);
+                    rent = HouseListFragment.newInstance(1,fManager);
                     fTransaction.add(R.id.ly_content, rent);
                 } else {
                     fTransaction.show(rent);
@@ -108,7 +108,7 @@ public class HouseRentSaleActivity extends AppCompatActivity implements View.OnC
                 setSelected();
                 house_sale.setSelected(true);
                 if (sale == null) {
-                    sale = HouseListFragment.newInstance(2);
+                    sale = HouseListFragment.newInstance(2,fManager);
                     fTransaction.add(R.id.ly_content, sale);
                 } else {
                     fTransaction.show(sale);

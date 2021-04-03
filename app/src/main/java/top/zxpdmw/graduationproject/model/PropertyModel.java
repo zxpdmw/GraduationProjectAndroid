@@ -25,6 +25,6 @@ public class PropertyModel {
         Call<ResponseBody> GetProperty(@Query("houseId") String houseId);
 
         @GET(ConstUtil.PROPERTY_ADD)
-        Call<ResponseBody> AddProperty(@Query("houseId") String houseid, @Query("property") String property);
+        Call<ResponseBody> AddProperty(@Query("houseId") String houseId, @Query("property") String property);
     }
 }

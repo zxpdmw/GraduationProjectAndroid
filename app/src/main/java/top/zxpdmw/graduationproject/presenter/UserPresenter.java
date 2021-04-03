@@ -6,14 +6,12 @@ import com.google.gson.Gson;
 
 import org.json.JSONObject;
 
-import java.util.List;
-
 import lombok.SneakyThrows;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import top.zxpdmw.graduationproject.bean.CommonResult;
+import top.zxpdmw.graduationproject.bean.CommonList;
 import top.zxpdmw.graduationproject.bean.User;
 import top.zxpdmw.graduationproject.model.UserModel;
 import top.zxpdmw.graduationproject.presenter.contract.UserContract;
@@ -43,9 +41,6 @@ public class UserPresenter implements UserContract.Presenter {
                 String code=jsonObject.getString("code");
                 String message=jsonObject.getString("message");
                 final User data = new Gson().fromJson(jsonObject.getJSONObject("data").toString(), User.class);
-                Log.d(TAG, "onResponse: "+code);
-                Log.d(TAG, "onResponse: "+message);
-                Log.d(TAG, "onResponse: "+data);
                 switch (code) {
                     case "666":
                         view.showMsg(message);
@@ -67,13 +62,12 @@ public class UserPresenter implements UserContract.Presenter {
 
     @Override
     public void RegisterUser(User user) {
-        model.RegisterUser(user, new Callback<CommonResult>() {
+        model.RegisterUser(user, new Callback<CommonList>() {
             @SneakyThrows
             @Override
-            public void onResponse(Call<CommonResult> call, Response<CommonResult> response) {
+            public void onResponse(Call<CommonList> call, Response<CommonList> response) {
                 int code=response.body().getCode();
                 String msg=response.body().getMessage();
-                Log.d(TAG, "onResponse: "+response);
                 if (code==666){
                     view.showMsg(ConstUtil.TO_LOGIN_ACTIVITY);
                     view.jumpView(new LoginActivity());
@@ -83,7 +77,7 @@ public class UserPresenter implements UserContract.Presenter {
 
             }
             @Override
-            public void onFailure(Call<CommonResult> call, Throwable t) {
+            public void onFailure(Call<CommonList> call, Throwable t) {
                 view.showError(t.getMessage());
             }
         });

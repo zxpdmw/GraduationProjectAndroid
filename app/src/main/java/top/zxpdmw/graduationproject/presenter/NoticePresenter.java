@@ -1,21 +1,15 @@
 package top.zxpdmw.graduationproject.presenter;
 
-import android.util.Log;
-
-import androidx.annotation.LongDef;
-
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import lombok.SneakyThrows;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import top.zxpdmw.graduationproject.bean.CommonResult;
+import top.zxpdmw.graduationproject.bean.CommonList;
 import top.zxpdmw.graduationproject.bean.Notice;
 import top.zxpdmw.graduationproject.model.NoticeModel;
 import top.zxpdmw.graduationproject.presenter.contract.NoticeContract;
-import top.zxpdmw.graduationproject.ui.activity.DetailNoticeActivity;
 import top.zxpdmw.graduationproject.ui.activity.NoticeActivity;
 
 public class NoticePresenter implements NoticeContract.Presenter {
@@ -30,10 +24,10 @@ public class NoticePresenter implements NoticeContract.Presenter {
 
     @Override
     public void RecommendNotice() {
-        noticeModel.RecommendNotice(new Callback<CommonResult<Notice>>() {
+        noticeModel.RecommendNotice(new Callback<CommonList<Notice>>() {
             @SneakyThrows
             @Override
-            public void onResponse(Call<CommonResult<Notice>> call, Response<CommonResult<Notice>> response) {
+            public void onResponse(Call<CommonList<Notice>> call, Response<CommonList<Notice>> response) {
                 int code = response.body().getCode();
                 String msg = response.body().getMessage();
                 List<Notice> list = response.body().getData();
@@ -44,7 +38,7 @@ public class NoticePresenter implements NoticeContract.Presenter {
             }
 
             @Override
-            public void onFailure(Call<CommonResult<Notice>> call, Throwable t) {
+            public void onFailure(Call<CommonList<Notice>> call, Throwable t) {
                 view.showError(t.getMessage());
             }
         });
