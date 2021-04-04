@@ -12,7 +12,7 @@
         android:layout_height="150dp"
         android:layout_gravity="center_horizontal"
         android:layout_margin="100dp"
-        android:src="@drawable/shequ" />
+        android:src="@drawable/logo" />
 
     <FrameLayout
         android:id="@+id/fg_main_layout"
