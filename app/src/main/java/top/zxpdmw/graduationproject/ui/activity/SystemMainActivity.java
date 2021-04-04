@@ -90,6 +90,7 @@ public class SystemMainActivity extends AppCompatActivity implements AdapterView
                 startActivity(intent);
         } else if (position == 3) {
             Intent intent = new Intent(SystemMainActivity.this, ComplainRepairActivity.class);
+            intent.putExtra("username",user.getUsername());
             startActivity(intent);
         } else if (position == 4) {
             Intent intent = new Intent(SystemMainActivity.this, HouseKeepingActivity.class);

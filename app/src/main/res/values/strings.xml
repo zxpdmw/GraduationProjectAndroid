@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">便民社区</string>
-    <string name="login">登 录</string>
-    <string name="register">注 册</string>
+    <string name="login">登    录</string>
+    <string name="register">注    册</string>
     <string name="title">社区通</string>
     <string name="new_user">新用户</string>
     <string name="username">用户名</string>
@@ -16,6 +16,8 @@
     <string name="houseRentSale">"房 屋 租 售                                                                      "</string>
     <string name="me">"我 的                                                                                      "</string>
     <string name="property">"物 业 费                                                                                              "</string>
+    <string name="unamelength">请输入6-10位账号</string>
+    <string name="upwdlength">请输入6-10位密码</string>
 
 
 </resources>

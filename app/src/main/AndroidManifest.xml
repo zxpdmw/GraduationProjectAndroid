@@ -42,9 +42,7 @@
             android:name=".ui.activity.NoticeActivity"
             android:exported="true"
             android:parentActivityName=".ui.activity.SystemMainActivity" />
-        <activity android:name=".ui.activity.RegisterActivity" />
         <activity android:name=".ui.activity.SystemMainActivity" />
-        <activity android:name=".ui.activity.LoginActivity" />
         <activity android:name=".ui.activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

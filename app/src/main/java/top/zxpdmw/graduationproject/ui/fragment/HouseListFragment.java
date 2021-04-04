@@ -15,7 +15,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.xuexiang.xui.widget.popupwindow.ViewTooltip;
 
 import java.time.temporal.ValueRange;
 import java.util.List;
@@ -77,6 +76,7 @@ public class HouseListFragment extends Fragment implements HouseRentSaleContract
         }else{
             new ToastUtil(getActivity(),ConstUtil.SYSTEM_EXCEPTION).show(500);
         }
+        listView.setOnItemClickListener(this);
         return view;
     }
 
@@ -109,15 +109,14 @@ public class HouseListFragment extends Fragment implements HouseRentSaleContract
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         FragmentTransaction fTransaction = fManager.beginTransaction();
-        HouseMessageFragment ncFragment = new HouseMessageFragment();
+        HouseMessageFragment houseMessageFragment = new HouseMessageFragment();
         Bundle bd = new Bundle();
         bd.putSerializable("content", list.get(position));
-        ncFragment.setArguments(bd);
+        houseMessageFragment.setArguments(bd);
         //获取Activity的控件
-
         //加上Fragment替换动画
         fTransaction.setCustomAnimations(R.anim.fragment_slide_left_enter, R.anim.fragment_slide_left_exit);
-        fTransaction.replace(R.id.ly_content, ncFragment);
+        fTransaction.replace(R.id.ly_content, houseMessageFragment);
         //调用addToBackStack将Fragment添加到栈中
         fTransaction.addToBackStack(null);
         fTransaction.commit();

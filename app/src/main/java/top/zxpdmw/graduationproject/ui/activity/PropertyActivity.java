@@ -9,7 +9,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.xuexiang.xui.widget.dialog.materialdialog.internal.ThemeSingleton;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

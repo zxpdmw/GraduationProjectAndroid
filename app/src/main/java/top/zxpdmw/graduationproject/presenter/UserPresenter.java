@@ -1,10 +1,12 @@
 package top.zxpdmw.graduationproject.presenter;
 
-import android.util.Log;
+import androidx.fragment.app.Fragment;
 
 import com.google.gson.Gson;
 
 import org.json.JSONObject;
+
+import java.util.concurrent.TimeUnit;
 
 import lombok.SneakyThrows;
 import okhttp3.ResponseBody;
@@ -15,8 +17,8 @@ import top.zxpdmw.graduationproject.bean.CommonList;
 import top.zxpdmw.graduationproject.bean.User;
 import top.zxpdmw.graduationproject.model.UserModel;
 import top.zxpdmw.graduationproject.presenter.contract.UserContract;
-import top.zxpdmw.graduationproject.ui.activity.LoginActivity;
 import top.zxpdmw.graduationproject.ui.activity.SystemMainActivity;
+import top.zxpdmw.graduationproject.ui.fragment.RegisterFragment;
 import top.zxpdmw.graduationproject.util.ConstUtil;
 
 
@@ -70,7 +72,8 @@ public class UserPresenter implements UserContract.Presenter {
                 String msg=response.body().getMessage();
                 if (code==666){
                     view.showMsg(ConstUtil.TO_LOGIN_ACTIVITY);
-                    view.jumpView(new LoginActivity());
+                    TimeUnit.SECONDS.sleep(1);
+                    view.switchFragment();
                 }else{
                     view.showMsg(msg);
                 }
@@ -82,4 +85,5 @@ public class UserPresenter implements UserContract.Presenter {
             }
         });
     }
+
 }

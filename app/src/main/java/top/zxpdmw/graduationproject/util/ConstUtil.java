@@ -33,7 +33,5 @@ public class ConstUtil {
     public static final String USER_GET_HOUSEID="user/houseid";
 
 
-
-
-
+    public static final String HOUSE_KEEPING_EDIT = "housekeeping/edit";
 }
