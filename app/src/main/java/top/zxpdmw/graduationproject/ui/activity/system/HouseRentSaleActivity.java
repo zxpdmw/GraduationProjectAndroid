@@ -108,7 +108,6 @@ public class HouseRentSaleActivity extends AppCompatActivity implements View.OnC
                 setSelected();
                 house_my.setSelected(true);
                 if (my == null) {
-                    Log.d("zwy", "onClick: "+bundle.getString("username"));
                     my = HouseListFragment.newInstance(3,bundle.getString("username"));
                     fTransaction.add(R.id.ly_content, my);
                 } else {

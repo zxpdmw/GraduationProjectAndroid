@@ -26,9 +26,8 @@ public class NoticeActivity extends AppCompatActivity implements NoticeContract.
             ListView listView;
     List<Notice> noticeList;
 
-
     NoticePresenter noticePresenter=new NoticePresenter(this);
-    private long exitTime = 0;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

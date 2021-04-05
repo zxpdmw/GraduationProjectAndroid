@@ -9,6 +9,7 @@ import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import top.zxpdmw.graduationproject.R;
+import top.zxpdmw.graduationproject.ui.BaseView;
 
 public class CommunityPageActivity extends AppCompatActivity {
     @BindView(R.id.toolbar)

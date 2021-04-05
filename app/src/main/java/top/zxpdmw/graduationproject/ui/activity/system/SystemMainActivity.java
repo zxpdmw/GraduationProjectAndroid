@@ -37,9 +37,6 @@ public class SystemMainActivity extends AppCompatActivity {
     User user;
     FragmentManager fragmentManage = getSupportFragmentManager();
 
-    @BindView(R.id.system_main_layout)
-    FrameLayout frameLayout;
-
     private long exitTime = 0;
 
 
