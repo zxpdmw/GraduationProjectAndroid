@@ -26,8 +26,7 @@
             android:layout_marginTop="16dp"
             android:textColor="#1D1D1C"
             android:maxLines="1"
-            android:textSize="20sp" />
-
+            android:textSize="30sp" />
     </LinearLayout>
 
 

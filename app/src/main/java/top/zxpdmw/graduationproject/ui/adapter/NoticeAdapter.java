@@ -8,12 +8,15 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import lombok.AllArgsConstructor;
 import top.zxpdmw.graduationproject.R;
 import top.zxpdmw.graduationproject.bean.Notice;
+import top.zxpdmw.graduationproject.util.TimeUtil;
 
 @AllArgsConstructor
 public class NoticeAdapter extends BaseAdapter {
@@ -49,9 +52,10 @@ public class NoticeAdapter extends BaseAdapter {
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
-        viewHolder.notice_icon.setBackgroundResource(R.drawable.touxiang);
+//        viewHolder.notice_icon.setBackgroundResource(R.drawable.touxiang);
+        Glide.with(parent.getContext()).load("http://n.sinaimg.cn/games/639/w400h239/20210325/dd06-kmvwsvx9318810.jpg").dontAnimate().into(viewHolder.notice_icon);
         viewHolder.notice_title.setText(notices.get(position).getTitle());
-        viewHolder.notice_publish_time.setText(notices.get(position).getContent());
+        viewHolder.notice_publish_time.setText(TimeUtil.descriptiveData(notices.get(position).getPublish_time()));
         return convertView;
     }
 
