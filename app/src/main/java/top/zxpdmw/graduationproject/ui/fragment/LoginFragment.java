@@ -24,7 +24,7 @@ import top.zxpdmw.graduationproject.R;
 import top.zxpdmw.graduationproject.bean.User;
 import top.zxpdmw.graduationproject.presenter.UserPresenter;
 import top.zxpdmw.graduationproject.presenter.contract.UserContract;
-import top.zxpdmw.graduationproject.ui.activity.SystemMainActivity;
+import top.zxpdmw.graduationproject.ui.activity.system.SystemMainActivity;
 import top.zxpdmw.graduationproject.util.ToastUtil;
 
 public class LoginFragment extends Fragment implements UserContract.View {
@@ -47,7 +47,6 @@ public class LoginFragment extends Fragment implements UserContract.View {
     public View onCreateView(@NonNull @NotNull LayoutInflater inflater, @Nullable @org.jetbrains.annotations.Nullable ViewGroup container, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fg_login, container, false);
         unbinder = ButterKnife.bind(this, view);
-
         return view;
     }
 
@@ -86,6 +85,7 @@ public class LoginFragment extends Fragment implements UserContract.View {
     @Override
     public void jumpView(AppCompatActivity activity) {
         final Intent intent = new Intent(getActivity(), SystemMainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
         intent.putExtra("user",user);
         startActivity(intent);
     }
@@ -94,5 +94,6 @@ public class LoginFragment extends Fragment implements UserContract.View {
     public void showMsg(String msg) {
         new ToastUtil(getActivity(),msg).show(500);
     }
+
 
 }

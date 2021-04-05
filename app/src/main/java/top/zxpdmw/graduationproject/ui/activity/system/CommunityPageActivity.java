@@ -1,43 +1,41 @@
-package top.zxpdmw.graduationproject.ui.activity;
+package top.zxpdmw.graduationproject.ui.activity.system;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import top.zxpdmw.graduationproject.R;
-import top.zxpdmw.graduationproject.bean.User;
 
-public class MyInfoActivity extends AppCompatActivity {
-    private Intent intent;
-    @BindView(R.id.my_house)
-    TextView nickname;
-    @BindView(R.id.my_nickename)
-    TextView houseId;
+public class CommunityPageActivity extends AppCompatActivity {
     @BindView(R.id.toolbar)
     Toolbar toolbar;
-    private User user;
+    @BindView(R.id.community_title)
+    TextView title;
+    @BindView(R.id.community_name)
+    TextView name;
+    @BindView(R.id.community_introduce)
+    TextView introduce;
+    @BindView(R.id.community_phone)
+    TextView phone;
+    @BindView(R.id.community_address)
+    TextView address;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_my_info);
+        setContentView(R.layout.activity_community_page);
         ButterKnife.bind(this);
         init();
     }
 
-    private void init(){
-        toolbar.setTitle("我的");
+    private void init() {
+        toolbar.setTitle("社区黄页");
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         toolbar.setNavigationOnClickListener(v -> finish());
-        intent=getIntent();
-        user = (User) intent.getSerializableExtra("user");
-        nickname.setText(user.getNickname());
-        houseId.setText(user.getHouse_id());
     }
 }

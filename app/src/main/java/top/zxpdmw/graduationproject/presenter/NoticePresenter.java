@@ -10,7 +10,6 @@ import top.zxpdmw.graduationproject.bean.CommonList;
 import top.zxpdmw.graduationproject.bean.Notice;
 import top.zxpdmw.graduationproject.model.NoticeModel;
 import top.zxpdmw.graduationproject.presenter.contract.NoticeContract;
-import top.zxpdmw.graduationproject.ui.activity.NoticeActivity;
 
 public class NoticePresenter implements NoticeContract.Presenter {
     private static final String TAG = "zwy-----Notice";
@@ -33,7 +32,7 @@ public class NoticePresenter implements NoticeContract.Presenter {
                 List<Notice> list = response.body().getData();
                 if (code == 666) {
                     view.showResult(list);
-                    view.jumpView(new NoticeActivity());
+//                    view.switchFragment();
                 }
             }
 

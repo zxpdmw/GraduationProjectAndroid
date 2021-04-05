@@ -1,4 +1,4 @@
-package top.zxpdmw.graduationproject.ui.activity;
+package top.zxpdmw.graduationproject.ui.activity.system;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;

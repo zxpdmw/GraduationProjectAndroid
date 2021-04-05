@@ -1,7 +1,5 @@
 package top.zxpdmw.graduationproject.presenter;
 
-import androidx.fragment.app.Fragment;
-
 import com.google.gson.Gson;
 
 import org.json.JSONObject;
@@ -17,8 +15,7 @@ import top.zxpdmw.graduationproject.bean.CommonList;
 import top.zxpdmw.graduationproject.bean.User;
 import top.zxpdmw.graduationproject.model.UserModel;
 import top.zxpdmw.graduationproject.presenter.contract.UserContract;
-import top.zxpdmw.graduationproject.ui.activity.SystemMainActivity;
-import top.zxpdmw.graduationproject.ui.fragment.RegisterFragment;
+import top.zxpdmw.graduationproject.ui.activity.system.SystemMainActivity;
 import top.zxpdmw.graduationproject.util.ConstUtil;
 
 

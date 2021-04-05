@@ -18,31 +18,30 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="n">
         <activity
-            android:name=".ui.activity.HouseRentSaleActivity"
+            android:name=".ui.activity.system.PropertyActivity"
+            android:exported="true"></activity>
+        <activity
+            android:name=".ui.activity.system.CommunityPageActivity"
             android:exported="true" />
         <activity
-            android:name=".ui.activity.HouseKeepingActivity"
+            android:name=".ui.activity.system.DetailNoticeActivity"
             android:exported="true" />
         <activity
-            android:name=".ui.activity.ComplainRepairActivity"
+            android:name=".ui.activity.system.NoticeActivity"
             android:exported="true" />
         <activity
-            android:name=".ui.activity.MyInfoActivity"
+            android:name=".ui.activity.system.HouseRentSaleActivity"
             android:exported="true" />
         <activity
-            android:name=".ui.activity.CommunityPageActivity"
+            android:name=".ui.activity.system.HouseKeepingActivity"
             android:exported="true" />
         <activity
-            android:name=".ui.activity.DetailNoticeActivity"
+            android:name=".ui.activity.system.ComplainRepairActivity"
             android:exported="true" />
         <activity
-            android:name=".ui.activity.PropertyActivity"
+            android:name=".ui.activity.system.MyInfoActivity"
             android:exported="true" />
-        <activity
-            android:name=".ui.activity.NoticeActivity"
-            android:exported="true"
-            android:parentActivityName=".ui.activity.SystemMainActivity" />
-        <activity android:name=".ui.activity.SystemMainActivity" />
+        <activity android:name=".ui.activity.system.SystemMainActivity" />
         <activity android:name=".ui.activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -22,10 +22,6 @@ import top.zxpdmw.graduationproject.ui.fragment.MainFragment;
 
 public class MainActivity extends AppCompatActivity {
 
-//    @BindView(R.id.login)
-//    Button login;
-//    @BindView(R.id.register)
-//    Button register;
     @BindView(R.id.icon)
     ImageView image;
     @BindView(R.id.fg_main_layout)
@@ -39,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+        //动画
         RotateAnimation rotate  = new RotateAnimation(0f, 360f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
         LinearInterpolator lin = new LinearInterpolator();
         rotate.setInterpolator(lin);
@@ -56,16 +53,5 @@ public class MainActivity extends AppCompatActivity {
             fragmentTransaction.show(mainFragment);
         }
         fragmentTransaction.commit();
-
-
-//        login.setOnClickListener(v -> {
-//            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-//            startActivity(intent);
-//        });
-//
-//        register.setOnClickListener(v -> {
-//            Intent intent = new Intent(MainActivity.this, RegisterActivity.class);
-//            startActivity(intent);
-//        });
     }
 }

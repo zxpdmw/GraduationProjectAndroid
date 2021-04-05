@@ -1,22 +1,18 @@
-package top.zxpdmw.graduationproject.ui.fragment;
+package top.zxpdmw.graduationproject.ui.fragment.system;
 
-import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toolbar;
 
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 
-import java.time.temporal.ValueRange;
 import java.util.List;
 
 import lombok.SneakyThrows;
@@ -105,6 +101,8 @@ public class HouseListFragment extends Fragment implements HouseRentSaleContract
     public void showMsg(String msg) {
 
     }
+
+
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
 
-    tools:context=".ui.activity.MyInfoActivity">
+    tools:context=".ui.activity.system.MyInfoActivity">
     <include layout="@layout/toolbar"
         android:id="@+id/toolbar"/>
 

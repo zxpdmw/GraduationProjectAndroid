@@ -1,64 +1,43 @@
-package top.zxpdmw.graduationproject.ui.activity;
+package top.zxpdmw.graduationproject.ui.activity.system;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+
+import android.app.Dialog;
+import android.content.DialogInterface;
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.ImageView;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import top.zxpdmw.graduationproject.R;
 import top.zxpdmw.graduationproject.bean.HouseKeeping;
-import top.zxpdmw.graduationproject.presenter.ComplainRepairPresenter;
-import top.zxpdmw.graduationproject.presenter.contract.ComplainRepairContract;
-import top.zxpdmw.graduationproject.ui.adapter.ComplainRepairAdapter;
-import top.zxpdmw.graduationproject.bean.ComplainRepair;
+import top.zxpdmw.graduationproject.presenter.HouseKeepingPresenter;
+import top.zxpdmw.graduationproject.presenter.contract.HouseKeepingContract;
 
-import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.EditText;
-import android.widget.ListView;
-
-import java.util.List;
-
-public class ComplainRepairActivity extends AppCompatActivity implements AdapterView.OnItemClickListener, ComplainRepairContract.View {
+public class HouseKeepingActivity extends AppCompatActivity implements HouseKeepingContract.View {
     @BindView(R.id.toolbar)
-    Toolbar toolbar;
-    @BindView(R.id.list_complain_repair)
-    ListView listView;
-    ComplainRepairAdapter complainRepairAdapter;
-    Context context = ComplainRepairActivity.this;
-    ComplainRepairPresenter complainRepairPresenter=new ComplainRepairPresenter(this);
-    Intent intent;
+     Toolbar toolbar;
+    @BindView(R.id.add_house_keeping) ImageView imageView;
+    HouseKeepingPresenter houseKeepingPresenter=new HouseKeepingPresenter(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_complain_repair);
+        setContentView(R.layout.activity_house_keeping);
         ButterKnife.bind(this);
         init();
-        complainRepairPresenter.GetComplainRepair(intent.getStringExtra("username"));
     }
 
-    private void init() {
-        intent=getIntent();
-        toolbar.setTitle("投诉报修");
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        toolbar.setNavigationOnClickListener(v -> finish());
-    }
-
-    private void initListView(List<ComplainRepair> complainRepairs){
-        final ComplainRepairAdapter complainRepairAdapter = new ComplainRepairAdapter(complainRepairs,context);
-        listView.setAdapter(complainRepairAdapter);
-    }
-    @OnClick(R.id.add_complain_repair)
-    void addComplainRepair(){
+    @OnClick(R.id.add_house_keeping)
+    void addHouseKeeping(){
         //实例化布局
         View view = LayoutInflater.from(this).inflate(R.layout.add_house_keeping,null);
         EditText address = view.findViewById(R.id.edit_address);
@@ -79,7 +58,7 @@ public class ComplainRepairActivity extends AppCompatActivity implements Adapter
         dialog.setButton(AlertDialog.BUTTON_POSITIVE, "添加", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                complainRepairPresenter.AddComplainRepair(null);
+                houseKeepingPresenter.AddHouseKeeping(houseKeeping);
             }
         });
         dialog.setButton(AlertDialog.BUTTON_NEGATIVE, "取消", new DialogInterface.OnClickListener() {
@@ -91,14 +70,16 @@ public class ComplainRepairActivity extends AppCompatActivity implements Adapter
         dialog.show();
     }
 
-    @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+    private void init(){
+        toolbar.setTitle("家政服务");
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        toolbar.setNavigationOnClickListener(v -> finish());
     }
 
     @Override
-    public void showList(List<ComplainRepair> list) {
-        initListView(list);
+    public void showList(List<HouseKeeping> list) {
+
     }
 
     @Override
@@ -115,4 +96,5 @@ public class ComplainRepairActivity extends AppCompatActivity implements Adapter
     public void showMsg(String msg) {
 
     }
+
 }

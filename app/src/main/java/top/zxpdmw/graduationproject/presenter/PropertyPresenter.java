@@ -26,8 +26,6 @@ public class PropertyPresenter implements PropertyContract.Presenter {
     @Override
     public void GetProperty(String houseId) {
         model.GetProperty(houseId, new Callback<ResponseBody>() {
-
-
             @SneakyThrows
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {

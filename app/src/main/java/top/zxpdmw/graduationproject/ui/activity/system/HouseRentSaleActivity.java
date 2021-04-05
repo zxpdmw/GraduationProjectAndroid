@@ -1,4 +1,4 @@
-package top.zxpdmw.graduationproject.ui.activity;
+package top.zxpdmw.graduationproject.ui.activity.system;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -12,22 +12,12 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.IOException;
-import java.nio.channels.InterruptedByTimeoutException;
-import java.util.Objects;
-import java.util.concurrent.TimeUnit;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import lombok.SneakyThrows;
-import okhttp3.Response;
 import top.zxpdmw.graduationproject.R;
 
-import top.zxpdmw.graduationproject.ui.fragment.HouseListFragment;
-import top.zxpdmw.graduationproject.util.ConstUtil;
+import top.zxpdmw.graduationproject.ui.fragment.system.HouseListFragment;
 
 public class HouseRentSaleActivity extends AppCompatActivity implements View.OnClickListener {
     @BindView(R.id.toolbar)
