@@ -56,7 +56,10 @@ public class HouseRentSaleActivity extends AppCompatActivity implements View.OnC
         toolbar.setTitle("房 屋 租 售");
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        toolbar.setNavigationOnClickListener(v -> finish());
+        toolbar.setNavigationOnClickListener(v -> {
+            finish();
+            overridePendingTransition(R.anim.in_from_left, R.anim.out_of_right);
+        });
 
         house_sale.setOnClickListener(this);
         house_rent.setOnClickListener(this);
@@ -116,5 +119,11 @@ public class HouseRentSaleActivity extends AppCompatActivity implements View.OnC
                 break;
         }
         fTransaction.commit();
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.in_from_left, R.anim.out_of_right);
     }
 }

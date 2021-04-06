@@ -50,7 +50,10 @@ public class ComplainRepairActivity extends AppCompatActivity implements Adapter
         toolbar.setTitle("投诉报修");
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        toolbar.setNavigationOnClickListener(v -> finish());
+        toolbar.setNavigationOnClickListener(v -> {
+            finish();
+            overridePendingTransition(R.anim.in_from_left, R.anim.out_of_right);
+        });
     }
 
     private void initListView(List<ComplainRepair> complainRepairs){
@@ -116,4 +119,9 @@ public class ComplainRepairActivity extends AppCompatActivity implements Adapter
 
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.in_from_left, R.anim.out_of_right);
+    }
 }

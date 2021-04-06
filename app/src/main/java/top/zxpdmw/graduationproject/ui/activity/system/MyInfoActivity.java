@@ -34,10 +34,19 @@ public class MyInfoActivity extends AppCompatActivity {
         toolbar.setTitle("我的");
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        toolbar.setNavigationOnClickListener(v -> finish());
+        toolbar.setNavigationOnClickListener(v -> {
+            finish();
+            overridePendingTransition(R.anim.in_from_left, R.anim.out_of_right);
+        });
         intent=getIntent();
         user = (User) intent.getSerializableExtra("user");
         nickname.setText(user.getNickname());
         houseId.setText(user.getHouse_id());
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.in_from_left, R.anim.out_of_right);
     }
 }

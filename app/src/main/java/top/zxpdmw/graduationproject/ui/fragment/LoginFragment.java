@@ -1,6 +1,8 @@
 package top.zxpdmw.graduationproject.ui.fragment;
 
+import android.app.ActivityOptions;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +13,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
@@ -77,6 +80,7 @@ public class LoginFragment extends Fragment implements UserContract.View {
 
     }
 
+
     @Override
     public void showError(String msg) {
         new ToastUtil(getActivity(),msg).show(500);
@@ -88,11 +92,12 @@ public class LoginFragment extends Fragment implements UserContract.View {
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
         intent.putExtra("user",user);
         startActivity(intent);
+        getActivity().overridePendingTransition(R.anim.in_from_right, R.anim.out_of_left);
     }
 
     @Override
     public void showMsg(String msg) {
-        new ToastUtil(getActivity(),msg).show(500);
+//        new ToastUtil(getActivity(),msg).show(500);
     }
 
 

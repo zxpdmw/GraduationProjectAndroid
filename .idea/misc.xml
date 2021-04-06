@@ -16,6 +16,7 @@
         <entry key="..\:/projects/GraduationProjectAndroid/app/src/main/res/drawable/tab_menu_message.xml" value="0.21979166666666666" />
         <entry key="..\:/projects/GraduationProjectAndroid/app/src/main/res/drawable/tab_menu_setting.xml" value="0.14907407407407408" />
         <entry key="..\:/projects/GraduationProjectAndroid/app/src/main/res/drawable/tab_menu_text.xml" value="0.21979166666666666" />
+        <entry key="..\:/projects/GraduationProjectAndroid/app/src/main/res/drawable/time.xml" value="0.1425925925925926" />
         <entry key="..\:/projects/GraduationProjectAndroid/app/src/main/res/layout/activity_community_page.xml" value="0.22" />
         <entry key="..\:/projects/GraduationProjectAndroid/app/src/main/res/layout/activity_complain.xml" value="0.20364583333333333" />
         <entry key="..\:/projects/GraduationProjectAndroid/app/src/main/res/layout/activity_complain_repair.xml" value="0.15579710144927536" />
@@ -29,7 +30,7 @@
         <entry key="..\:/projects/GraduationProjectAndroid/app/src/main/res/layout/activity_property.xml" value="0.22" />
         <entry key="..\:/projects/GraduationProjectAndroid/app/src/main/res/layout/activity_register.xml" value="0.22" />
         <entry key="..\:/projects/GraduationProjectAndroid/app/src/main/res/layout/activity_repair.xml" value="0.20364583333333333" />
-        <entry key="..\:/projects/GraduationProjectAndroid/app/src/main/res/layout/activity_systemmain.xml" value="0.20364583333333333" />
+        <entry key="..\:/projects/GraduationProjectAndroid/app/src/main/res/layout/activity_systemmain.xml" value="0.22" />
         <entry key="..\:/projects/GraduationProjectAndroid/app/src/main/res/layout/activity_test.xml" value="0.22" />
         <entry key="..\:/projects/GraduationProjectAndroid/app/src/main/res/layout/add_house_keeping.xml" value="0.13994565217391305" />
         <entry key="..\:/projects/GraduationProjectAndroid/app/src/main/res/layout/bottom.xml" value="0.22" />

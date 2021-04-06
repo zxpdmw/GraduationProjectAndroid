@@ -49,6 +49,7 @@ public class NoticeActivity extends AppCompatActivity implements NoticeContract.
         Intent intent=new Intent(NoticeActivity.this,DetailNoticeActivity.class);
         intent.putExtra("notice",noticeList.get(id));
         startActivity(intent);
+        overridePendingTransition(R.anim.in_from_right, R.anim.out_of_left);
     }
 
     @Override
@@ -76,11 +77,20 @@ public class NoticeActivity extends AppCompatActivity implements NoticeContract.
         toolbar.setTitle("社区公告");
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        toolbar.setNavigationOnClickListener(v -> finish());
+        toolbar.setNavigationOnClickListener(v -> {
+            finish();
+            overridePendingTransition(R.anim.in_from_left, R.anim.out_of_right);
+        });
     }
 
     @Override
     public void destroyToolBar(String title) {
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.in_from_left, R.anim.out_of_right);
     }
 }

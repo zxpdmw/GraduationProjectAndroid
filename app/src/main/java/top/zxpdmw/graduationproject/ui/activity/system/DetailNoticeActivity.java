@@ -41,7 +41,10 @@ public class DetailNoticeActivity extends AppCompatActivity {
         toolbar.setTitle("公告详情");
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        toolbar.setNavigationOnClickListener(v -> finish());
+        toolbar.setNavigationOnClickListener(v -> {
+            finish();
+            overridePendingTransition(R.anim.in_from_left, R.anim.out_of_right);
+        });
         intent = getIntent();
         notice = (Notice) intent.getSerializableExtra("notice");
         title.setText(notice.getTitle());
@@ -49,5 +52,11 @@ public class DetailNoticeActivity extends AppCompatActivity {
         final String s = TimeUtil.descriptiveData(notice.getPublish_time());
         publishTime.setText(s);
         content.setText(notice.getContent());
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.in_from_left, R.anim.out_of_right);
     }
 }

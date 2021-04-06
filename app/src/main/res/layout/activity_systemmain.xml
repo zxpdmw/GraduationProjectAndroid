@@ -4,11 +4,88 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <include layout="@layout/toolbar"
-        android:id="@+id/toolbar" />
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar" />
+
+    <RelativeLayout
+        android:id="@+id/weather"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="#66ccff">
+        <ImageView
+            android:id="@+id/weather_icon"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:background="@drawable/qing"/>
+        <TextView
+            android:id="@+id/weather_range"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="13~20"
+            android:layout_toRightOf="@+id/weather_icon"
+            android:layout_marginTop="10dp"
+            android:textColor="#ffcc00"
+            android:textSize="25sp"/>
+        <TextView
+            android:id="@+id/weather_wind"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="东南风"
+            android:layout_toRightOf="@+id/weather_icon"
+            android:layout_below="@+id/weather_range"
+            android:textColor="@color/white"
+            android:textSize="25sp"/>
+        <TextView
+            android:id="@+id/weather_now"
+            android:layout_width="wrap_content"
+            android:layout_height="80dp"
+            android:textSize="60dp"
+            android:textColor="@color/white"
+            android:text="20"
+            android:layout_toRightOf="@+id/weather_range"
+            android:layout_marginLeft="20dp" />
+        <TextView
+            android:id="@+id/weather_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="多云"
+            android:layout_toRightOf="@+id/weather_now"
+            android:textSize="25sp"
+            android:textColor="@color/white"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="20dp"/>
+
+        <TextView
+            android:id="@+id/weather_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="芜湖"
+            android:textColor="@color/white"
+            android:layout_below="@+id/weather_status"
+            android:layout_toRightOf="@id/weather_now"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="5dp"
+            android:textSize="25sp"/>
+        <TextView
+            android:id="@+id/time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="2021年4月6日     16:12"
+            android:textSize="30sp"
+            android:layout_below="@+id/weather_icon"
+            android:layout_marginLeft="10dp"
+            android:paddingStart="20dp"
+            android:layout_marginRight="10dp"
+            android:textColor="@color/white"
+            android:background="@drawable/time"
+            android:layout_marginTop="15dp"/>
+    </RelativeLayout>
 
     <ListView
         android:id="@+id/list_main"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="0dp"
+        android:layout_weight="4" />
 </LinearLayout>

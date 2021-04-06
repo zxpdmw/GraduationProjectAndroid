@@ -1,31 +1,49 @@
 package top.zxpdmw.graduationproject.ui.activity.system;
 
+import android.app.ActivityOptions;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
-import android.widget.FrameLayout;
+import android.transition.Transition;
+import android.transition.TransitionInflater;
+import android.view.Window;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentManager;
 
+import java.io.Serializable;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import butterknife.OnItemClick;
 import lombok.SneakyThrows;
 import top.zxpdmw.graduationproject.R;
+import top.zxpdmw.graduationproject.bean.Weather;
+import top.zxpdmw.graduationproject.presenter.WeatherPresenter;
+import top.zxpdmw.graduationproject.presenter.contract.WeatherContract;
 import top.zxpdmw.graduationproject.ui.adapter.SystemMainAdapter;
 import top.zxpdmw.graduationproject.bean.Module;
 import top.zxpdmw.graduationproject.bean.User;
 
 
-public class SystemMainActivity extends AppCompatActivity {
+public class SystemMainActivity extends AppCompatActivity implements WeatherContract.View {
     List<Module> moduleList = Arrays.asList(Module.NOTICE, Module.PAGE, Module.PROPERTY, Module.COMPLAIN_REPAIR, Module.HOUSE_KEEPING, Module.HOUSE_RENT_SALE, Module.MY_INFO);
     private SystemMainAdapter adapter = null;
     @BindView(R.id.toolbar)
@@ -34,6 +52,26 @@ public class SystemMainActivity extends AppCompatActivity {
     TextView textView;
     @BindView(R.id.list_main)
     ListView listView;
+    @BindView(R.id.weather)
+    RelativeLayout relativeLayout;
+    @BindView(R.id.weather_icon)
+    ImageView icon;
+    @BindView(R.id.weather_wind)
+    TextView wind;
+    @BindView(R.id.weather_address)
+    TextView address;
+    @BindView(R.id.weather_range)
+    TextView range;
+    @BindView(R.id.weather_now)
+    TextView now;
+    @BindView(R.id.weather_status)
+    TextView status;
+    @BindView(R.id.time)
+    TextView time;
+    List<Weather> weatherList;
+
+    WeatherPresenter weatherPresenter = new WeatherPresenter(this);
+
     User user;
     FragmentManager fragmentManage = getSupportFragmentManager();
 
@@ -46,47 +84,60 @@ public class SystemMainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_systemmain);
         ButterKnife.bind(this);
+//        weatherPresenter.getWeather("101220301");
+
+
         Intent intent = getIntent();
         user = (User) intent.getSerializableExtra("user");
         textView.setText("便民社区");
-        adapter=new SystemMainAdapter(moduleList,this);
+        adapter = new SystemMainAdapter(moduleList, this);
         listView.setAdapter(adapter);
     }
 
+    @OnClick(R.id.weather)
+    void setRelativeLayout() {
+        final Intent intent = new Intent(this, WeatherActivity.class);
+        intent.putExtra("list", weatherList.toString());
+        startActivity(intent);
+        overridePendingTransition(R.anim.in_from_right, R.anim.out_of_left);
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @OnItemClick(R.id.list_main)
-    void setListView(int id){
-        final Intent intent=new Intent();
-        switch (id){
+    void setListView(int id) {
+        final Intent intent = new Intent();
+        switch (id) {
             case 0:
-                intent.setClass(this,NoticeActivity.class);
+                intent.setClass(this, NoticeActivity.class);
                 break;
             case 1:
-                intent.setClass(this,CommunityPageActivity.class);
+                intent.setClass(this, CommunityPageActivity.class);
                 break;
             case 2:
-                intent.setClass(this,PropertyActivity.class);
+                intent.setClass(this, PropertyActivity.class);
                 intent.putExtra("houseId", user.getHouse_id());
                 intent.putExtra("nickname", user.getNickname());
                 break;
             case 3:
                 intent.setClass(this, ComplainRepairActivity.class);
-                intent.putExtra("username",user.getUsername());
+                intent.putExtra("username", user.getUsername());
                 break;
             case 4:
-                intent.setClass(this,HouseKeepingActivity.class);
+                intent.setClass(this, HouseKeepingActivity.class);
                 break;
             case 5:
-                intent.setClass(this,HouseRentSaleActivity.class);
+                intent.setClass(this, HouseRentSaleActivity.class);
                 final Bundle bundle = new Bundle();
-                bundle.putString("username",user.getUsername());
-                intent.putExtra("bundle",bundle);
+                bundle.putString("username", user.getUsername());
+                intent.putExtra("bundle", bundle);
                 break;
             case 6:
-                intent.setClass(this,MyInfoActivity.class);
+                intent.setClass(this, MyInfoActivity.class);
                 intent.putExtra("user", user);
                 break;
         }
         startActivity(intent);
+        overridePendingTransition(R.anim.in_from_right, R.anim.out_of_left);
     }
 
     @Override
@@ -102,5 +153,69 @@ public class SystemMainActivity extends AppCompatActivity {
         } else {
             fragmentManage.popBackStack();
         }
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    @Override
+    public void showList(List<Weather> list) {
+        this.weatherList = list;
+        now.setText(list.get(0).getReal());
+        status.setText(list.get(0).getWeather());
+        range.setText(list.get(0).getLowest() + "~" + list.get(0).getHighest());
+        wind.setText(list.get(0).getWind());
+        address.setText(list.get(0).getArea());
+        final Calendar instance = Calendar.getInstance(Locale.CHINA);
+        final Date time = instance.getTime();
+        int hour=time.getHours()+8;
+        this.time.setText(list.get(0).getDate()+"     "+hour+":"+time.getMinutes());
+        switch (list.get(0).getWeatherimg()) {
+            case "duoyun.png":
+                icon.setBackgroundResource(R.drawable.yun);
+                break;
+            case "yu.png":
+                icon.setBackgroundResource(R.drawable.yu);
+                break;
+            case "yun.png":
+                icon.setBackgroundResource(R.drawable.yun);
+                break;
+            case "qing.png":
+                icon.setBackgroundResource(R.drawable.qing);
+                break;
+            case "yin.png":
+                icon.setBackgroundResource(R.drawable.yin);
+                break;
+            case "leizhenyu.png":
+                icon.setBackgroundResource(R.drawable.lei);
+                break;
+            case "xue.png":
+                icon.setBackgroundResource(R.drawable.xue);
+                break;
+            case "wu.png":
+                icon.setBackgroundResource(R.drawable.wu);
+                break;
+            case "shachenbao.png":
+                icon.setBackgroundResource(R.drawable.shachen);
+                break;
+        }
+    }
+
+    @Override
+    public void initTodayWeather() {
+
+    }
+
+    @Override
+    public void showError(String msg) {
+
+    }
+
+    @Override
+    public void jumpView(AppCompatActivity activity) {
+
+    }
+
+    @Override
+    public void showMsg(String msg) {
+
     }
 }

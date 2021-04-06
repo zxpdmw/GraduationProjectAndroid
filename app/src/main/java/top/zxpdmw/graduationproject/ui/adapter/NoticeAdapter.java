@@ -52,8 +52,8 @@ public class NoticeAdapter extends BaseAdapter {
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
-//        viewHolder.notice_icon.setBackgroundResource(R.drawable.touxiang);
-        Glide.with(parent.getContext()).load("http://n.sinaimg.cn/games/639/w400h239/20210325/dd06-kmvwsvx9318810.jpg").dontAnimate().into(viewHolder.notice_icon);
+        viewHolder.notice_icon.setBackgroundResource(R.drawable.touxiang);
+//        Glide.with(parent.getContext()).load("http://n.sinaimg.cn/games/639/w400h239/20210325/dd06-kmvwsvx9318810.jpg").dontAnimate().into(viewHolder.notice_icon);
         viewHolder.notice_title.setText(notices.get(position).getTitle());
         viewHolder.notice_publish_time.setText(TimeUtil.descriptiveData(notices.get(position).getPublish_time()));
         return convertView;

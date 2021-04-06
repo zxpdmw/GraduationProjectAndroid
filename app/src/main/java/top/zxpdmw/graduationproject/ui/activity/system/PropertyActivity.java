@@ -61,7 +61,10 @@ public class PropertyActivity extends AppCompatActivity implements PropertyContr
         toolbar.setTitle("物 业 费");
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        toolbar.setNavigationOnClickListener(v -> finish());
+        toolbar.setNavigationOnClickListener(v -> {
+            finish();
+            overridePendingTransition(R.anim.in_from_left, R.anim.out_of_right);
+        });
     }
 
     @Override
@@ -82,5 +85,11 @@ public class PropertyActivity extends AppCompatActivity implements PropertyContr
     @Override
     public void showMsg(String msg) {
         new ToastUtil(this,msg).show(500);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.in_from_left, R.anim.out_of_right);
     }
 }
