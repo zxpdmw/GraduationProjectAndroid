@@ -2,16 +2,14 @@ package top.zxpdmw.graduationproject.presenter;
 
 import android.util.Log;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import top.zxpdmw.graduationproject.bean.HFWeather;
-import top.zxpdmw.graduationproject.bean.ResponseWeather;
+import top.zxpdmw.graduationproject.bean.WeatherDay;
+import top.zxpdmw.graduationproject.bean.WeatherHour;
+import top.zxpdmw.graduationproject.bean.WeatherNow;
 import top.zxpdmw.graduationproject.model.WeatherModel;
 import top.zxpdmw.graduationproject.presenter.contract.WeatherContract;
-import top.zxpdmw.graduationproject.ui.fragment.LoginFragment;
 
 public class WeatherPresenter implements WeatherContract.Presenter {
 
@@ -24,40 +22,65 @@ public class WeatherPresenter implements WeatherContract.Presenter {
 
 
     @Override
-    public void Now(String location) {
-        model.Now(location, new Callback<HFWeather>() {
+    public void Now() {
+        model.Now(new Callback<WeatherNow>() {
             @Override
-            public void onResponse(Call<HFWeather> call, Response<HFWeather> response) {
+            public void onResponse(Call<WeatherNow> call, Response<WeatherNow> response) {
                 String code=response.body().getCode();
                 if (code.equals("200")){
                     view.showNow(response.body().getNow());
+                    Log.d("zwy", "onResponse: sccess"+response.body().getNow());
+                }else{
+                    Log.d("zwy", "onResponse: false");
                 }
             }
 
             @Override
-            public void onFailure(Call<HFWeather> call, Throwable t) {
+            public void onFailure(Call<WeatherNow> call, Throwable t) {
 
             }
         });
     }
 
-
     @Override
-    public void getWeather(String city) {
-        model.getWeather(city, new Callback<ResponseWeather>() {
+    public void Hour() {
+        model.Hour(new Callback<WeatherHour>() {
             @Override
-            public void onResponse(Call<ResponseWeather> call, Response<ResponseWeather> response) {
-                    int code=response.body().getCode();
-                    if (code==200){
-                        view.showList(response.body().getNewslist());
-                        Log.d("zwy", "onResponse: "+response.body().getNewslist());
-                    }else{
-                        view.showMsg(response.body().getMsg());
-                    }
+            public void onResponse(Call<WeatherHour> call, Response<WeatherHour> response) {
+                String code=response.body().getCode();
+                if (code.equals("200")){
+                    Log.d("zwy", "onResponse: "+response.body().toString());
+                    view.showHour(response.body().getHourly());
+                }else {
+                    Log.d("zwy", "onResponse: false");
+                }
+
             }
 
             @Override
-            public void onFailure(Call<ResponseWeather> call, Throwable t) {
+            public void onFailure(Call<WeatherHour> call, Throwable t) {
+
+            }
+        });
+    }
+
+    @Override
+    public void Day() {
+        model.Daty(new Callback<WeatherDay>() {
+            @Override
+            public void onResponse(Call<WeatherDay> call, Response<WeatherDay> response) {
+                String code=response.body().getCode();
+                if (code.equals("200")){
+                    Log.d("zwy", "onResponse: "+response.body().toString());
+                    view.showDay(response.body().getDaily());
+                }else{
+                    Log.d("zwy", "onResponse: false");
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<WeatherDay> call, Throwable t) {
 
             }
         });

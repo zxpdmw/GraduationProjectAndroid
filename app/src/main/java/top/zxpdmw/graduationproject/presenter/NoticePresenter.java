@@ -32,7 +32,6 @@ public class NoticePresenter implements NoticeContract.Presenter {
                 List<Notice> list = response.body().getData();
                 if (code == 666) {
                     view.showResult(list);
-//                    view.switchFragment();
                 }
             }
 

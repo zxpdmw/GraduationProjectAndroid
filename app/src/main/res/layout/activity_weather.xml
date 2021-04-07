@@ -1,19 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.activity.system.WeatherActivity"
-    android:orientation="vertical"
     android:background="@drawable/weather_bg">
-<!--    <include layout="@layout/toolbar"-->
-<!--        android:id="@+id/toolbar"/>-->
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <RelativeLayout
         android:id="@+id/weather"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="2">
+        android:layout_height="wrap_content">
 
         <TextView
             android:id="@+id/weather_address"
@@ -40,7 +37,7 @@
             android:layout_height="wrap_content"
             android:text="15"
             android:gravity="center_horizontal"
-            android:textSize="100sp"
+            android:textSize="90sp"
             android:layout_below="@+id/weather_status"
             android:textColor="@color/black"/>
 
@@ -51,19 +48,317 @@
             android:gravity="center_horizontal"
             android:textColor="@color/black"
             android:text="最高 15  最低 9"
-            android:textSize="20sp"
+            android:textSize="25sp"
             android:layout_below="@+id/weather_now"/>
     </RelativeLayout>
 
     <View
-        android:layout_height="1px"
+        android:id="@+id/one"
+        android:layout_height="2px"
         android:background="@color/white"
-        android:layout_width="fill_parent"/>
+        android:layout_width="fill_parent"
+        android:layout_below="@id/weather"
+        android:layout_marginTop="20dp"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/weather_hour"
+        android:layout_width="wrap_content"
+        android:layout_height="150dp"
+        android:layout_below="@+id/one"
+        android:layout_marginTop="5dp"/>
+
+    <View
+        android:id="@+id/two"
+        android:layout_height="1.5px"
+        android:layout_marginTop="5dp"
+        android:background="@color/white"
+        android:layout_width="fill_parent"
+        android:layout_below="@id/weather_hour" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/weather_day"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_below="@id/two"/>
+    <View
+        android:id="@+id/three"
+        android:layout_height="1.5px"
+        android:layout_marginTop="5dp"
+        android:background="@color/white"
+        android:layout_width="fill_parent"
+        android:layout_below="@id/weather_day"/>
+
+    <RelativeLayout
+        android:id="@+id/weather_air"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/three">
+        <TextView
+            android:id="@+id/air_zhiliang"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="空气质量"
+            android:textSize="20sp"
+            android:textColor="#e5e5ff"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="10dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="AQI(CN)"
+            android:gravity="right"
+            android:layout_alignParentRight="true"
+            android:textSize="20sp"
+            android:textColor="#e5e5ff"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="10dp"/>
+
+        <TextView
+            android:id="@+id/air"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/air_zhiliang"
+            android:text="20 - 优"
+            android:textColor="@color/white"
+            android:textSize="30sp"
+            android:layout_marginLeft="10dp"
+            />
+
+    <View
+        android:id="@+id/four"
+        android:layout_height="1.5px"
+        android:layout_marginTop="5dp"
+        android:background="@color/white"
+        android:layout_width="fill_parent"
+        android:layout_below="@id/air"/>
 
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="3"/>
 
-</LinearLayout>
+        <TextView
+            android:id="@+id/sunrise"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="日出"
+            android:textColor="#e5e5ff"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="10dp"
+            android:textSize="20sp"
+            android:layout_below="@id/four"/>
+
+        <TextView
+            android:id="@+id/sunrise_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="05:46"
+            android:textSize="40sp"
+            android:layout_marginLeft="10dp"
+            android:layout_below="@id/sunrise"
+            android:textColor="@color/white"/>
+
+        <View
+            android:id="@+id/five"
+            android:layout_height="1.5px"
+            android:layout_marginTop="5dp"
+            android:background="@color/white"
+            android:layout_width="fill_parent"
+            android:layout_below="@id/sunrise_time"/>
+
+        <TextView
+            android:id="@+id/sunset"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="日落"
+            android:textColor="#e5e5ff"
+            android:layout_marginLeft="10dp"
+            android:textSize="20sp"
+            android:layout_below="@+id/five"/>
+
+        <TextView
+            android:id="@+id/sunset_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="18:30"
+            android:textSize="40sp"
+            android:layout_below="@id/sunset"
+            android:textColor="@color/white"
+            android:layout_marginLeft="10dp"/>
+
+
+        <View
+            android:id="@+id/six"
+            android:layout_height="1.5px"
+            android:layout_marginTop="5dp"
+            android:background="@color/white"
+            android:layout_width="fill_parent"
+            android:layout_below="@id/sunset_time"/>
+
+        <TextView
+            android:id="@+id/ziwaixian"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="紫外线指数"
+            android:textColor="#e5e5ff"
+            android:layout_marginLeft="10dp"
+            android:textSize="20sp"
+            android:layout_below="@+id/six"/>
+
+        <TextView
+            android:id="@+id/ziwaixian_zhishu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="3"
+            android:textSize="40sp"
+            android:layout_below="@id/ziwaixian"
+            android:textColor="@color/white"
+            android:layout_marginLeft="10dp"/>
+
+
+        <View
+            android:id="@+id/seven"
+            android:layout_height="1.5px"
+            android:layout_marginTop="5dp"
+            android:background="@color/white"
+            android:layout_width="fill_parent"
+            android:layout_below="@id/ziwaixian_zhishu"/>
+
+        <TextView
+            android:id="@+id/shidu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="湿度"
+            android:textColor="#e5e5ff"
+            android:layout_marginLeft="10dp"
+            android:textSize="20sp"
+            android:layout_below="@+id/seven"/>
+
+        <TextView
+            android:id="@+id/shidu_zhishu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="88%"
+            android:textSize="40sp"
+            android:layout_below="@id/shidu"
+            android:textColor="@color/white"
+            android:layout_marginLeft="10dp"/>
+
+        <View
+            android:id="@+id/eight"
+            android:layout_height="1.5px"
+            android:layout_marginTop="5dp"
+            android:background="@color/white"
+            android:layout_width="fill_parent"
+            android:layout_below="@id/shidu_zhishu"/>
+
+        <TextView
+            android:id="@+id/wind"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="风"
+            android:textColor="#e5e5ff"
+            android:layout_marginLeft="10dp"
+            android:textSize="20sp"
+            android:layout_below="@+id/eight"/>
+
+        <TextView
+            android:id="@+id/wind_zhishu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="东北4米/秒"
+            android:textSize="40sp"
+            android:layout_below="@id/wind"
+            android:textColor="@color/white"
+            android:layout_marginLeft="10dp"/>
+
+        <View
+            android:id="@+id/nine"
+            android:layout_height="1.5px"
+            android:layout_marginTop="5dp"
+            android:background="@color/white"
+            android:layout_width="fill_parent"
+            android:layout_below="@id/wind_zhishu"/>
+
+        <TextView
+            android:id="@+id/yaqiang"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="压强"
+            android:textColor="#e5e5ff"
+            android:layout_marginLeft="10dp"
+            android:textSize="20sp"
+            android:layout_below="@+id/nine"/>
+
+        <TextView
+            android:id="@+id/yaqiang_zhishu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1021百帕"
+            android:textSize="40sp"
+            android:layout_below="@id/yaqiang"
+            android:textColor="@color/white"
+            android:layout_marginLeft="10dp"/>
+
+        <View
+            android:id="@+id/ten"
+            android:layout_height="1.5px"
+            android:layout_marginTop="5dp"
+            android:background="@color/white"
+            android:layout_width="fill_parent"
+            android:layout_below="@id/yaqiang_zhishu"/>
+
+        <TextView
+            android:id="@+id/nengjiandu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="能见度"
+            android:textColor="#e5e5ff"
+            android:layout_marginLeft="10dp"
+            android:textSize="20sp"
+            android:layout_below="@+id/ten"/>
+
+        <TextView
+            android:id="@+id/nengjiandu_zhishu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="11.3公里"
+            android:textSize="40sp"
+            android:layout_below="@id/nengjiandu"
+            android:textColor="@color/white"
+            android:layout_marginLeft="10dp"/>
+
+        <View
+            android:id="@+id/eleven"
+            android:layout_height="1.5px"
+            android:layout_marginTop="5dp"
+            android:background="@color/white"
+            android:layout_width="fill_parent"
+            android:layout_below="@id/nengjiandu_zhishu"/>
+
+        <TextView
+            android:id="@+id/jiangshuiliang"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="降水量"
+            android:textColor="#e5e5ff"
+            android:layout_marginLeft="10dp"
+            android:textSize="20sp"
+            android:layout_below="@+id/eleven"/>
+
+        <TextView
+            android:id="@+id/jiangshuiliang_zhishu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="10.7毫米"
+            android:textSize="40sp"
+            android:layout_below="@id/jiangshuiliang"
+            android:textColor="@color/white"
+            android:layout_marginLeft="10dp"/>
+
+    </RelativeLayout>
+
+
+
+</RelativeLayout>
+
+</ScrollView>

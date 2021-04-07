@@ -10,7 +10,6 @@ import top.zxpdmw.graduationproject.ui.fragment.BaseFragment;
 public interface NoticeContract {
     interface View extends BaseFragment {
         void showResult(List<Notice> list);
-        void switchFragment();
     }
 
     interface Presenter extends BasePresenter{

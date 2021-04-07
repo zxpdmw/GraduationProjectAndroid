@@ -1,5 +1,7 @@
 package top.zxpdmw.graduationproject.bean;
 
+import java.util.List;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -8,22 +10,21 @@ import lombok.experimental.Accessors;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Accessors(chain =true)
-public class HFWeather {
+@Accessors(chain=true)
+public class WeatherHour {
     String code;
     String updateTime;
     String fxLink;
-    Now now;
+    List<Hour> hourly;
     Object object;
 
     @Data
     @AllArgsConstructor
     @NoArgsConstructor
-    @Accessors(chain =true)
-    public class Now{
-        String obsTime;
+    @Accessors(chain=true)
+    public static class Hour{
+        String fxTime;
         String temp;
-        String feelslike;
         String icon;
         String text;
         String wind360;
@@ -31,16 +32,10 @@ public class HFWeather {
         String windScale;
         String windSpeed;
         String humidity;
+        String pop;
         String precip;
-        String pressure;
-        String vis;
+        String preesure;
         String cloud;
         String dew;
     }
-
-    class Refer{
-
-    }
-
 }
-

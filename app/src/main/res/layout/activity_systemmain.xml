@@ -69,9 +69,9 @@
            android:layout_centerHorizontal="true"/>
     </RelativeLayout>
 
-    <ListView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/list_main"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:layout_weight="4" />
+        android:layout_weight="4"/>
 </LinearLayout>

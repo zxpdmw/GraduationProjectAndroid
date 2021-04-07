@@ -3,6 +3,8 @@ package top.zxpdmw.graduationproject.ui.activity.system;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -13,6 +15,8 @@ import top.zxpdmw.graduationproject.presenter.ComplainRepairPresenter;
 import top.zxpdmw.graduationproject.presenter.contract.ComplainRepairContract;
 import top.zxpdmw.graduationproject.ui.adapter.ComplainRepairAdapter;
 import top.zxpdmw.graduationproject.bean.ComplainRepair;
+import top.zxpdmw.graduationproject.ui.adapter.ItemClickListener;
+import top.zxpdmw.graduationproject.util.ToastUtil;
 
 import android.content.Context;
 import android.content.DialogInterface;
@@ -23,16 +27,15 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.List;
 
-public class ComplainRepairActivity extends AppCompatActivity implements AdapterView.OnItemClickListener, ComplainRepairContract.View {
+public class ComplainRepairActivity extends AppCompatActivity implements ComplainRepairContract.View {
     @BindView(R.id.toolbar)
     Toolbar toolbar;
     @BindView(R.id.list_complain_repair)
-    ListView listView;
-    ComplainRepairAdapter complainRepairAdapter;
-    Context context = ComplainRepairActivity.this;
+    RecyclerView recyclerView;
     ComplainRepairPresenter complainRepairPresenter=new ComplainRepairPresenter(this);
     Intent intent;
 
@@ -42,6 +45,7 @@ public class ComplainRepairActivity extends AppCompatActivity implements Adapter
         setContentView(R.layout.activity_complain_repair);
         ButterKnife.bind(this);
         init();
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
         complainRepairPresenter.GetComplainRepair(intent.getStringExtra("username"));
     }
 
@@ -57,8 +61,14 @@ public class ComplainRepairActivity extends AppCompatActivity implements Adapter
     }
 
     private void initListView(List<ComplainRepair> complainRepairs){
-        final ComplainRepairAdapter complainRepairAdapter = new ComplainRepairAdapter(complainRepairs,context);
-        listView.setAdapter(complainRepairAdapter);
+        final ComplainRepairAdapter complainRepairAdapter = new ComplainRepairAdapter(complainRepairs);
+        complainRepairAdapter.setOnItemClickListener(new ItemClickListener() {
+            @Override
+            public void OnItemClickListener(int position) {
+                new ToastUtil(ComplainRepairActivity.this,"zzz").show(500);
+            }
+        });
+        recyclerView.setAdapter(complainRepairAdapter);
     }
     @OnClick(R.id.add_complain_repair)
     void addComplainRepair(){
@@ -92,11 +102,6 @@ public class ComplainRepairActivity extends AppCompatActivity implements Adapter
             }
         });
         dialog.show();
-    }
-
-    @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
     }
 
     @Override

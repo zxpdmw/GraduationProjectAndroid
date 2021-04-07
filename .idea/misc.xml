@@ -32,7 +32,7 @@
         <entry key="..\:/projects/GraduationProjectAndroid/app/src/main/res/layout/activity_repair.xml" value="0.20364583333333333" />
         <entry key="..\:/projects/GraduationProjectAndroid/app/src/main/res/layout/activity_systemmain.xml" value="0.25" />
         <entry key="..\:/projects/GraduationProjectAndroid/app/src/main/res/layout/activity_test.xml" value="0.22" />
-        <entry key="..\:/projects/GraduationProjectAndroid/app/src/main/res/layout/activity_weather.xml" value="0.22" />
+        <entry key="..\:/projects/GraduationProjectAndroid/app/src/main/res/layout/activity_weather.xml" value="0.25" />
         <entry key="..\:/projects/GraduationProjectAndroid/app/src/main/res/layout/add_house_keeping.xml" value="0.13994565217391305" />
         <entry key="..\:/projects/GraduationProjectAndroid/app/src/main/res/layout/bottom.xml" value="0.22" />
         <entry key="..\:/projects/GraduationProjectAndroid/app/src/main/res/layout/fg_complain_repair_list.xml" value="0.15896739130434784" />
@@ -63,6 +63,8 @@
         <entry key="..\:/projects/GraduationProjectAndroid/app/src/main/res/layout/item_list_people.xml" value="0.1" />
         <entry key="..\:/projects/GraduationProjectAndroid/app/src/main/res/layout/item_list_rent.xml" value="0.1634963768115942" />
         <entry key="..\:/projects/GraduationProjectAndroid/app/src/main/res/layout/item_list_rent_sale.xml" value="0.15896739130434784" />
+        <entry key="..\:/projects/GraduationProjectAndroid/app/src/main/res/layout/item_weather_day.xml" value="0.20364583333333333" />
+        <entry key="..\:/projects/GraduationProjectAndroid/app/src/main/res/layout/item_weather_hour.xml" value="0.16394927536231885" />
         <entry key="..\:/projects/GraduationProjectAndroid/app/src/main/res/layout/title.xml" value="0.1" />
         <entry key="..\:/projects/GraduationProjectAndroid/app/src/main/res/layout/toolbar.xml" value="0.22" />
         <entry key="..\:/projects/GraduationProjectAndroid/app/src/main/res/layout/toolbar_.xml" value="0.14266304347826086" />

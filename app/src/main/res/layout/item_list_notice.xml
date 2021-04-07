@@ -8,8 +8,8 @@
 
     <ImageView
         android:id="@+id/notice_icon"
-        android:layout_width="64dp"
-        android:layout_height="64dp"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:baselineAlignBottom="true"
         android:scaleType="fitXY"
         android:paddingLeft="8dp"
@@ -26,7 +26,7 @@
             android:layout_height="wrap_content"
             android:paddingLeft="8dp"
             android:textColor="@color/black"
-            android:textSize="20sp"
+            android:textSize="30sp"
             android:paddingStart="8dp" />
 
         <TextView
@@ -35,7 +35,7 @@
             android:layout_height="wrap_content"
             android:paddingLeft="8dp"
             android:textColor="@color/black"
-            android:textSize="15sp"
+            android:textSize="25sp"
             android:layout_marginTop="15dp"
             android:paddingStart="8dp" />
 
