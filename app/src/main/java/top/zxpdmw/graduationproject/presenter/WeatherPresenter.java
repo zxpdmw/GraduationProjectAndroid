@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import top.zxpdmw.graduationproject.bean.HFWeather;
 import top.zxpdmw.graduationproject.bean.ResponseWeather;
 import top.zxpdmw.graduationproject.model.WeatherModel;
 import top.zxpdmw.graduationproject.presenter.contract.WeatherContract;
@@ -20,6 +21,26 @@ public class WeatherPresenter implements WeatherContract.Presenter {
         this.view=view;
         model=new WeatherModel();
     }
+
+
+    @Override
+    public void Now(String location) {
+        model.Now(location, new Callback<HFWeather>() {
+            @Override
+            public void onResponse(Call<HFWeather> call, Response<HFWeather> response) {
+                String code=response.body().getCode();
+                if (code.equals("200")){
+                    view.showNow(response.body().getNow());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<HFWeather> call, Throwable t) {
+
+            }
+        });
+    }
+
 
     @Override
     public void getWeather(String city) {

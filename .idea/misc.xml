@@ -30,9 +30,9 @@
         <entry key="..\:/projects/GraduationProjectAndroid/app/src/main/res/layout/activity_property.xml" value="0.22" />
         <entry key="..\:/projects/GraduationProjectAndroid/app/src/main/res/layout/activity_register.xml" value="0.22" />
         <entry key="..\:/projects/GraduationProjectAndroid/app/src/main/res/layout/activity_repair.xml" value="0.20364583333333333" />
-        <entry key="..\:/projects/GraduationProjectAndroid/app/src/main/res/layout/activity_systemmain.xml" value="0.22" />
+        <entry key="..\:/projects/GraduationProjectAndroid/app/src/main/res/layout/activity_systemmain.xml" value="0.25" />
         <entry key="..\:/projects/GraduationProjectAndroid/app/src/main/res/layout/activity_test.xml" value="0.22" />
-        <entry key="..\:/projects/GraduationProjectAndroid/app/src/main/res/layout/activity_weather.xml" value="0.1" />
+        <entry key="..\:/projects/GraduationProjectAndroid/app/src/main/res/layout/activity_weather.xml" value="0.22" />
         <entry key="..\:/projects/GraduationProjectAndroid/app/src/main/res/layout/add_house_keeping.xml" value="0.13994565217391305" />
         <entry key="..\:/projects/GraduationProjectAndroid/app/src/main/res/layout/bottom.xml" value="0.22" />
         <entry key="..\:/projects/GraduationProjectAndroid/app/src/main/res/layout/fg_complain_repair_list.xml" value="0.15896739130434784" />
@@ -81,12 +81,5 @@
   </component>
   <component name="ProjectType">
     <option name="id" value="Android" />
-  </component>
-  <component name="VisualizationToolProject">
-    <option name="state">
-      <ProjectState>
-        <option name="scale" value="0.22" />
-      </ProjectState>
-    </option>
   </component>
 </project>

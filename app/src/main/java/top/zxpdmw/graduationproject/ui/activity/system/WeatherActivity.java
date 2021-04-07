@@ -27,7 +27,7 @@ public class WeatherActivity extends AppCompatActivity {
         Type type = new TypeToken<List<Weather>>() {
         }.getType();
         List<Weather> list = new Gson().fromJson(intent.getStringExtra("list"),type);
-        Log.d("zwy", "onCreate:"+list);
+        Log.d("zwy", "onCreate: "+list);
     }
 
     @Override

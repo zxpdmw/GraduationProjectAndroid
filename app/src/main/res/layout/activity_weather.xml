@@ -1,9 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.activity.system.WeatherActivity">
+    tools:context=".ui.activity.system.WeatherActivity"
+    android:orientation="vertical"
+    android:background="@drawable/weather_bg">
+<!--    <include layout="@layout/toolbar"-->
+<!--        android:id="@+id/toolbar"/>-->
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <RelativeLayout
+        android:id="@+id/weather"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2">
+
+        <TextView
+            android:id="@+id/weather_address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="芜湖市"
+            android:layout_marginTop="20dp"
+            android:textSize="45sp"
+            android:textColor="@color/black"
+            android:gravity="center_horizontal"/>
+        <TextView
+            android:id="@+id/weather_status"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="多云"
+            android:gravity="center_horizontal"
+            android:layout_below="@+id/weather_address"
+            android:textSize="35sp"
+            android:textColor="@color/black"/>
+
+        <TextView
+            android:id="@+id/weather_now"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="15"
+            android:gravity="center_horizontal"
+            android:textSize="100sp"
+            android:layout_below="@+id/weather_status"
+            android:textColor="@color/black"/>
+
+        <TextView
+            android:id="@+id/weather_range"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:textColor="@color/black"
+            android:text="最高 15  最低 9"
+            android:textSize="20sp"
+            android:layout_below="@+id/weather_now"/>
+    </RelativeLayout>
+
+    <View
+        android:layout_height="1px"
+        android:background="@color/white"
+        android:layout_width="fill_parent"/>
+
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="3"/>
+
+</LinearLayout>

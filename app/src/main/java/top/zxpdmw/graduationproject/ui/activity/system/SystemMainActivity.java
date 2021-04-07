@@ -19,15 +19,24 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentManager;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.ZoneId;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.TimeZone;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -35,6 +44,7 @@ import butterknife.OnClick;
 import butterknife.OnItemClick;
 import lombok.SneakyThrows;
 import top.zxpdmw.graduationproject.R;
+import top.zxpdmw.graduationproject.bean.HFWeather;
 import top.zxpdmw.graduationproject.bean.Weather;
 import top.zxpdmw.graduationproject.presenter.WeatherPresenter;
 import top.zxpdmw.graduationproject.presenter.contract.WeatherContract;
@@ -56,19 +66,14 @@ public class SystemMainActivity extends AppCompatActivity implements WeatherCont
     RelativeLayout relativeLayout;
     @BindView(R.id.weather_icon)
     ImageView icon;
-    @BindView(R.id.weather_wind)
-    TextView wind;
     @BindView(R.id.weather_address)
     TextView address;
-    @BindView(R.id.weather_range)
-    TextView range;
     @BindView(R.id.weather_now)
     TextView now;
     @BindView(R.id.weather_status)
     TextView status;
     @BindView(R.id.time)
     TextView time;
-    List<Weather> weatherList;
 
     WeatherPresenter weatherPresenter = new WeatherPresenter(this);
 
@@ -78,13 +83,26 @@ public class SystemMainActivity extends AppCompatActivity implements WeatherCont
     private long exitTime = 0;
 
 
+    @Override
+    public void showNow(HFWeather.Now hfWeather) {
+        now.setText(hfWeather.getTemp()+ "\u2103");
+        status.setText(hfWeather.getText());
+        address.setText("芜湖");
+        TimeZone timeZone = TimeZone.getTimeZone("GMT+8:00");
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd     HH:mm");
+        simpleDateFormat.setTimeZone(timeZone);
+        final String format = simpleDateFormat.format(new Date());
+        time.setText(format);
+
+    }
+
     @SneakyThrows
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_systemmain);
         ButterKnife.bind(this);
-//        weatherPresenter.getWeather("101220301");
+        weatherPresenter.Now("101220301");
 
 
         Intent intent = getIntent();
@@ -97,7 +115,6 @@ public class SystemMainActivity extends AppCompatActivity implements WeatherCont
     @OnClick(R.id.weather)
     void setRelativeLayout() {
         final Intent intent = new Intent(this, WeatherActivity.class);
-        intent.putExtra("list", weatherList.toString());
         startActivity(intent);
         overridePendingTransition(R.anim.in_from_right, R.anim.out_of_left);
     }
@@ -158,45 +175,45 @@ public class SystemMainActivity extends AppCompatActivity implements WeatherCont
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void showList(List<Weather> list) {
-        this.weatherList = list;
-        now.setText(list.get(0).getReal());
-        status.setText(list.get(0).getWeather());
-        range.setText(list.get(0).getLowest() + "~" + list.get(0).getHighest());
-        wind.setText(list.get(0).getWind());
-        address.setText(list.get(0).getArea());
-        final Calendar instance = Calendar.getInstance(Locale.CHINA);
-        final Date time = instance.getTime();
-        int hour=time.getHours()+8;
-        this.time.setText(list.get(0).getDate()+"     "+hour+":"+time.getMinutes());
-        switch (list.get(0).getWeatherimg()) {
-            case "duoyun.png":
-                icon.setBackgroundResource(R.drawable.yun);
-                break;
-            case "yu.png":
-                icon.setBackgroundResource(R.drawable.yu);
-                break;
-            case "yun.png":
-                icon.setBackgroundResource(R.drawable.yun);
-                break;
-            case "qing.png":
-                icon.setBackgroundResource(R.drawable.qing);
-                break;
-            case "yin.png":
-                icon.setBackgroundResource(R.drawable.yin);
-                break;
-            case "leizhenyu.png":
-                icon.setBackgroundResource(R.drawable.lei);
-                break;
-            case "xue.png":
-                icon.setBackgroundResource(R.drawable.xue);
-                break;
-            case "wu.png":
-                icon.setBackgroundResource(R.drawable.wu);
-                break;
-            case "shachenbao.png":
-                icon.setBackgroundResource(R.drawable.shachen);
-                break;
-        }
+//        this.weatherList = list;
+//        now.setText(list.get(0).getReal());
+//        status.setText(list.get(0).getWeather());
+//        range.setText(list.get(0).getLowest() + "~" + list.get(0).getHighest());
+//        wind.setText(list.get(0).getWind());
+//        address.setText(list.get(0).getArea());
+//        final Calendar instance = Calendar.getInstance(Locale.CHINA);
+//        final Date time = instance.getTime();
+//        int hour=time.getHours()+8;
+//        this.time.setText(list.get(0).getDate()+"     "+hour+":"+time.getMinutes());
+//        switch (list.get(0).getWeatherimg()) {
+//            case "duoyun.png":
+//                icon.setBackgroundResource(R.drawable.yun);
+//                break;
+//            case "yu.png":
+//                icon.setBackgroundResource(R.drawable.yu);
+//                break;
+//            case "yun.png":
+//                icon.setBackgroundResource(R.drawable.yun);
+//                break;
+//            case "qing.png":
+//                icon.setBackgroundResource(R.drawable.qing);
+//                break;
+//            case "yin.png":
+//                icon.setBackgroundResource(R.drawable.yin);
+//                break;
+//            case "leizhenyu.png":
+//                icon.setBackgroundResource(R.drawable.lei);
+//                break;
+//            case "xue.png":
+//                icon.setBackgroundResource(R.drawable.xue);
+//                break;
+//            case "wu.png":
+//                icon.setBackgroundResource(R.drawable.wu);
+//                break;
+//            case "shachenbao.png":
+//                icon.setBackgroundResource(R.drawable.shachen);
+//                break;
+//        }
     }
 
     @Override
