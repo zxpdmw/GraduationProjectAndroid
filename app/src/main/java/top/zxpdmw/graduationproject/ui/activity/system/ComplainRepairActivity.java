@@ -47,6 +47,8 @@ public class ComplainRepairActivity extends AppCompatActivity implements Complai
 
     private void init() {
         intent=getIntent();
+        toolbar.setTitleTextAppearance(this, R.style.Toolbar_TitleText);
+
         toolbar.setTitle("投诉报修");
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

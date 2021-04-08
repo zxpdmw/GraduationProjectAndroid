@@ -39,6 +39,7 @@ public class DetailNoticeActivity extends AppCompatActivity {
 
     private void init() {
         toolbar.setTitle("公告详情");
+        toolbar.setTitleTextAppearance(this, R.style.Toolbar_TitleText);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         toolbar.setNavigationOnClickListener(v -> {

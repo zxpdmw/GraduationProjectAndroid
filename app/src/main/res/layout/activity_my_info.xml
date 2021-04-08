@@ -3,62 +3,29 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
     tools:context=".ui.activity.system.MyInfoActivity">
     <include layout="@layout/toolbar"
         android:id="@+id/toolbar"/>
 
-   <ImageView
-       android:id="@+id/my_info_touxiang"
-       android:layout_width="200dp"
-       android:layout_height="200dp"
-       android:layout_gravity="center"
-       android:background="@drawable/touxiang"
-       android:layout_below="@+id/toolbar"
-        android:layout_marginLeft="100dp"
-       android:layout_marginTop="10dp"/>
-
-    <TextView
-        android:id="@+id/my_info_nickename"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="昵    称:"
-        android:textSize="30sp"
-        android:layout_marginTop="10dp"
-        android:layout_below="@+id/my_info_touxiang"
-        android:layout_marginLeft="10dp"/>
+    <de.hdodenhof.circleimageview.CircleImageView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/my_touxiang"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:src="@drawable/touxiang"
+        app:civ_border_width="2dp"
+        android:layout_below="@+id/toolbar"
+        app:civ_border_color="@color/white"
+        android:layout_centerHorizontal="true"/>
 
     <TextView
         android:id="@+id/my_nickename"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/my_info_touxiang"
-        android:layout_toRightOf="@+id/my_info_nickename"
+        android:layout_below="@+id/my_touxiang"
         android:text="张小培"
         android:textSize="30sp"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="10dp"/>
-
-    <TextView
-        android:id="@+id/my_info_house"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="房屋号:"
-        android:textSize="30sp"
-        android:layout_marginTop="10dp"
-        android:layout_below="@+id/my_info_nickename"
-        android:layout_marginLeft="10dp"/>
-
-    <TextView
-        android:id="@+id/my_house"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="9999"
-        android:textSize="30sp"
-        android:layout_marginTop="10dp"
-        android:layout_toRightOf="@+id/my_info_house"
-        android:layout_below="@+id/my_info_nickename"
-        android:layout_marginLeft="10dp"/>
+        android:layout_centerHorizontal="true"/>
 
 
 </RelativeLayout>

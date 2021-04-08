@@ -14,10 +14,8 @@ import top.zxpdmw.graduationproject.bean.User;
 
 public class MyInfoActivity extends AppCompatActivity {
     private Intent intent;
-    @BindView(R.id.my_house)
-    TextView nickname;
     @BindView(R.id.my_nickename)
-    TextView houseId;
+    TextView nickname;
     @BindView(R.id.toolbar)
     Toolbar toolbar;
     private User user;
@@ -41,7 +39,6 @@ public class MyInfoActivity extends AppCompatActivity {
         intent=getIntent();
         user = (User) intent.getSerializableExtra("user");
         nickname.setText(user.getNickname());
-        houseId.setText(user.getHouse_id());
     }
 
     @Override

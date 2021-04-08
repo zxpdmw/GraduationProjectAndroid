@@ -72,6 +72,7 @@ public class HouseKeepingActivity extends AppCompatActivity implements HouseKeep
 
     private void init(){
         toolbar.setTitle("家政服务");
+        toolbar.setTitleTextAppearance(this, R.style.Toolbar_TitleText);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         toolbar.setNavigationOnClickListener(v -> {

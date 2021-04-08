@@ -54,6 +54,7 @@ public class HouseRentSaleActivity extends AppCompatActivity implements View.OnC
         intent=getIntent();
         bundle=intent.getBundleExtra("bundle");
         toolbar.setTitle("房 屋 租 售");
+        toolbar.setTitleTextAppearance(this, R.style.Toolbar_TitleText);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         toolbar.setNavigationOnClickListener(v -> {

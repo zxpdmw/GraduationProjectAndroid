@@ -60,6 +60,7 @@ public class PropertyActivity extends AppCompatActivity implements PropertyContr
         nickname.setText(intent.getStringExtra("nickname"));
         presenter.GetProperty(houseId);
         toolbar.setTitle("物 业 费");
+        toolbar.setTitleTextAppearance(this, R.style.Toolbar_TitleText);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         toolbar.setNavigationOnClickListener(v -> {
@@ -85,7 +86,6 @@ public class PropertyActivity extends AppCompatActivity implements PropertyContr
 
     @Override
     public void showError(String msg) {
-//        new ToastUtil(this,msg).show(500);
         ToastUtils.show(msg,500);
     }
 
@@ -96,7 +96,6 @@ public class PropertyActivity extends AppCompatActivity implements PropertyContr
 
     @Override
     public void showMsg(String msg) {
-//        new ToastUtil(this,msg).show(500);
         ToastUtils.show(msg,500);
 
     }

@@ -35,6 +35,7 @@ public class CommunityPageActivity extends AppCompatActivity implements BaseView
 
     private void init() {
         toolbar.setTitle("社区黄页");
+        toolbar.setTitleTextAppearance(this, R.style.Toolbar_TitleText);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         toolbar.setNavigationOnClickListener(v -> finish());

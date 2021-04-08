@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Toolbar_TitleText">
+        <item name="android:textSize">30sp</item><!--toolbar标题字体大小-->
+        <item name="android:textColor">@color/black</item><!--toolbar标题字体颜色-->
+    </style>
+</resources>

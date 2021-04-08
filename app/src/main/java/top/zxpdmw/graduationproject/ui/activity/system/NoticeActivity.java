@@ -97,6 +97,7 @@ public class NoticeActivity extends AppCompatActivity implements NoticeContract.
     public void initToolBar(String title) {
         toolbar.setTitle("社区公告");
         setSupportActionBar(toolbar);
+        toolbar.setTitleTextAppearance(this, R.style.Toolbar_TitleText);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         toolbar.setNavigationOnClickListener(v -> {
             finish();
