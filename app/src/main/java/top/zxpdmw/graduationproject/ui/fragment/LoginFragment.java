@@ -1,8 +1,7 @@
 package top.zxpdmw.graduationproject.ui.fragment;
 
-import android.app.ActivityOptions;
 import android.content.Intent;
-import android.os.Build;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,9 +12,11 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+
+import com.zyao89.view.zloading.ZLoadingDialog;
+import com.zyao89.view.zloading.Z_TYPE;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -28,7 +29,7 @@ import top.zxpdmw.graduationproject.bean.User;
 import top.zxpdmw.graduationproject.presenter.UserPresenter;
 import top.zxpdmw.graduationproject.presenter.contract.UserContract;
 import top.zxpdmw.graduationproject.ui.activity.system.SystemMainActivity;
-import top.zxpdmw.graduationproject.util.ToastUtil;
+import top.zxpdmw.graduationproject.util.ToastUtils;
 
 public class LoginFragment extends Fragment implements UserContract.View {
     private Unbinder unbinder;
@@ -41,6 +42,8 @@ public class LoginFragment extends Fragment implements UserContract.View {
     @BindView(R.id.login_password)
     EditText password;
     User user;
+    ZLoadingDialog dialog;
+
 
     UserPresenter userPresenter = new UserPresenter(this);
 
@@ -53,6 +56,21 @@ public class LoginFragment extends Fragment implements UserContract.View {
         return view;
     }
 
+    @Override
+    public void dismissLoading() {
+        dialog.dismiss();
+    }
+
+    @Override
+    public void showLoading() {
+        dialog=new ZLoadingDialog(getActivity());
+        dialog.setLoadingBuilder(Z_TYPE.DOUBLE_CIRCLE)//设置类型
+                .setLoadingColor(Color.WHITE)
+                .setDialogBackgroundColor(getResources().getColor(R.color.loading_background))
+                .setHintText("登录中...")
+                .show();
+    }
+
     @OnClick(R.id.new_user)
     public void setNewUser() {
         getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fg_main_layout, new RegisterFragment()).addToBackStack(null).commit();
@@ -60,7 +78,18 @@ public class LoginFragment extends Fragment implements UserContract.View {
 
     @OnClick(R.id.login_button)
     public void loginUser() {
+        if (username.getText().toString().equals("")){
+           ToastUtils.show("请输入账号!",500);
+            return;
+        }
+
+        if (password.getText().toString().equals("")){
+            ToastUtils.show("请输入密码!",500);
+            return;
+        }
+
         userPresenter.LoginUser(username.getText().toString(), password.getText().toString());
+
     }
 
 
@@ -72,7 +101,7 @@ public class LoginFragment extends Fragment implements UserContract.View {
 
     @Override
     public void LoadUser(User user) {
-        this.user=user;
+        this.user = user;
     }
 
     @Override
@@ -80,25 +109,23 @@ public class LoginFragment extends Fragment implements UserContract.View {
 
     }
 
-
     @Override
     public void showError(String msg) {
-        new ToastUtil(getActivity(),msg).show(500);
+        ToastUtils.show(msg,500);
+
     }
 
     @Override
     public void jumpView(AppCompatActivity activity) {
         final Intent intent = new Intent(getActivity(), SystemMainActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
-        intent.putExtra("user",user);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.putExtra("user", user);
         startActivity(intent);
         getActivity().overridePendingTransition(R.anim.in_from_right, R.anim.out_of_left);
     }
 
     @Override
     public void showMsg(String msg) {
-//        new ToastUtil(getActivity(),msg).show(500);
+        ToastUtils.show(msg,500);
     }
-
-
 }

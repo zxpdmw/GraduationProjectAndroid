@@ -28,11 +28,12 @@ public class NoticePresenter implements NoticeContract.Presenter {
             @Override
             public void onResponse(Call<CommonList<Notice>> call, Response<CommonList<Notice>> response) {
                 int code = response.body().getCode();
-                String msg = response.body().getMessage();
                 List<Notice> list = response.body().getData();
+                view.showLoading();
                 if (code == 666) {
                     view.showResult(list);
                 }
+                view.dismissLoading();
             }
 
             @Override

@@ -25,25 +25,26 @@ public class UserPresenter implements UserContract.Presenter {
     private UserContract.View view;
     private UserModel model;
 
-    public UserPresenter(UserContract.View view){
-        this.view=view;
-        model=new UserModel();
+    public UserPresenter(UserContract.View view) {
+        this.view = view;
+        model = new UserModel();
     }
 
     @Override
     public void LoginUser(String username, String password) {
-        model.LoginUser(username,password,new Callback<ResponseBody>() {
+        model.LoginUser(username, password, new Callback<ResponseBody>() {
             @SneakyThrows
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                JSONObject jsonObject=new JSONObject(response.body().string());
-                String code=jsonObject.getString("code");
-                String message=jsonObject.getString("message");
-                final User data = new Gson().fromJson(jsonObject.getJSONObject("data").toString(), User.class);
+                JSONObject jsonObject = new JSONObject(response.body().string());
+                String code = jsonObject.getString("code");
+                String message = jsonObject.getString("message");
                 switch (code) {
                     case "666":
                         view.showMsg(message);
+                        final User data = new Gson().fromJson(jsonObject.getJSONObject("data").toString(), User.class);
                         view.LoadUser(data);
+                        TimeUnit.MILLISECONDS.sleep(500);
                         view.jumpView(new SystemMainActivity());
                         break;
                     case "5551":
@@ -52,6 +53,7 @@ public class UserPresenter implements UserContract.Presenter {
                         break;
                 }
             }
+
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 view.showError(ConstUtil.SYSTEM_EXCEPTION);
@@ -65,17 +67,18 @@ public class UserPresenter implements UserContract.Presenter {
             @SneakyThrows
             @Override
             public void onResponse(Call<CommonList> call, Response<CommonList> response) {
-                int code=response.body().getCode();
-                String msg=response.body().getMessage();
-                if (code==666){
+                int code = response.body().getCode();
+                String msg = response.body().getMessage();
+                if (code == 666) {
                     view.showMsg(ConstUtil.TO_LOGIN_ACTIVITY);
                     TimeUnit.SECONDS.sleep(1);
                     view.switchFragment();
-                }else{
+                } else {
                     view.showMsg(msg);
                 }
 
             }
+
             @Override
             public void onFailure(Call<CommonList> call, Throwable t) {
                 view.showError(t.getMessage());

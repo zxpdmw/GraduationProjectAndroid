@@ -14,8 +14,12 @@ buildscript {
     }
 }
 
+
 allprojects {
     repositories {
+        maven {
+            url "http://maven.aliyun.com/nexus/content/groups/public"
+        }
         mavenLocal()
         mavenCentral()
         maven { url "https://jitpack.io" }
@@ -25,7 +29,17 @@ allprojects {
 
 task clean(type: Delete) {
     delete rootProject.buildDir
+
 }
+
+task showRepos {
+    doLast {
+        repositories.each {
+            println "repository: ${it.name} ('${it.url}')"
+        }
+    }
+}
+
 
 dependencies {
 }

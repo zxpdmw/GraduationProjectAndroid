@@ -18,7 +18,6 @@
             android:id="@+id/weather_icon"
             android:layout_width="80dp"
             android:layout_height="80dp"
-            android:background="@drawable/yu"
             android:layout_below="@id/time"
             android:layout_marginLeft="20dp"/>
         <TextView
@@ -27,7 +26,7 @@
             android:layout_height="80dp"
             android:textSize="60dp"
             android:textColor="@color/black"
-            android:text="20"
+            android:text=""
             android:layout_toRightOf="@+id/weather_icon"
             android:layout_marginLeft="70dp"
             android:layout_below="@id/time"/>
@@ -35,7 +34,7 @@
             android:id="@+id/weather_status"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="多云"
+            android:text=""
             android:layout_toRightOf="@+id/weather_now"
             android:textSize="25sp"
             android:layout_below="@id/time"
@@ -48,7 +47,7 @@
             android:id="@+id/weather_address"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="芜湖"
+            android:text=""
             android:textColor="@color/black"
             android:layout_below="@+id/weather_status"
             android:layout_toRightOf="@id/weather_now"
@@ -59,7 +58,6 @@
             android:id="@+id/time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="2021年4月6日     16:12"
             android:textSize="30sp"
             android:paddingStart="20dp"
             android:paddingEnd="20dp"

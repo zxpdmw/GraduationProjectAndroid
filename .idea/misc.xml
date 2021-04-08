@@ -64,7 +64,7 @@
         <entry key="..\:/projects/GraduationProjectAndroid/app/src/main/res/layout/item_list_rent.xml" value="0.1634963768115942" />
         <entry key="..\:/projects/GraduationProjectAndroid/app/src/main/res/layout/item_list_rent_sale.xml" value="0.15896739130434784" />
         <entry key="..\:/projects/GraduationProjectAndroid/app/src/main/res/layout/item_weather_day.xml" value="0.20364583333333333" />
-        <entry key="..\:/projects/GraduationProjectAndroid/app/src/main/res/layout/item_weather_hour.xml" value="0.16394927536231885" />
+        <entry key="..\:/projects/GraduationProjectAndroid/app/src/main/res/layout/item_weather_hour.xml" value="0.25" />
         <entry key="..\:/projects/GraduationProjectAndroid/app/src/main/res/layout/title.xml" value="0.1" />
         <entry key="..\:/projects/GraduationProjectAndroid/app/src/main/res/layout/toolbar.xml" value="0.22" />
         <entry key="..\:/projects/GraduationProjectAndroid/app/src/main/res/layout/toolbar_.xml" value="0.14266304347826086" />
@@ -83,5 +83,12 @@
   </component>
   <component name="ProjectType">
     <option name="id" value="Android" />
+  </component>
+  <component name="VisualizationToolProject">
+    <option name="state">
+      <ProjectState>
+        <option name="scale" value="0.20364583333333333" />
+      </ProjectState>
+    </option>
   </component>
 </project>

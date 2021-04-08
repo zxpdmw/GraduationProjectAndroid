@@ -23,7 +23,7 @@ import top.zxpdmw.graduationproject.R;
 import top.zxpdmw.graduationproject.bean.User;
 import top.zxpdmw.graduationproject.presenter.UserPresenter;
 import top.zxpdmw.graduationproject.presenter.contract.UserContract;
-import top.zxpdmw.graduationproject.util.ToastUtil;
+import top.zxpdmw.graduationproject.util.ToastUtils;
 
 public class RegisterFragment extends Fragment implements UserContract.View {
     UserPresenter userPresenter = new UserPresenter(this);
@@ -52,22 +52,29 @@ public class RegisterFragment extends Fragment implements UserContract.View {
     void setRegister() {
         User user = new User();
         if (nickname.getText().toString().equals("")) {
-            new ToastUtil(getActivity(), "请输入昵称!").show();
+//            new ToastUtil(getActivity(), "请输入昵称!").show();
+            ToastUtils.show("请输入昵称!",500);
+
             return;
         }
         user.setNickname(nickname.getText().toString());
         if (username.getText().toString().equals("")) {
-            new ToastUtil(getActivity(), "请输入账号!").show();
+//            new ToastUtil(getActivity(), "请输入账号!").show();
+            ToastUtils.show("请输入账号!",500);
+
             return;
         }
         user.setUsername(username.getText().toString());
         if (password.getText().toString().equals("")) {
-            new ToastUtil(getActivity(), "请输入密码!").show();
+//            new ToastUtil(getActivity(), "请输入密码!").show();
+            ToastUtils.show("请输入密码!",500);
+
             return;
         }
         user.setPassword(password.getText().toString());
         if (houseId.getText().toString().equals("")) {
-            new ToastUtil(getActivity(), "请输入房屋号!").show();
+//            new ToastUtil(getActivity(), "请输入房屋号!").show()
+                        ToastUtils.show("请输入房屋号!",500);
             return;
         }
         user.setHouse_id(houseId.getText().toString());
@@ -106,8 +113,20 @@ public class RegisterFragment extends Fragment implements UserContract.View {
     }
 
     @Override
+    public void dismissLoading() {
+
+    }
+
+    @Override
+    public void showLoading() {
+
+    }
+
+    @Override
     public void showError(String msg) {
-        new ToastUtil(getActivity(), msg).show(500);
+//        new ToastUtil(getActivity(), msg).show(500);
+        ToastUtils.show(msg,500);
+
     }
 
     @Override
@@ -117,6 +136,8 @@ public class RegisterFragment extends Fragment implements UserContract.View {
 
     @Override
     public void showMsg(String msg) {
-        new ToastUtil(getActivity(), msg).show(500);
+//        new ToastUtil(getActivity(), msg).show(500);
+        ToastUtils.show(msg,500);
+
     }
 }

@@ -9,7 +9,7 @@
         style="@style/edittext"
         android:layout_marginTop="10dp"
         android:hint="@string/username"
-        android:text="zwy" />
+        android:text="zxpdmw" />
 
 
     <EditText
@@ -17,7 +17,7 @@
         style="@style/edittext"
         android:hint="@string/password"
         android:inputType="textPassword"
-        android:text="123" />
+        android:text="zxpdmw" />
 
     <Button
         android:id="@+id/login_button"

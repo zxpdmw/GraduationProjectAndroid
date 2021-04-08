@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.lang.reflect.Field;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -50,9 +51,11 @@ public class WeatherHourAdapter extends RecyclerView.Adapter<WeatherHourAdapter.
         final String substring = fxTime.substring(0, fxTime.length() - 6);
         final Date parse = format.parse(substring);
         holder.tv_time.setText(parse.getHours()+"时");
-        holder.img_icon.setImageResource(R.drawable.yun);
         holder.tv_rain.setText(vo.getPop() + '%');
         holder.tv_temp.setText(vo.getTemp());
+
+        Field field = R.drawable.class.getField("a"+vo.getIcon());
+        holder.img_icon.setBackgroundResource(field.getInt(field.getName()));
     }
 
     @Override
@@ -60,7 +63,7 @@ public class WeatherHourAdapter extends RecyclerView.Adapter<WeatherHourAdapter.
         return list.size();
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder {
+    static class ViewHolder extends RecyclerView.ViewHolder {
         TextView tv_time;
         TextView tv_rain;
         ImageView img_icon;

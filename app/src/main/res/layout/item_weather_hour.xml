@@ -25,7 +25,8 @@
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_below="@+id/rain_probability"
-        android:layout_centerHorizontal="true"/>
+        android:layout_centerHorizontal="true"
+        android:background="@color/white"/>
 
     <TextView
         android:id="@+id/weather_temp"

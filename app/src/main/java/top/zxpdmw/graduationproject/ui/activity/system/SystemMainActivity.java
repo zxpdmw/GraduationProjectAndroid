@@ -1,6 +1,8 @@
 package top.zxpdmw.graduationproject.ui.activity.system;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -14,6 +16,10 @@ import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.zyao89.view.zloading.ZLoadingDialog;
+import com.zyao89.view.zloading.Z_TYPE;
+
+import java.lang.reflect.Field;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
@@ -25,8 +31,10 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import lombok.SneakyThrows;
 import top.zxpdmw.graduationproject.R;
+import top.zxpdmw.graduationproject.bean.WeatherAir;
 import top.zxpdmw.graduationproject.bean.WeatherDay;
 import top.zxpdmw.graduationproject.bean.WeatherHour;
+import top.zxpdmw.graduationproject.bean.WeatherLife;
 import top.zxpdmw.graduationproject.bean.WeatherNow;
 import top.zxpdmw.graduationproject.presenter.WeatherPresenter;
 import top.zxpdmw.graduationproject.presenter.contract.WeatherContract;
@@ -38,6 +46,7 @@ import top.zxpdmw.graduationproject.bean.User;
 
 public class SystemMainActivity extends AppCompatActivity implements WeatherContract.View {
     List<Module> moduleList = Arrays.asList(Module.NOTICE, Module.PAGE, Module.PROPERTY, Module.COMPLAIN_REPAIR, Module.HOUSE_KEEPING, Module.HOUSE_RENT_SALE, Module.MY_INFO);
+    ZLoadingDialog zLoadingDialog = new ZLoadingDialog(this);
 
     @Override
     public void showHour(List<WeatherHour.Hour> list) {
@@ -63,6 +72,8 @@ public class SystemMainActivity extends AppCompatActivity implements WeatherCont
     @BindView(R.id.time)
     TextView time;
 
+    int count=0;
+
     WeatherPresenter weatherPresenter = new WeatherPresenter(this);
 
 
@@ -78,8 +89,30 @@ public class SystemMainActivity extends AppCompatActivity implements WeatherCont
     }
 
     @Override
+    public void showLife(WeatherLife.Day life) {
+
+    }
+
+    @Override
+    public void showAir(WeatherAir air) {
+
+    }
+
+    @Override
+    public void dismissLoading() {
+        zLoadingDialog.dismiss();
+    }
+
+    @Override
+    public void showLoading() {
+        zLoadingDialog.show();
+    }
+
+
+    @Override
+    @SneakyThrows
     public void showNow(WeatherNow.Now hfWeather) {
-        now.setText(hfWeather.getTemp()+ "\u2103");
+        now.setText(hfWeather.getTemp() + "\u2103");
         status.setText(hfWeather.getText());
         address.setText("芜湖");
         TimeZone timeZone = TimeZone.getTimeZone("GMT+8:00");
@@ -87,7 +120,8 @@ public class SystemMainActivity extends AppCompatActivity implements WeatherCont
         simpleDateFormat.setTimeZone(timeZone);
         final String format = simpleDateFormat.format(new Date());
         time.setText(format);
-
+        Field field = R.drawable.class.getField("a" + hfWeather.getIcon());
+        icon.setBackgroundResource(field.getInt(field.getName()));
     }
 
     @SneakyThrows
@@ -96,13 +130,14 @@ public class SystemMainActivity extends AppCompatActivity implements WeatherCont
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_systemmain);
         ButterKnife.bind(this);
+        zLoadingDialog.setLoadingBuilder(Z_TYPE.LEAF_ROTATE)//设置类型
+                .setLoadingColor(Color.WHITE).setDialogBackgroundColor(getResources().getColor(R.color.loading_background)).setDurationTime(1.0)//颜色
+                .setHintText("加载中...").show();
         weatherPresenter.Now();
-
-
         Intent intent = getIntent();
         user = (User) intent.getSerializableExtra("user");
         textView.setText("便民社区");
-        LinearLayoutManager linearLayoutManager=new LinearLayoutManager(this);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
         final MainAdapter mainAdapter = new MainAdapter(moduleList);
         mainAdapter.setOnItemClickListener(new ItemClickListener() {
@@ -167,7 +202,6 @@ public class SystemMainActivity extends AppCompatActivity implements WeatherCont
             fragmentManage.popBackStack();
         }
     }
-
 
 
     @Override

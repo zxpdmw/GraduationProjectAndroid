@@ -86,6 +86,16 @@ public class HouseKeepingActivity extends AppCompatActivity implements HouseKeep
     }
 
     @Override
+    public void dismissLoading() {
+
+    }
+
+    @Override
+    public void showLoading() {
+
+    }
+
+    @Override
     public void showError(String msg) {
 
     }

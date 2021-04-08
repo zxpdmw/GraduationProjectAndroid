@@ -16,18 +16,14 @@ import top.zxpdmw.graduationproject.presenter.contract.ComplainRepairContract;
 import top.zxpdmw.graduationproject.ui.adapter.ComplainRepairAdapter;
 import top.zxpdmw.graduationproject.bean.ComplainRepair;
 import top.zxpdmw.graduationproject.ui.adapter.ItemClickListener;
-import top.zxpdmw.graduationproject.util.ToastUtil;
+import top.zxpdmw.graduationproject.util.ToastUtils;
 
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.EditText;
-import android.widget.ListView;
-import android.widget.Toast;
 
 import java.util.List;
 
@@ -65,7 +61,7 @@ public class ComplainRepairActivity extends AppCompatActivity implements Complai
         complainRepairAdapter.setOnItemClickListener(new ItemClickListener() {
             @Override
             public void OnItemClickListener(int position) {
-                new ToastUtil(ComplainRepairActivity.this,"zzz").show(500);
+                ToastUtils.show("zzz",500);
             }
         });
         recyclerView.setAdapter(complainRepairAdapter);
@@ -107,6 +103,16 @@ public class ComplainRepairActivity extends AppCompatActivity implements Complai
     @Override
     public void showList(List<ComplainRepair> list) {
         initListView(list);
+    }
+
+    @Override
+    public void dismissLoading() {
+
+    }
+
+    @Override
+    public void showLoading() {
+
     }
 
     @Override

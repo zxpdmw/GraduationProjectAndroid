@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
@@ -12,7 +11,7 @@ import androidx.fragment.app.Fragment;
 import top.zxpdmw.graduationproject.R;
 import top.zxpdmw.graduationproject.bean.HouseRentSale;
 import top.zxpdmw.graduationproject.ui.adapter.HouseRentSaleAdapter;
-import top.zxpdmw.graduationproject.util.ToastUtil;
+import top.zxpdmw.graduationproject.util.ToastUtils;
 
 public class HouseMessageFragment extends Fragment {
     private HouseRentSaleAdapter adapter;
@@ -29,7 +28,9 @@ public class HouseMessageFragment extends Fragment {
             final HouseRentSale content = (HouseRentSale) arguments.get("content");
             textView.setText(content.getMessage());
         }else{
-            new ToastUtil(getActivity(),"now is no data").show(500);
+//            new ToastUtil(getActivity(),"now is no data").show(500);
+            ToastUtils.show("没有数据",500);
+
         }
 
         return view;

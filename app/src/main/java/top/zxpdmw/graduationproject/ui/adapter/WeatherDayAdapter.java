@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.lang.reflect.Field;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -56,7 +57,8 @@ public class WeatherDayAdapter extends RecyclerView.Adapter<WeatherDayAdapter.Vi
             holder.min.setText("  "+vo.getTempMin());
         }
         holder.max.setText(vo.getTempMax());
-        holder.icon.setImageResource(R.drawable.yun);
+        Field field = R.drawable.class.getField("a"+vo.getIconDay());
+        holder.icon.setBackgroundResource(field.getInt(field.getName()));
     }
 
     @Override

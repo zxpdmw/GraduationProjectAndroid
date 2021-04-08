@@ -16,7 +16,7 @@ import butterknife.OnClick;
 import top.zxpdmw.graduationproject.R;
 import top.zxpdmw.graduationproject.presenter.PropertyPresenter;
 import top.zxpdmw.graduationproject.presenter.contract.PropertyContract;
-import top.zxpdmw.graduationproject.util.ToastUtil;
+import top.zxpdmw.graduationproject.util.ToastUtils;
 
 public class PropertyActivity extends AppCompatActivity implements PropertyContract.View {
     @BindView(R.id.toolbar)
@@ -46,7 +46,8 @@ public class PropertyActivity extends AppCompatActivity implements PropertyContr
     public void addProperty(){
         String add = editText.getText().toString();
         if (add.equals("")) {
-            new ToastUtil(this, "请输入缴纳金额").show(500);
+//            new ToastUtil(this, "请输入缴纳金额").show(500);
+            ToastUtils.show("请输入缴纳金额",500);
         } else {
             presenter.AddProperty(houseId,editText.getText().toString());
         }
@@ -73,8 +74,19 @@ public class PropertyActivity extends AppCompatActivity implements PropertyContr
     }
 
     @Override
+    public void dismissLoading() {
+
+    }
+
+    @Override
+    public void showLoading() {
+
+    }
+
+    @Override
     public void showError(String msg) {
-        new ToastUtil(this,msg).show(500);
+//        new ToastUtil(this,msg).show(500);
+        ToastUtils.show(msg,500);
     }
 
     @Override
@@ -84,7 +96,9 @@ public class PropertyActivity extends AppCompatActivity implements PropertyContr
 
     @Override
     public void showMsg(String msg) {
-        new ToastUtil(this,msg).show(500);
+//        new ToastUtil(this,msg).show(500);
+        ToastUtils.show(msg,500);
+
     }
 
     @Override

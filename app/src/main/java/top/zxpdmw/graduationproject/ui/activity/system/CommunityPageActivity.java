@@ -11,7 +11,7 @@ import butterknife.ButterKnife;
 import top.zxpdmw.graduationproject.R;
 import top.zxpdmw.graduationproject.ui.BaseView;
 
-public class CommunityPageActivity extends AppCompatActivity {
+public class CommunityPageActivity extends AppCompatActivity implements BaseView {
     @BindView(R.id.toolbar)
     Toolbar toolbar;
     @BindView(R.id.community_title)
@@ -44,5 +44,30 @@ public class CommunityPageActivity extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
         overridePendingTransition(R.anim.in_from_left, R.anim.out_of_right);
+    }
+
+    @Override
+    public void dismissLoading() {
+
+    }
+
+    @Override
+    public void showLoading() {
+
+    }
+
+    @Override
+    public void showError(String msg) {
+
+    }
+
+    @Override
+    public void jumpView(AppCompatActivity activity) {
+
+    }
+
+    @Override
+    public void showMsg(String msg) {
+
     }
 }

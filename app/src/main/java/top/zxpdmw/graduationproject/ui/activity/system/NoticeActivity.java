@@ -6,7 +6,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+
+import com.zyao89.view.zloading.ZLoadingDialog;
+import com.zyao89.view.zloading.Z_TYPE;
 
 import java.util.List;
 
@@ -25,6 +29,7 @@ public class NoticeActivity extends AppCompatActivity implements NoticeContract.
     @BindView(R.id.notice_list)
     RecyclerView recyclerView;
     List<Notice> noticeList;
+    ZLoadingDialog dialog = new ZLoadingDialog(this);
 
     NoticePresenter noticePresenter = new NoticePresenter(this);
 
@@ -34,9 +39,11 @@ public class NoticeActivity extends AppCompatActivity implements NoticeContract.
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notice);
         ButterKnife.bind(this);
+        showLoading();
         initToolBar("");
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         noticePresenter.RecommendNotice();
+
     }
 
     @Override
@@ -56,6 +63,20 @@ public class NoticeActivity extends AppCompatActivity implements NoticeContract.
         recyclerView.setAdapter(noticeAdapter);
     }
 
+
+    @Override
+    public void dismissLoading() {
+        dialog.dismiss();
+    }
+
+    @Override
+    public void showLoading() {
+        dialog.setLoadingBuilder(Z_TYPE.ROTATE_CIRCLE)//设置类型
+                .setLoadingColor(Color.WHITE)
+                .setDialogBackgroundColor(getResources().getColor(R.color.loading_background))
+                .setDurationTime(1)
+                .setHintText("加载中...").show();
+    }
 
     @Override
     public void showError(String msg) {
