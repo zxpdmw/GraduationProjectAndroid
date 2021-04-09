@@ -16,7 +16,6 @@ import top.zxpdmw.graduationproject.presenter.contract.ComplainRepairContract;
 import top.zxpdmw.graduationproject.ui.adapter.ComplainRepairAdapter;
 import top.zxpdmw.graduationproject.bean.ComplainRepair;
 import top.zxpdmw.graduationproject.ui.adapter.ItemClickListener;
-import top.zxpdmw.graduationproject.util.ToastUtils;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -25,6 +24,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import com.hjq.toast.ToastUtils;
 
 import java.util.List;
 
@@ -66,7 +67,7 @@ public class ComplainRepairActivity extends AppCompatActivity implements Complai
         complainRepairAdapter.setOnItemClickListener(new ItemClickListener() {
             @Override
             public void OnItemClickListener(int position) {
-                ToastUtils.show("zzz",500);
+                ToastUtils.show("zzz");
             }
         });
         recyclerView.setAdapter(complainRepairAdapter);

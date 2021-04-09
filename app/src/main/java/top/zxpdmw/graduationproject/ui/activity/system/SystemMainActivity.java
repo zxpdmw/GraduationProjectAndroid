@@ -15,6 +15,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.hjq.toast.ToastUtils;
 import com.zyao89.view.zloading.ZLoadingDialog;
 import com.zyao89.view.zloading.Z_TYPE;
 
@@ -191,8 +192,7 @@ public class SystemMainActivity extends AppCompatActivity implements WeatherCont
     public void onBackPressed() {
         if (fragmentManage.getBackStackEntryCount() == 0) {
             if ((System.currentTimeMillis() - exitTime) > 2000) {
-                Toast.makeText(getApplicationContext(), "再按一次退出程序",
-                        Toast.LENGTH_SHORT).show();
+                ToastUtils.show("再按一次退出程序");
                 exitTime = System.currentTimeMillis();
             } else {
                 super.onBackPressed();
@@ -205,7 +205,7 @@ public class SystemMainActivity extends AppCompatActivity implements WeatherCont
 
     @Override
     public void showError(String msg) {
-
+        ToastUtils.show(msg);
     }
 
     @Override
@@ -215,6 +215,6 @@ public class SystemMainActivity extends AppCompatActivity implements WeatherCont
 
     @Override
     public void showMsg(String msg) {
-
+        ToastUtils.show(msg);
     }
 }

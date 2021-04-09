@@ -15,8 +15,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import com.hjq.toast.ToastUtils;
 import com.zyao89.view.zloading.ZLoadingDialog;
-import com.zyao89.view.zloading.Z_TYPE;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -29,7 +29,6 @@ import top.zxpdmw.graduationproject.bean.User;
 import top.zxpdmw.graduationproject.presenter.UserPresenter;
 import top.zxpdmw.graduationproject.presenter.contract.UserContract;
 import top.zxpdmw.graduationproject.ui.activity.system.SystemMainActivity;
-import top.zxpdmw.graduationproject.util.ToastUtils;
 
 public class LoginFragment extends Fragment implements UserContract.View {
     private Unbinder unbinder;
@@ -63,12 +62,7 @@ public class LoginFragment extends Fragment implements UserContract.View {
 
     @Override
     public void showLoading() {
-        dialog=new ZLoadingDialog(getActivity());
-        dialog.setLoadingBuilder(Z_TYPE.DOUBLE_CIRCLE)//设置类型
-                .setLoadingColor(Color.WHITE)
-                .setDialogBackgroundColor(getResources().getColor(R.color.loading_background))
-                .setHintText("登录中...")
-                .show();
+
     }
 
     @OnClick(R.id.new_user)
@@ -79,12 +73,12 @@ public class LoginFragment extends Fragment implements UserContract.View {
     @OnClick(R.id.login_button)
     public void loginUser() {
         if (username.getText().toString().equals("")){
-           ToastUtils.show("请输入账号!",500);
+           ToastUtils.show("请输入账号!");
             return;
         }
 
         if (password.getText().toString().equals("")){
-            ToastUtils.show("请输入密码!",500);
+            ToastUtils.show("请输入密码!");
             return;
         }
 
@@ -111,8 +105,7 @@ public class LoginFragment extends Fragment implements UserContract.View {
 
     @Override
     public void showError(String msg) {
-        ToastUtils.show(msg,500);
-
+        ToastUtils.show(msg);
     }
 
     @Override
@@ -126,6 +119,6 @@ public class LoginFragment extends Fragment implements UserContract.View {
 
     @Override
     public void showMsg(String msg) {
-        ToastUtils.show(msg,500);
+        ToastUtils.show(msg);
     }
 }

@@ -1,73 +1,205 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg"
     android:orientation="vertical"
-    tools:context=".ui.activity.PropertyActivity">
+    tools:context=".ui.activity.system.PropertyActivity">
 
     <include
         android:id="@+id/toolbar"
         layout="@layout/toolbar" />
 
-    <LinearLayout
+    <TextView
+        android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_below="@id/toolbar"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center_horizontal"
+        android:labelFor="@id/toolbar"
+        android:text="暂未查询到欠费"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/black"
+        android:textSize="35sp" />
 
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="10dp"
-            android:text="尊敬的:"
-            android:textSize="50dp" />
-        <TextView
-            android:id="@+id/property_nickname"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="三月布鲁"
-            android:textSize="50dp" />
-    </LinearLayout>
+    <View
+        android:id="@+id/onee"
+        style="@style/view"
+        android:layout_below="@+id/textView"/>
 
-    <LinearLayout
+    <TextView
+        android:id="@+id/yue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:orientation="horizontal">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="当前物业费剩余:"
-            android:textSize="30sp"/>
+        android:layout_below="@id/onee"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:text="当前可以用余额"
+        android:textColor="@color/hui"
+        android:textSize="25sp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/property_balance"
-            android:textSize="30dp"
-            android:layout_marginLeft="10dp"
-            android:text="50.0"/>
-    </LinearLayout>
-
-    <EditText
-        android:id="@+id/property_add"
+    <TextView
+        android:id="@+id/property_yue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="请输入缴纳金额           "
-        android:layout_marginTop="20dp"
-        android:inputType="number"
-        android:layout_gravity="center"
-        android:background="#ffff"/>
+        android:layout_below="@id/onee"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="10dp"
+        android:text="50.5"
+        android:textColor="@color/black"
+        android:textSize="25sp" />
+
+    <View
+        android:id="@id/two"
+        style="@style/view"
+        android:layout_below="@id/yue" />
+
+    <TextView
+        android:id="@+id/huhao"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/two"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:text="户号"
+        android:textColor="@color/hui"
+        android:textSize="25sp" />
+
+    <TextView
+        android:id="@+id/huhao_xinxi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/two"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="10dp"
+        android:text="8888"
+        android:textColor="@color/black"
+        android:textSize="25sp" />
+
+    <View
+        android:id="@id/three"
+        style="@style/view"
+        android:layout_below="@id/huhao" />
+
+    <TextView
+        android:id="@+id/huming"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/three"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:text="户名"
+        android:textColor="@color/hui"
+        android:textSize="25sp" />
+
+    <TextView
+        android:id="@+id/huming_xinxi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/three"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="10dp"
+        android:text="张惟宇"
+        android:textColor="@color/black"
+        android:textSize="25sp" />
+
+    <View
+        android:id="@id/five"
+        style="@style/view"
+        android:layout_below="@id/huming" />
+
+    <TextView
+        android:id="@+id/jiaofei"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/five"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:text="缴费单位"
+        android:textColor="@color/hui"
+        android:textSize="25sp" />
+
+    <TextView
+        android:id="@+id/jiaofei_xinxi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/five"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="10dp"
+        android:text="物业部"
+        android:textColor="@color/black"
+        android:textSize="25sp" />
+
+    <View
+        android:id="@id/six"
+        style="@style/view"
+        android:layout_below="@id/jiaofei" />
 
     <Button
-        android:layout_width="wrap_content"
+        android:id="@+id/property_100"
+        android:layout_width="120dp"
         android:layout_height="wrap_content"
+        android:layout_below="@id/six"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:textSize="25sp"
+        android:text="100"/>
+
+    <Button
+        android:id="@+id/property_200"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/six"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:textSize="25sp"
+        android:text="200"/>
+
+    <Button
+        android:id="@+id/property_300"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/six"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="10dp"
+        android:textSize="25sp"
+        android:layout_marginRight="10dp"
+        android:text="300"/>
+
+
+    <EditText
+        android:id="@+id/edit"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_below="@id/property_100"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="10dp"
+        android:background="#f2f2f2"
+        android:inputType="number"
+        android:hint="点击输入缴费金额"
+        android:paddingStart="10dp"
+        android:textSize="25sp" />
+
+
+    <Button
         android:id="@+id/addProperty"
-        android:text="缴费"
-        android:background="#66b2ff"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/edit"
+        android:layout_centerHorizontal="true"
         android:layout_gravity="center"
-        android:layout_marginTop="20dp"/>
-</LinearLayout>
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/unlogin"
+        android:text="缴 费"
+        android:textSize="20sp" />
+</RelativeLayout>

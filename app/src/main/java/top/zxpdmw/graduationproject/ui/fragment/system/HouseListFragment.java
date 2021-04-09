@@ -13,6 +13,8 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 
+import com.hjq.toast.ToastUtils;
+
 import java.util.List;
 
 import lombok.SneakyThrows;
@@ -22,7 +24,6 @@ import top.zxpdmw.graduationproject.presenter.contract.HouseRentSaleContract;
 import top.zxpdmw.graduationproject.ui.adapter.HouseRentSaleAdapter;
 import top.zxpdmw.graduationproject.bean.HouseRentSale;
 import top.zxpdmw.graduationproject.util.ConstUtil;
-import top.zxpdmw.graduationproject.util.ToastUtils;
 
 
 public class HouseListFragment extends Fragment implements HouseRentSaleContract.View, AdapterView.OnItemClickListener {
@@ -50,7 +51,7 @@ public class HouseListFragment extends Fragment implements HouseRentSaleContract
 
     @Override
     public void showNoData() {
-        ToastUtils.show("没有数据",500);
+        ToastUtils.show("没有数据");
 
     }
 
@@ -71,7 +72,7 @@ public class HouseListFragment extends Fragment implements HouseRentSaleContract
                 houseRentSalePresenter.HouseByUsername(arguments.getString("username"));
             }
         }else{
-            ToastUtils.show(ConstUtil.SYSTEM_EXCEPTION,500);
+            ToastUtils.show(ConstUtil.SYSTEM_EXCEPTION);
         }
         listView.setOnItemClickListener(this);
         return view;

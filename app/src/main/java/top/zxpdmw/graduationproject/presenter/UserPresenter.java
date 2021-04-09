@@ -44,13 +44,10 @@ public class UserPresenter implements UserContract.Presenter {
                         view.showMsg(message);
                         final User data = new Gson().fromJson(jsonObject.getJSONObject("data").toString(), User.class);
                         view.LoadUser(data);
-                        TimeUnit.MILLISECONDS.sleep(500);
                         view.jumpView(new SystemMainActivity());
                         break;
-                    case "5551":
-                    case "5552":
+                    default:
                         view.showMsg(message);
-                        break;
                 }
             }
 

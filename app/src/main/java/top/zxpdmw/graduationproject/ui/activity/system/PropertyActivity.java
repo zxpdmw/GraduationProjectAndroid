@@ -8,7 +8,10 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
+
+import com.hjq.toast.ToastUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -16,7 +19,6 @@ import butterknife.OnClick;
 import top.zxpdmw.graduationproject.R;
 import top.zxpdmw.graduationproject.presenter.PropertyPresenter;
 import top.zxpdmw.graduationproject.presenter.contract.PropertyContract;
-import top.zxpdmw.graduationproject.util.ToastUtils;
 
 public class PropertyActivity extends AppCompatActivity implements PropertyContract.View {
     @BindView(R.id.toolbar)
@@ -25,12 +27,21 @@ public class PropertyActivity extends AppCompatActivity implements PropertyContr
     TextView toolbar_title;
     @BindView(R.id.addProperty)
     Button button;
-    @BindView(R.id.property_nickname)
+    @BindView(R.id.huhao_xinxi)
+    TextView huhao;
+    @BindView(R.id.huming_xinxi)
     TextView nickname;
-    @BindView(R.id.property_balance)
+    @BindView(R.id.property_yue)
     TextView balance;
-    @BindView(R.id.property_add)
+    @BindView(R.id.edit)
     EditText editText;
+    @BindView(R.id.property_100)
+    Button p100;
+    @BindView(R.id.property_200)
+    Button p200;
+    @BindView(R.id.property_300)
+    Button p300;
+
     private Intent intent;
     private String houseId;
     PropertyPresenter presenter=new PropertyPresenter(this);
@@ -48,12 +59,27 @@ public class PropertyActivity extends AppCompatActivity implements PropertyContr
     public void addProperty(){
         String add = editText.getText().toString();
         if (add.equals("")) {
-//            new ToastUtil(this, "请输入缴纳金额").show(500);
-            ToastUtils.show("请输入缴纳金额",500);
+            ToastUtils.show("请输入缴纳金额");
         } else {
             presenter.AddProperty(houseId,editText.getText().toString());
         }
     }
+
+    @OnClick(R.id.property_100)
+    void set100(){
+        editText.setText("100");
+    }
+
+    @OnClick(R.id.property_300)
+    void setP300(){
+        editText.setText("300");
+    }
+
+    @OnClick(R.id.property_200)
+    void setP200(){
+        editText.setText("200");
+    }
+
 
 
     private void init() {
@@ -89,7 +115,7 @@ public class PropertyActivity extends AppCompatActivity implements PropertyContr
 
     @Override
     public void showError(String msg) {
-        ToastUtils.show(msg,500);
+        ToastUtils.show(msg);
     }
 
     @Override
@@ -99,7 +125,7 @@ public class PropertyActivity extends AppCompatActivity implements PropertyContr
 
     @Override
     public void showMsg(String msg) {
-        ToastUtils.show(msg,500);
+        ToastUtils.show(msg);
 
     }
 
