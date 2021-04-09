@@ -3,5 +3,11 @@
     <string-array name="rent_sale">
         <item>出租</item>
         <item>出售</item>
-    </string-array> 
+    </string-array>
+
+    <string-array name="cr">
+        <item>请选择</item>
+        <item>投诉</item>
+        <item>报修</item>
+    </string-array>
 </resources>

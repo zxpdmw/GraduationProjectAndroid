@@ -9,6 +9,7 @@ import com.hjq.toast.IToastStyle;
 import com.hjq.toast.ToastUtils;
 import com.hjq.toast.style.ToastBlackStyle;
 import com.hjq.toast.style.ToastWhiteStyle;
+import com.xuexiang.xui.XUI;
 
 public class BaseApplication extends Application {
 

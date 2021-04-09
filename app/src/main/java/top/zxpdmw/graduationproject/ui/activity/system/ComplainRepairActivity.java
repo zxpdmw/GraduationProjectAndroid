@@ -1,7 +1,9 @@
 package top.zxpdmw.graduationproject.ui.activity.system;
 
+
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.view.ContextThemeWrapper;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -22,6 +24,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -75,11 +78,13 @@ public class ComplainRepairActivity extends AppCompatActivity implements Complai
 
     @OnClick(R.id.add_complain_repair)
     void addComplainRepair(){
+        ContextThemeWrapper contextThemeWrapper =
+                new ContextThemeWrapper(ComplainRepairActivity.this, R.style.dialog);
         //实例化布局
-        View view = LayoutInflater.from(this).inflate(R.layout.add_house_keeping,null);
-        EditText address = view.findViewById(R.id.edit_address);
-        EditText phone=view.findViewById(R.id.edit_phone);
-        EditText type=view.findViewById(R.id.edit_type);
+        View view = LayoutInflater.from(this).inflate(R.layout.activity_add_complain_repair,null);
+        EditText address = view.findViewById(R.id.address);
+        EditText phone=view.findViewById(R.id.phone);
+        EditText type=view.findViewById(R.id.message);
         final HouseKeeping houseKeeping = new HouseKeeping();
         houseKeeping.setAddress(address.getText().toString());
         houseKeeping.setPhone(phone.getText().toString());
@@ -87,9 +92,9 @@ public class ComplainRepairActivity extends AppCompatActivity implements Complai
         //找到并对自定义布局中的控件进行操作的示例
 
         //创建对话框
-        AlertDialog dialog = new AlertDialog.Builder(this).create();
-        dialog.setIcon(R.drawable.touxiang);//设置图标
-        dialog.setTitle("添加投诉报修");//设置标题
+        AlertDialog dialog = new AlertDialog.Builder(contextThemeWrapper).create();
+//        dialog.setIcon(R.drawable.touxiang);//设置图标
+//        dialog.setTitle("添加投诉报修");//设置标题
         dialog.setView(view);//添加布局
         //设置按键
         dialog.setButton(AlertDialog.BUTTON_POSITIVE, "添加", new DialogInterface.OnClickListener() {

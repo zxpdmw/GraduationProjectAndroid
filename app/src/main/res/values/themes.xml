@@ -78,4 +78,8 @@
         <item name="android:windowEnterAnimation">@anim/popup_show</item>
         <item name="android:windowExitAnimation">@anim/popup_gone</item>
     </style>
+
+    <style name="dialog" parent="@android:style/Theme.Dialog">
+        <item name="android:textSize">20sp</item>
+    </style>
 </resources>
