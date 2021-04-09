@@ -2,7 +2,6 @@ package top.zxpdmw.graduationproject.ui.activity.system;
 
 import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -170,7 +169,7 @@ public class SystemMainActivity extends AppCompatActivity implements WeatherCont
                         intent.putExtra("bundle", bundle);
                         break;
                     case 6:
-                        intent.setClass(SystemMainActivity.this, MyInfoActivity.class);
+                        intent.setClass(SystemMainActivity.this, MyActivity.class);
                         intent.putExtra("user", user);
                         break;
                 }

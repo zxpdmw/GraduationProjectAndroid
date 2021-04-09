@@ -22,6 +22,8 @@ import top.zxpdmw.graduationproject.ui.fragment.system.HouseListFragment;
 public class HouseRentSaleActivity extends AppCompatActivity implements View.OnClickListener {
     @BindView(R.id.toolbar)
      Toolbar toolbar;
+    @BindView(R.id.toolbar_title)
+    TextView toolbar_title;
     @BindView(R.id.house_rent)
      TextView house_rent;
     @BindView(R.id.house_sale)
@@ -53,7 +55,8 @@ public class HouseRentSaleActivity extends AppCompatActivity implements View.OnC
     private void init() {
         intent=getIntent();
         bundle=intent.getBundleExtra("bundle");
-        toolbar.setTitle("房 屋 租 售");
+        toolbar.setTitle("");
+        toolbar_title.setText("房屋租售");
         toolbar.setTitleTextAppearance(this, R.style.Toolbar_TitleText);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

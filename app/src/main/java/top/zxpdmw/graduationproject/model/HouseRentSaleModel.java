@@ -14,6 +14,13 @@ import top.zxpdmw.graduationproject.http.HttpManager;
 import top.zxpdmw.graduationproject.util.ConstUtil;
 
 public class HouseRentSaleModel {
+    public static final String HOUSE_RENT_SALE="houserentsale/all";
+    public static final String HOUSE_RENT="houserentsale/rent";
+    public static final String HOUSE_SALE="houserentsale/sale";
+    public static final String HOUSE_RENT_SALE_PUBLISH="houserentsale/publishe";
+    public static final String HOUSE_RENT_SALE_DELETE="houserentsale/delete";
+    public static final String HOUSE_RENT_SALE_EDIT_HOUSE="houserentsale/edit";
+    public static final String HOUSE_RENT_SALE_USERNAME="houserentsale/get";
     final HouseRentSaleHttp houseRentSaleHttp = HttpManager.retrofit.create(HouseRentSaleHttp.class);
 
     public void HouseRent(Callback<CommonList<HouseRentSale>> callback){
@@ -37,22 +44,22 @@ public class HouseRentSaleModel {
     }
 
     interface HouseRentSaleHttp {
-        @GET(ConstUtil.HOUSE_RENT)
+        @GET(HOUSE_RENT)
         Call<CommonList<HouseRentSale>> HouseRent();
 
-        @GET(ConstUtil.HOUSE_SALE)
+        @GET(HOUSE_SALE)
         Call<CommonList<HouseRentSale>> HouseSale();
 
-        @GET(ConstUtil.HOUSE_RENT_SALE)
+        @GET(HOUSE_RENT_SALE)
         Call<CommonList<HouseRentSale>> HouseRentSale();
 
-        @POST(ConstUtil.HOUSE_RENT_SALE_PUBLISH)
+        @POST(HOUSE_RENT_SALE_PUBLISH)
         Call<ResponseBody> HousePublish(@Body HouseRentSale houseRentSale);
 
-        @POST(ConstUtil.HOUSE_RENT_SALE_EDIT_HOUSE)
+        @POST(HOUSE_RENT_SALE_EDIT_HOUSE)
         Call<CommonOne<HouseRentSale>> HouseEdit(@Body HouseRentSale houseRentSale);
 
-        @GET(ConstUtil.HOUSE_RENT_SALE_USERNAME)
+        @GET(HOUSE_RENT_SALE_USERNAME)
         Call<CommonList<HouseRentSale>> HouseByUsername(@Query("username")String username);
     }
 

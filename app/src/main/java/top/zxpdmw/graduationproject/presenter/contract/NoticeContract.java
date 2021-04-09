@@ -5,10 +5,9 @@ import java.util.List;
 import top.zxpdmw.graduationproject.bean.Notice;
 import top.zxpdmw.graduationproject.presenter.BasePresenter;
 import top.zxpdmw.graduationproject.ui.BaseView;
-import top.zxpdmw.graduationproject.ui.fragment.BaseFragment;
 
 public interface NoticeContract {
-    interface View extends BaseFragment {
+    interface View extends BaseView {
         void showResult(List<Notice> list);
     }
 

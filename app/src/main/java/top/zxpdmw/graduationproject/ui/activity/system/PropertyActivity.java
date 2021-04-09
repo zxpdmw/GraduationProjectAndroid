@@ -21,6 +21,8 @@ import top.zxpdmw.graduationproject.util.ToastUtils;
 public class PropertyActivity extends AppCompatActivity implements PropertyContract.View {
     @BindView(R.id.toolbar)
     Toolbar toolbar;
+    @BindView(R.id.toolbar_title)
+    TextView toolbar_title;
     @BindView(R.id.addProperty)
     Button button;
     @BindView(R.id.property_nickname)
@@ -59,7 +61,8 @@ public class PropertyActivity extends AppCompatActivity implements PropertyContr
         houseId = intent.getStringExtra("houseId");
         nickname.setText(intent.getStringExtra("nickname"));
         presenter.GetProperty(houseId);
-        toolbar.setTitle("物 业 费");
+        toolbar_title.setText("物业费");
+        toolbar.setTitle("");
         toolbar.setTitleTextAppearance(this, R.style.Toolbar_TitleText);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

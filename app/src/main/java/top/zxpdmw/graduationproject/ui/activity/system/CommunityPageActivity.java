@@ -24,6 +24,8 @@ public class CommunityPageActivity extends AppCompatActivity implements BaseView
     TextView phone;
     @BindView(R.id.community_address)
     TextView address;
+    @BindView(R.id.toolbar_title)
+    TextView toolbar_title;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,11 +36,15 @@ public class CommunityPageActivity extends AppCompatActivity implements BaseView
     }
 
     private void init() {
-        toolbar.setTitle("社区黄页");
+        toolbar.setTitle("");
+        toolbar_title.setText("社区黄页");
         toolbar.setTitleTextAppearance(this, R.style.Toolbar_TitleText);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        toolbar.setNavigationOnClickListener(v -> finish());
+        toolbar.setNavigationOnClickListener(v -> {
+            finish();
+            overridePendingTransition(R.anim.in_from_left, R.anim.out_of_right);
+        });
     }
 
     @Override

@@ -18,6 +18,10 @@
     <string name="property">"物 业 费                                                                                              "</string>
     <string name="unamelength">请输入6-10位账号</string>
     <string name="upwdlength">请输入6-10位密码</string>
+    <string name="help">帮助与反馈</string>
+    <string name="huancun">缓存管理</string>
+    <string name="about">关于我们</string>
+    <string name="haoping">给我们好评</string>
 
 
 </resources>

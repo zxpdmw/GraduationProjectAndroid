@@ -10,6 +10,8 @@ import top.zxpdmw.graduationproject.http.HttpManager;
 import top.zxpdmw.graduationproject.util.ConstUtil;
 
 public class PropertyModel {
+    public static final String PROPERTY_GET="property/get";
+    public static final String PROPERTY_ADD="property/pay";
     final PropertyHttp propertyHttp = HttpManager.retrofit.create(PropertyHttp.class);
 
     public void GetProperty(String houseId, Callback<ResponseBody> callback) {
@@ -21,10 +23,10 @@ public class PropertyModel {
     }
 
     interface PropertyHttp {
-        @GET(ConstUtil.PROPERTY_GET)
+        @GET(PROPERTY_GET)
         Call<ResponseBody> GetProperty(@Query("houseId") String houseId);
 
-        @GET(ConstUtil.PROPERTY_ADD)
+        @GET(PROPERTY_ADD)
         Call<ResponseBody> AddProperty(@Query("houseId") String houseId, @Query("property") String property);
     }
 }

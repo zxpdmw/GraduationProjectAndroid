@@ -9,6 +9,8 @@
     <color name="white">#FFFFFFFF</color>
     <color name="main">#28af63</color>
 
+    <color name="hui">#bfbfbf</color>
+
     <color name="bg_black">#000000</color>
     <color name="bg_white">#FFFFFF</color>
     <color name="bg_topbar">#FCFCFC</color>
@@ -17,8 +19,8 @@
 
     <color name="toolbar">#f2f2f2</color>
 
-
-
+    <color name="colorMainGreen">#0066ff</color>
+    <color name="background_gray">#bfbfbf</color>
 
     <color name="text_gray">#8D7A71</color>
     <color name="text_white">#FFFFFF</color>

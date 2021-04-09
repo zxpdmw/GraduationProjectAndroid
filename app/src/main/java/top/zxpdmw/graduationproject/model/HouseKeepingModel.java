@@ -14,6 +14,11 @@ import top.zxpdmw.graduationproject.http.HttpManager;
 import top.zxpdmw.graduationproject.util.ConstUtil;
 
 public class HouseKeepingModel {
+    public static final String HOUSE_KEEPING_ADD="housekeeping/add";
+    public static final String HOUSE_KEEPING_DELETE="housekeeping/delete";
+    public static final String HOUSE_KEEPING_GET_BY_USERNAME="housekeeping/get";
+    public static final String HOUSE_KEEPING_EDIT = "housekeeping/edit";
+
     final HouseKeepingHttp houseKeepingHttp= HttpManager.retrofit.create(HouseKeepingHttp.class);
 
     public void DeleteHouseKeeping(Integer id, Callback<CommonOne> callback){
@@ -35,13 +40,13 @@ public class HouseKeepingModel {
 
     interface HouseKeepingHttp{
 
-        @GET(ConstUtil.HOUSE_KEEPING_DELETE)
+        @GET(HOUSE_KEEPING_DELETE)
         Call<CommonOne> DeleteHouseKeeping(@Query("id")Integer id);
-        @POST(ConstUtil.HOUSE_KEEPING_ADD)
+        @POST(HOUSE_KEEPING_ADD)
         Call<CommonOne> AddHouseKeeping(@Body HouseKeeping houseKeeping);
-        @GET(ConstUtil.HOUSE_KEEPING_GET_BY_USERNAME)
+        @GET(HOUSE_KEEPING_GET_BY_USERNAME)
         Call<CommonList<HouseKeeping>> GetHouseKeeping(@Query("username") String username);
-        @POST(ConstUtil.HOUSE_KEEPING_EDIT)
+        @POST(HOUSE_KEEPING_EDIT)
         Call<CommonOne> EditHouseKeeping(@Body HouseKeeping houseKeeping);
     }
 

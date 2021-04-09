@@ -16,6 +16,7 @@
     <style name="time">
 
     </style>
+
     <style name="Toolbar">
         <item name="android:textSize">20sp</item>
         <item name="android:textColor">@color/black</item>
@@ -50,4 +51,31 @@
     </style>
 
 
+    <style name="my_icon">
+        <item name="android:layout_height">45dp</item>
+        <item name="android:layout_width">45dp</item>
+        <item name="android:layout_marginTop">20dp</item>
+        <item name="android:layout_marginLeft">30dp</item>
+    </style>
+
+    <style name="my_text">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_marginTop">20dp</item>
+        <item name="android:layout_marginLeft">30dp</item>
+        <item name="android:textSize">35sp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="view">
+        <item name="android:layout_height">1dp</item>
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:background">@color/hui</item>
+        <item name="android:layout_marginTop">20dp</item>
+    </style>
+
+    <style name="popwindow_anim_style">
+        <item name="android:windowEnterAnimation">@anim/popup_show</item>
+        <item name="android:windowExitAnimation">@anim/popup_gone</item>
+    </style>
 </resources>

@@ -1,31 +1,94 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.activity.system.MyInfoActivity">
-    <include layout="@layout/toolbar"
-        android:id="@+id/toolbar"/>
+    android:layout_height="match_parent">
 
-    <de.hdodenhof.circleimageview.CircleImageView
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/my_touxiang"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:src="@drawable/touxiang"
-        app:civ_border_width="2dp"
-        android:layout_below="@+id/toolbar"
-        app:civ_border_color="@color/white"
-        android:layout_centerHorizontal="true"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/my_nickename"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/my_touxiang"
-        android:text="张小培"
-        android:textSize="30sp"
-        android:layout_centerHorizontal="true"/>
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/my_info"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#3366ff"
+        tools:context=".ui.activity.system.MyActivity">
+
+        <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/my_touxiang"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/touxiang"
+            app:civ_border_color="@color/white"
+            app:civ_border_width="2dp"
+            android:layout_marginTop="100dp"
+            android:layout_marginRight="10dp"/>
 
 
-</RelativeLayout>
+        <TextView
+            android:id="@+id/my_nickename"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="张小培"
+            android:textSize="40sp"
+            android:textColor="@color/white"
+            android:layout_marginTop="50dp"
+            android:layout_marginLeft="35dp"/>
+
+        <TextView
+            android:id="@+id/my_username"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/my_nickename"
+            android:text="ID:zxpdmw"
+            android:textColor="@color/white"
+            android:textSize="25sp"
+            android:layout_marginLeft="35dp"/>
+
+    </RelativeLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_setting"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/my_info"/>
+
+        <Button
+            android:id="@+id/edit_password"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/rv_setting"
+            android:layout_marginTop="40dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_centerHorizontal="true"
+            android:text="修改密码"
+            android:textColor="#ff3333"
+            android:textSize="35sp"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:background="@drawable/unlogin"/>
+
+
+        <Button
+            android:id="@+id/unLogin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/edit_password"
+            android:layout_marginTop="40dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_centerHorizontal="true"
+            android:text="退出登录"
+            android:textColor="#ff3333"
+            android:textSize="35sp"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:background="@drawable/unlogin"
+            />
+    </RelativeLayout>
+
+</ScrollView>

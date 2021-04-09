@@ -24,12 +24,15 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import java.util.List;
 
 public class ComplainRepairActivity extends AppCompatActivity implements ComplainRepairContract.View {
     @BindView(R.id.toolbar)
     Toolbar toolbar;
+    @BindView(R.id.toolbar_title)
+    TextView toolbar_title;
     @BindView(R.id.list_complain_repair)
     RecyclerView recyclerView;
     ComplainRepairPresenter complainRepairPresenter=new ComplainRepairPresenter(this);
@@ -48,8 +51,8 @@ public class ComplainRepairActivity extends AppCompatActivity implements Complai
     private void init() {
         intent=getIntent();
         toolbar.setTitleTextAppearance(this, R.style.Toolbar_TitleText);
-
-        toolbar.setTitle("投诉报修");
+        toolbar.setTitle("");
+        toolbar_title.setText("投诉保修");
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         toolbar.setNavigationOnClickListener(v -> {
@@ -68,6 +71,7 @@ public class ComplainRepairActivity extends AppCompatActivity implements Complai
         });
         recyclerView.setAdapter(complainRepairAdapter);
     }
+
     @OnClick(R.id.add_complain_repair)
     void addComplainRepair(){
         //实例化布局

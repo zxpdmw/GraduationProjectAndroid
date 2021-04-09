@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.activity.system.InfoActivity">
+    <include layout="@layout/toolbar"
+        android:id="@+id/toolbar"/>
+
+    <RelativeLayout
+        android:id="@+id/oner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/toolbar">
+
+        <TextView
+            android:id="@+id/my_touxiang"
+            android:text="头像"
+            style="@style/my_text"
+            android:layout_centerVertical="true"/>
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/touxiang"
+            app:civ_border_color="@color/white"
+            app:civ_border_width="2dp"
+            android:layout_marginTop="25dp"
+            android:layout_marginRight="30dp"/>
+
+    </RelativeLayout>
+
+
+    <View
+        android:id="@+id/one"
+        style="@style/view"
+        android:layout_below="@id/oner"/>
+
+    <RelativeLayout
+        android:id="@+id/twor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/one">
+
+
+        <TextView
+            android:id="@+id/my_nickname"
+            style="@style/my_text"
+            android:text="昵称"
+            />
+
+        <TextView
+            android:id="@+id/my_nickanem_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="微微维他命"
+            android:textSize="25sp"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="25dp"
+            android:layout_marginRight="30dp"
+            android:layout_centerHorizontal="true"/>
+
+    </RelativeLayout>
+
+
+    <View
+        android:id="@+id/two"
+        style="@style/view"
+        android:layout_below="@id/twor"/>
+
+    <RelativeLayout
+        android:id="@+id/threer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/two">
+        <TextView
+            android:id="@+id/my_address"
+            style="@style/my_text"
+            android:text="地址" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/my_address_text"
+            android:text="安徽省芜湖市"
+            android:textSize="25sp"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="25dp"
+            android:layout_marginRight="30dp"
+
+            />
+    </RelativeLayout>
+
+    <View
+        android:id="@+id/three"
+        style="@style/view"
+        android:layout_below="@id/threer"/>
+
+    <RelativeLayout
+        android:id="@+id/fourr"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/three">
+
+        <TextView
+            android:id="@+id/my_phone"
+            style="@style/my_text"
+            android:text="电话"/>
+
+        <TextView
+            android:id="@+id/my_phone_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="17375352129"
+            android:layout_alignParentRight="true"
+            android:textSize="25sp"
+            android:layout_marginRight="30dp"
+            android:layout_marginTop="25dp"/>
+
+
+    </RelativeLayout>
+
+    <View
+        android:id="@+id/four"
+        style="@style/view"
+        android:layout_below="@id/fourr"/>
+
+    <RelativeLayout
+        android:id="@+id/fiver"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/four">
+
+        <TextView
+            android:id="@+id/my_house"
+            style="@style/my_text"
+            android:text="房屋号"/>
+
+        <TextView
+            android:id="@+id/my_house_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="8888"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="25dp"
+            android:layout_marginRight="30dp"
+            android:textSize="25sp"/>
+
+    </RelativeLayout>
+</RelativeLayout>

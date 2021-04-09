@@ -52,28 +52,24 @@ public class RegisterFragment extends Fragment implements UserContract.View {
     void setRegister() {
         User user = new User();
         if (nickname.getText().toString().equals("")) {
-//            new ToastUtil(getActivity(), "请输入昵称!").show();
             ToastUtils.show("请输入昵称!",500);
 
             return;
         }
         user.setNickname(nickname.getText().toString());
         if (username.getText().toString().equals("")) {
-//            new ToastUtil(getActivity(), "请输入账号!").show();
             ToastUtils.show("请输入账号!",500);
 
             return;
         }
         user.setUsername(username.getText().toString());
         if (password.getText().toString().equals("")) {
-//            new ToastUtil(getActivity(), "请输入密码!").show();
             ToastUtils.show("请输入密码!",500);
 
             return;
         }
         user.setPassword(password.getText().toString());
         if (houseId.getText().toString().equals("")) {
-//            new ToastUtil(getActivity(), "请输入房屋号!").show()
                         ToastUtils.show("请输入房屋号!",500);
             return;
         }

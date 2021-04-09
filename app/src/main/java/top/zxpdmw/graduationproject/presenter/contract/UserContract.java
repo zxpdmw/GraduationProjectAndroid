@@ -15,6 +15,11 @@ public interface UserContract {
      interface Presenter extends BasePresenter{
          void LoginUser(String username, String password);
          void RegisterUser(User user);
+         void EditPassword(String username,String password);
+         void EditAddress(String username,String address);
+         void EditHouse(String username,String house);
+         void EditPhone(String username,String phone);
+         void EditNickname(String username,String nickname);
 
      }
 }

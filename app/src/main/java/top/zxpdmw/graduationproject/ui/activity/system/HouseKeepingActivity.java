@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import java.util.List;
 
@@ -25,6 +26,8 @@ import top.zxpdmw.graduationproject.presenter.contract.HouseKeepingContract;
 public class HouseKeepingActivity extends AppCompatActivity implements HouseKeepingContract.View {
     @BindView(R.id.toolbar)
      Toolbar toolbar;
+    @BindView(R.id.toolbar_title)
+    TextView toolbar_title;
     @BindView(R.id.add_house_keeping) ImageView imageView;
     HouseKeepingPresenter houseKeepingPresenter=new HouseKeepingPresenter(this);
 
@@ -71,7 +74,8 @@ public class HouseKeepingActivity extends AppCompatActivity implements HouseKeep
     }
 
     private void init(){
-        toolbar.setTitle("家政服务");
+        toolbar.setTitle("");
+        toolbar_title.setText("家政服务");
         toolbar.setTitleTextAppearance(this, R.style.Toolbar_TitleText);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

@@ -22,4 +22,11 @@ public class Module implements Serializable {
     public static final Module REPAIR=new Module(R.drawable.repair, R.string.repair);
     public static final Module HOUSE_KEEPING=new Module(R.drawable.housekeeping,R.string.houseKeeping);
     public static final Module HOUSE_RENT_SALE=new Module(R.drawable.houserentsale, R.string.houseRentSale);
+
+    public static final Module HELP=new Module(R.drawable.help,R.string.help);
+    public static final Module ABOUT=new Module(R.drawable.about,R.string.about);
+    public static final Module HUANCUN=new Module(R.drawable.huancun,R.string.huancun);
+    public static final Module HAOPING=new Module(R.drawable.haoping,R.string.haoping);
+
+
 }

@@ -13,6 +13,8 @@ import top.zxpdmw.graduationproject.http.HttpManager;
 import top.zxpdmw.graduationproject.util.ConstUtil;
 
 public class ComplainRepairModel {
+    public static final String COMPLAIN_REPAIR_GET="complainrepair/get";
+    public static final String COMPLAIN_REPAIR_ADD="complainrepair/add";
     final ComplainRepairHttp complainRepairHttp= HttpManager.retrofit.create(ComplainRepairHttp.class);
 
     public void AddComplainRepair(ComplainRepair complainRepair, Callback<ResponseBody> callback){
@@ -24,10 +26,10 @@ public class ComplainRepairModel {
     }
 
     interface ComplainRepairHttp{
-        @POST(ConstUtil.COMPLAIN_REPAIR_ADD)
+        @POST(COMPLAIN_REPAIR_ADD)
         Call<ResponseBody> AddComplainRepair(@Body ComplainRepair complainRepair);
 
-        @GET(ConstUtil.COMPLAIN_REPAIR_GET)
+        @GET(COMPLAIN_REPAIR_GET)
         Call<CommonList<ComplainRepair>> GetComplainRepair(@Query("username")String username);
 
 

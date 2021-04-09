@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.widget.TextView;
 
 import com.zyao89.view.zloading.ZLoadingDialog;
 import com.zyao89.view.zloading.Z_TYPE;
@@ -26,6 +27,8 @@ import top.zxpdmw.graduationproject.ui.adapter.ItemClickListener;
 public class NoticeActivity extends AppCompatActivity implements NoticeContract.View {
     @BindView(R.id.toolbar)
     Toolbar toolbar;
+    @BindView(R.id.toolbar_title)
+    TextView toolbar_title;
     @BindView(R.id.notice_list)
     RecyclerView recyclerView;
     List<Notice> noticeList;
@@ -93,9 +96,10 @@ public class NoticeActivity extends AppCompatActivity implements NoticeContract.
 
     }
 
-    @Override
+
     public void initToolBar(String title) {
-        toolbar.setTitle("社区公告");
+        toolbar.setTitle("");
+        toolbar_title.setText("社区公告");
         setSupportActionBar(toolbar);
         toolbar.setTitleTextAppearance(this, R.style.Toolbar_TitleText);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -105,10 +109,6 @@ public class NoticeActivity extends AppCompatActivity implements NoticeContract.
         });
     }
 
-    @Override
-    public void destroyToolBar(String title) {
-
-    }
 
     @Override
     public void onBackPressed() {

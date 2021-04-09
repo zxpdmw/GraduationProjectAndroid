@@ -11,6 +11,8 @@ import top.zxpdmw.graduationproject.http.HttpManager;
 import top.zxpdmw.graduationproject.util.ConstUtil;
 
 public class NoticeModel {
+    public static final String NOTICE_RECOMMEND="notice/recommend";
+    public static final String NOTICE_DETAIL="notice/detail";
     final NoticeHttp noticeHttp = HttpManager.retrofit.create(NoticeHttp.class);
 
     public void RecommendNotice(Callback<CommonList<Notice>> callback){
@@ -22,10 +24,10 @@ public class NoticeModel {
     }
 
     interface NoticeHttp{
-        @GET(ConstUtil.NOTICE_RECOMMEND)
+        @GET(NOTICE_RECOMMEND)
         Call<CommonList<Notice>> RecommendNotice();
 
-        @GET(ConstUtil.NOTICE_DETAIL)
+        @GET(NOTICE_DETAIL)
         Call<CommonOne<Notice>> DetailNotice(@Query("title")String title);
     }
 }

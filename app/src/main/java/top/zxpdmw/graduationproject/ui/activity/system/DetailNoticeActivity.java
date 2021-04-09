@@ -17,6 +17,8 @@ import top.zxpdmw.graduationproject.util.TimeUtil;
 public class DetailNoticeActivity extends AppCompatActivity {
     @BindView(R.id.toolbar)
     Toolbar toolbar;
+    @BindView(R.id.toolbar_title)
+    TextView toolbar_title;
     @BindView(R.id.notice_title)
     TextView title;
     @BindView(R.id.notice_publisher)
@@ -38,7 +40,8 @@ public class DetailNoticeActivity extends AppCompatActivity {
     }
 
     private void init() {
-        toolbar.setTitle("公告详情");
+        toolbar.setTitle("");
+        toolbar_title.setText("公告详情");
         toolbar.setTitleTextAppearance(this, R.style.Toolbar_TitleText);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
