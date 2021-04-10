@@ -88,6 +88,7 @@ public class MyActivity extends AppCompatActivity {
     @OnClick(R.id.unLogin)
     void setUnLogin(){
         final Intent intent = new Intent(this, MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
         overridePendingTransition(R.anim.in_from_left, R.anim.out_of_right);
 
