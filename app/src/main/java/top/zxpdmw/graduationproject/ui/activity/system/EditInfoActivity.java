@@ -43,7 +43,7 @@ public class EditInfoActivity extends AppCompatActivity implements UserContract.
         data = intent.getStringExtra("data");
         if (data.equals("")){
             editText.setHint("请输入新密码");
-            editText.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+            editText.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
             editText.setHintTextColor(getResources().getColor(R.color.hui));
         }
         title = intent.getStringExtra("title");
