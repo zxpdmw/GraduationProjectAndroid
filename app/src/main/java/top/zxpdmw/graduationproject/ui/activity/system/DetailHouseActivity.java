@@ -6,11 +6,17 @@ import android.os.Bundle;
 
 import top.zxpdmw.graduationproject.R;
 
-public class AddComplainRepairActivity extends AppCompatActivity {
+public class DetailHouseActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_complain_repair);
+        setContentView(R.layout.activity_detail_house);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.in_from_left, R.anim.out_of_right);
     }
 }

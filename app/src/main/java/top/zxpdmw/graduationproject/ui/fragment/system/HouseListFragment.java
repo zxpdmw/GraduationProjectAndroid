@@ -1,5 +1,6 @@
 package top.zxpdmw.graduationproject.ui.fragment.system;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,6 +22,7 @@ import lombok.SneakyThrows;
 import top.zxpdmw.graduationproject.R;
 import top.zxpdmw.graduationproject.presenter.HouseRentSalePresenter;
 import top.zxpdmw.graduationproject.presenter.contract.HouseRentSaleContract;
+import top.zxpdmw.graduationproject.ui.activity.system.DetailHouseActivity;
 import top.zxpdmw.graduationproject.ui.adapter.HouseRentSaleAdapter;
 import top.zxpdmw.graduationproject.bean.HouseRentSale;
 import top.zxpdmw.graduationproject.util.ConstUtil;
@@ -118,17 +120,21 @@ public class HouseListFragment extends Fragment implements HouseRentSaleContract
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        FragmentTransaction fTransaction = fManager.beginTransaction();
-        HouseMessageFragment houseMessageFragment = new HouseMessageFragment();
-        Bundle bd = new Bundle();
-        bd.putSerializable("content", list.get(position));
-        houseMessageFragment.setArguments(bd);
-        //获取Activity的控件
-        //加上Fragment替换动画
-        fTransaction.setCustomAnimations(R.anim.fragment_slide_left_enter, R.anim.fragment_slide_left_exit);
-        fTransaction.replace(R.id.ly_content, houseMessageFragment);
-        //调用addToBackStack将Fragment添加到栈中
-        fTransaction.addToBackStack(null);
-        fTransaction.commit();
+//        FragmentTransaction fTransaction = fManager.beginTransaction();
+//        HouseMessageFragment houseMessageFragment = new HouseMessageFragment();
+//        Bundle bd = new Bundle();
+//        bd.putSerializable("content", list.get(position));
+//        houseMessageFragment.setArguments(bd);
+//        //获取Activity的控件
+//        //加上Fragment替换动画
+//        fTransaction.setCustomAnimations(R.anim.fragment_slide_left_enter, R.anim.fragment_slide_left_exit);
+//        fTransaction.replace(R.id.ly_content, houseMessageFragment);
+//        //调用addToBackStack将Fragment添加到栈中
+//        fTransaction.addToBackStack(null);
+//        fTransaction.commit();
+        final Intent intent = new Intent(getActivity(), DetailHouseActivity.class);
+        intent.putExtra("house",list.get(position));
+        startActivity(intent);
+        getActivity().overridePendingTransition(R.anim.in_from_right, R.anim.out_of_left);
     }
 }

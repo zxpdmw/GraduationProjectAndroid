@@ -1,17 +1,34 @@
 package top.zxpdmw.graduationproject.ui.activity.system;
 
+import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
+
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
+
+import com.xuexiang.xui.widget.dialog.materialdialog.MaterialDialog;
+import com.yanzhenjie.recyclerview.OnItemClickListener;
+import com.yanzhenjie.recyclerview.OnItemMenuClickListener;
+import com.yanzhenjie.recyclerview.SwipeMenu;
+import com.yanzhenjie.recyclerview.SwipeMenuBridge;
+import com.yanzhenjie.recyclerview.SwipeMenuCreator;
+import com.yanzhenjie.recyclerview.SwipeMenuItem;
+import com.yanzhenjie.recyclerview.SwipeRecyclerView;
 
 import java.util.List;
 
@@ -19,9 +36,12 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import top.zxpdmw.graduationproject.R;
+import top.zxpdmw.graduationproject.bean.ComplainRepair;
 import top.zxpdmw.graduationproject.bean.HouseKeeping;
 import top.zxpdmw.graduationproject.presenter.HouseKeepingPresenter;
 import top.zxpdmw.graduationproject.presenter.contract.HouseKeepingContract;
+import top.zxpdmw.graduationproject.ui.adapter.ComplainRepairAdapter;
+import top.zxpdmw.graduationproject.ui.adapter.HouseKeepingAdapter;
 
 public class HouseKeepingActivity extends AppCompatActivity implements HouseKeepingContract.View {
     @BindView(R.id.toolbar)
@@ -29,48 +49,50 @@ public class HouseKeepingActivity extends AppCompatActivity implements HouseKeep
     @BindView(R.id.toolbar_title)
     TextView toolbar_title;
     @BindView(R.id.add_house_keeping) ImageView imageView;
+    @BindView(R.id.list_house_keeping)
+    SwipeRecyclerView swipeRecyclerView;
     HouseKeepingPresenter houseKeepingPresenter=new HouseKeepingPresenter(this);
+    MaterialDialog.Builder builder;
+    MaterialDialog show;
+    List<HouseKeeping> list;
+    Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_house_keeping);
         ButterKnife.bind(this);
+        swipeRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        intent=getIntent();
+        houseKeepingPresenter.GetHouseKeeping(intent.getStringExtra("username"));
+        builder=new MaterialDialog.Builder(this);
         init();
     }
 
     @OnClick(R.id.add_house_keeping)
     void addHouseKeeping(){
-        //实例化布局
-        View view = LayoutInflater.from(this).inflate(R.layout.add_house_keeping,null);
-        EditText address = view.findViewById(R.id.edit_address);
-        EditText phone=view.findViewById(R.id.edit_phone);
-        EditText type=view.findViewById(R.id.edit_type);
-        final HouseKeeping houseKeeping = new HouseKeeping();
-        houseKeeping.setAddress(address.getText().toString());
-        houseKeeping.setPhone(phone.getText().toString());
-        houseKeeping.setHk_type(type.getText().toString());
-        //找到并对自定义布局中的控件进行操作的示例
+        final View view = View.inflate(this, R.layout.add_house_keeping, null);
+        Button cancel = view.findViewById(R.id.cancel);
+        Button add = view.findViewById(R.id.add);
+        show = builder.customView(view, false)
+                .show();
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                show.cancel();
+            }
+        });
 
-        //创建对话框
-        AlertDialog dialog = new AlertDialog.Builder(this).create();
-        dialog.setIcon(R.drawable.touxiang);//设置图标
-        dialog.setTitle("添加投诉报修");//设置标题
-        dialog.setView(view);//添加布局
-        //设置按键
-        dialog.setButton(AlertDialog.BUTTON_POSITIVE, "添加", new DialogInterface.OnClickListener() {
+        add.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialog, int which) {
-                houseKeepingPresenter.AddHouseKeeping(houseKeeping);
+            public void onClick(View v) {
+                EditText address = view.findViewById(R.id.address);
+                EditText phone = view.findViewById(R.id.phone);
+                EditText message = view.findViewById(R.id.message);
             }
         });
-        dialog.setButton(AlertDialog.BUTTON_NEGATIVE, "取消", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-            }
-        });
-        dialog.show();
+
+
     }
 
     private void init(){
@@ -87,7 +109,47 @@ public class HouseKeepingActivity extends AppCompatActivity implements HouseKeep
 
     @Override
     public void showList(List<HouseKeeping> list) {
+        this.list=list;
+        // 创建菜单：
+        SwipeMenuCreator mSwipeMenuCreator = new SwipeMenuCreator() {
+            @Override
+            public void onCreateMenu(SwipeMenu leftMenu, SwipeMenu rightMenu, int position) {
+                SwipeMenuItem deleteItem = new SwipeMenuItem(getApplicationContext()); // 各种文字和图标属性设置。
+                deleteItem.setText("删除");
+                deleteItem.setTextSize(25);
+                deleteItem.setTextColor(getResources().getColor(R.color.white));
+                deleteItem.setHeight(MATCH_PARENT);
+                deleteItem.setBackgroundColor(getResources().getColor(R.color.red));
+                deleteItem.setWidth(350);
+                rightMenu.addMenuItem(deleteItem); // 在Item左侧添加一个菜单。
+            }
+        };
+        swipeRecyclerView.setSwipeMenuCreator(mSwipeMenuCreator);
 
+        // 菜单点击监听。
+        OnItemMenuClickListener mItemMenuClickListener = new OnItemMenuClickListener() {
+            @Override
+            public void onItemClick(SwipeMenuBridge menuBridge, int position) {
+                // 任何操作必须先关闭菜单，否则可能出现Item菜单打开状态错乱。
+                menuBridge.closeMenu();
+                Log.d("zwy", "onItemClick: " + list.get(position).toString());
+            }
+        };
+
+        swipeRecyclerView.setOnItemMenuClickListener(mItemMenuClickListener);
+
+        swipeRecyclerView.setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int adapterPosition) {
+                Intent intent = new Intent(HouseKeepingActivity.this, DetailHouseKeepingActivity.class);
+                intent.putExtra("hk", list.get(adapterPosition));
+                startActivity(intent);
+                overridePendingTransition(R.anim.in_from_right, R.anim.out_of_left);
+            }
+        });
+
+        final HouseKeepingAdapter complainRepairAdapter = new HouseKeepingAdapter(list);
+        swipeRecyclerView.setAdapter(complainRepairAdapter);
     }
 
     @Override

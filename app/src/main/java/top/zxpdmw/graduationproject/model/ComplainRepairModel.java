@@ -15,6 +15,7 @@ import top.zxpdmw.graduationproject.util.ConstUtil;
 public class ComplainRepairModel {
     public static final String COMPLAIN_REPAIR_GET="complainrepair/get";
     public static final String COMPLAIN_REPAIR_ADD="complainrepair/add";
+    public static final String COMPLAIN_REPAIR_DELETE="complainrepair/delete";
     final ComplainRepairHttp complainRepairHttp= HttpManager.retrofit.create(ComplainRepairHttp.class);
 
     public void AddComplainRepair(ComplainRepair complainRepair, Callback<ResponseBody> callback){
@@ -25,6 +26,10 @@ public class ComplainRepairModel {
         complainRepairHttp.GetComplainRepair(username).enqueue(callback);
     }
 
+    public void DeleteComplainRepair(String id,String username,Callback<CommonList<ComplainRepair>> callback){
+        complainRepairHttp.DeleteComplainRepair(id,username).enqueue(callback);
+    }
+
     interface ComplainRepairHttp{
         @POST(COMPLAIN_REPAIR_ADD)
         Call<ResponseBody> AddComplainRepair(@Body ComplainRepair complainRepair);
@@ -32,7 +37,8 @@ public class ComplainRepairModel {
         @GET(COMPLAIN_REPAIR_GET)
         Call<CommonList<ComplainRepair>> GetComplainRepair(@Query("username")String username);
 
-
+        @GET(COMPLAIN_REPAIR_DELETE)
+        Call<CommonList<ComplainRepair>> DeleteComplainRepair(@Query("id")String id,@Query("username")String username);
 
     }
 }

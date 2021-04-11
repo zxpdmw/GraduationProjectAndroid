@@ -23,19 +23,9 @@ import top.zxpdmw.graduationproject.bean.ComplainRepair;
 import top.zxpdmw.graduationproject.bean.Notice;
 
 
+@AllArgsConstructor
 public class ComplainRepairAdapter extends RecyclerView.Adapter<ComplainRepairAdapter.ViewHolder> {
     private List<ComplainRepair> complainRepairs;
-
-    public ComplainRepairAdapter(List<ComplainRepair> list){
-        this.complainRepairs=list;
-    }
-    ItemClickListener mItemClickListener;
-
-    public void setOnItemClickListener(ItemClickListener itemClickListener) {
-        this.mItemClickListener = itemClickListener;
-    }
-
-
     @NonNull
     @NotNull
     @Override
@@ -53,14 +43,6 @@ public class ComplainRepairAdapter extends RecyclerView.Adapter<ComplainRepairAd
         holder.type.setText(vo.getCr_type());
         holder.icon.setImageResource(R.drawable.touxiang);
         holder.message.setText(vo.getMessage());
-        if(mItemClickListener!=null){
-            holder.itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    mItemClickListener.OnItemClickListener(holder.getAdapterPosition());
-                }
-            });
-        }
     }
 
     @Override

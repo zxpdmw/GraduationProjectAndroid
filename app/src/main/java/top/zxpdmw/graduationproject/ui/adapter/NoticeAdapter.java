@@ -17,11 +17,6 @@ import top.zxpdmw.graduationproject.bean.Notice;
 
 public class NoticeAdapter extends RecyclerView.Adapter<NoticeAdapter.ViewHolder> {
     List<Notice> notices;
-    ItemClickListener mItemClickListener;
-
-    public void setOnItemClickListener(ItemClickListener itemClickListener) {
-        this.mItemClickListener = itemClickListener;
-    }
 
     public NoticeAdapter(List<Notice> list){
         this.notices=list;
@@ -44,14 +39,6 @@ public class NoticeAdapter extends RecyclerView.Adapter<NoticeAdapter.ViewHolder
         holder.notice_publish_time.setText(vo.getPublish_time());
         holder.notice_icon.setImageResource(R.drawable.touxiang);
         holder.notice_title.setText(vo.getTitle());
-        if(mItemClickListener!=null){
-            holder.itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    mItemClickListener.OnItemClickListener(holder.getAdapterPosition());
-                }
-            });
-        }
     }
 
     @Override

@@ -21,11 +21,6 @@ public class MyInfoAdapter extends RecyclerView.Adapter<MyInfoAdapter.ViewHolder
         this.list=modules;
     }
 
-    ItemClickListener mItemClickListener;
-
-    public void setOnItemClickListener(ItemClickListener itemClickListener) {
-        this.mItemClickListener = itemClickListener;
-    }
 
     @NonNull
     @NotNull
@@ -40,14 +35,6 @@ public class MyInfoAdapter extends RecyclerView.Adapter<MyInfoAdapter.ViewHolder
         Module module=list.get(position);
         holder.icon.setBackgroundResource(module.getImg_icon());
         holder.text.setText(module.getTitle());
-        if(mItemClickListener!=null){
-            holder.itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    mItemClickListener.OnItemClickListener(holder.getAdapterPosition());
-                }
-            });
-        }
     }
 
     @Override

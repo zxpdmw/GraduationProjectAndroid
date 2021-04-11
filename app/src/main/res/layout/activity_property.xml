@@ -149,7 +149,7 @@
         android:layout_alignParentLeft="true"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp"
-        android:textSize="25sp"
+        android:textSize="30sp"
         android:text="100"/>
 
     <Button
@@ -159,7 +159,7 @@
         android:layout_below="@id/six"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
-        android:textSize="25sp"
+        android:textSize="30sp"
         android:text="200"/>
 
     <Button
@@ -169,7 +169,7 @@
         android:layout_below="@id/six"
         android:layout_alignParentRight="true"
         android:layout_marginTop="10dp"
-        android:textSize="25sp"
+        android:textSize="30sp"
         android:layout_marginRight="10dp"
         android:text="300"/>
 
@@ -201,5 +201,5 @@
         android:layout_marginRight="10dp"
         android:background="@drawable/unlogin"
         android:text="缴 费"
-        android:textSize="20sp" />
+        android:textSize="35sp" />
 </RelativeLayout>

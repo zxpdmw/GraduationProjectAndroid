@@ -3,13 +3,15 @@ package top.zxpdmw.graduationproject.ui.activity.system;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 
+import com.yanzhenjie.recyclerview.OnItemClickListener;
+import com.yanzhenjie.recyclerview.SwipeRecyclerView;
 import com.zyao89.view.zloading.ZLoadingDialog;
 import com.zyao89.view.zloading.Z_TYPE;
 
@@ -22,7 +24,6 @@ import top.zxpdmw.graduationproject.presenter.NoticePresenter;
 import top.zxpdmw.graduationproject.presenter.contract.NoticeContract;
 import top.zxpdmw.graduationproject.bean.Notice;
 import top.zxpdmw.graduationproject.ui.adapter.NoticeAdapter;
-import top.zxpdmw.graduationproject.ui.adapter.ItemClickListener;
 
 public class NoticeActivity extends AppCompatActivity implements NoticeContract.View {
     @BindView(R.id.toolbar)
@@ -30,7 +31,7 @@ public class NoticeActivity extends AppCompatActivity implements NoticeContract.
     @BindView(R.id.toolbar_title)
     TextView toolbar_title;
     @BindView(R.id.notice_list)
-    RecyclerView recyclerView;
+    SwipeRecyclerView recyclerView;
     List<Notice> noticeList;
     ZLoadingDialog dialog = new ZLoadingDialog(this);
 
@@ -53,15 +54,24 @@ public class NoticeActivity extends AppCompatActivity implements NoticeContract.
     public void showResult(List<Notice> list) {
         this.noticeList = list;
         final NoticeAdapter noticeAdapter = new NoticeAdapter(list);
-        noticeAdapter.setOnItemClickListener(new ItemClickListener() {
+        recyclerView.setOnItemClickListener(new OnItemClickListener() {
             @Override
-            public void OnItemClickListener(int position) {
+            public void onItemClick(View view, int adapterPosition) {
                 Intent intent = new Intent(NoticeActivity.this, DetailNoticeActivity.class);
-                intent.putExtra("notice", noticeList.get(position));
+                intent.putExtra("notice", noticeList.get(adapterPosition));
                 startActivity(intent);
                 overridePendingTransition(R.anim.in_from_right, R.anim.out_of_left);
             }
         });
+//        noticeAdapter.setOnItemClickListener(new ItemClickListener() {
+//            @Override
+//            public void OnItemClickListener(int position) {
+//                Intent intent = new Intent(NoticeActivity.this, DetailNoticeActivity.class);
+//                intent.putExtra("notice", noticeList.get(position));
+//                startActivity(intent);
+//                overridePendingTransition(R.anim.in_from_right, R.anim.out_of_left);
+//            }
+//        });
 
         recyclerView.setAdapter(noticeAdapter);
     }

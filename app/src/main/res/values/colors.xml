@@ -16,7 +16,7 @@
     <color name="bg_topbar">#FCFCFC</color>
     <color name="bg_gray">#00F1F1F1</color>
     <color name="transparent">#00FFFFFF</color>
-
+    <color name="red">#ff0000</color>
     <color name="toolbar">#f2f2f2</color>
 
     <color name="colorMainGreen">#0066ff</color>

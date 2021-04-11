@@ -3,6 +3,7 @@ package top.zxpdmw.graduationproject.presenter;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import top.zxpdmw.graduationproject.bean.CommonList;
 import top.zxpdmw.graduationproject.bean.CommonOne;
 import top.zxpdmw.graduationproject.bean.HouseKeeping;
 import top.zxpdmw.graduationproject.model.HouseKeepingModel;
@@ -20,7 +21,20 @@ public class HouseKeepingPresenter implements HouseKeepingContract.Presenter {
 
     @Override
     public void GetHouseKeeping(String username) {
+        houseKeepingModel.GetHouseKeeping(username, new Callback<CommonList<HouseKeeping>>() {
+            @Override
+            public void onResponse(Call<CommonList<HouseKeeping>> call, Response<CommonList<HouseKeeping>> response) {
+                int code=response.body().getCode();
+                if (code==666){
+                    view.showList(response.body().getData());
+                }
+            }
 
+            @Override
+            public void onFailure(Call<CommonList<HouseKeeping>> call, Throwable t) {
+
+            }
+        });
     }
 
     @Override

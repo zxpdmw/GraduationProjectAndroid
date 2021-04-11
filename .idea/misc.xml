@@ -66,6 +66,7 @@
         <entry key="..\:/projects/GraduationProjectAndroid/app/src/main/res/layout/item_housekeeping.xml" value="0.17391304347826086" />
         <entry key="..\:/projects/GraduationProjectAndroid/app/src/main/res/layout/item_houserentsale.xml" value="0.17391304347826086" />
         <entry key="..\:/projects/GraduationProjectAndroid/app/src/main/res/layout/item_list_complainrepair.xml" value="0.20364583333333333" />
+        <entry key="..\:/projects/GraduationProjectAndroid/app/src/main/res/layout/item_list_house_keeping.xml" value="0.1" />
         <entry key="..\:/projects/GraduationProjectAndroid/app/src/main/res/layout/item_list_housekeeping.xml" value="0.20364583333333333" />
         <entry key="..\:/projects/GraduationProjectAndroid/app/src/main/res/layout/item_list_houserentsale.xml" value="0.20364583333333333" />
         <entry key="..\:/projects/GraduationProjectAndroid/app/src/main/res/layout/item_list_main.xml" value="0.22" />
@@ -98,7 +99,7 @@
   <component name="VisualizationToolProject">
     <option name="state">
       <ProjectState>
-        <option name="scale" value="0.20364583333333333" />
+        <option name="scale" value="0.13994565217391305" />
       </ProjectState>
     </option>
   </component>

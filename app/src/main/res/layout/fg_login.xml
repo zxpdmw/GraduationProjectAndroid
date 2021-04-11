@@ -8,14 +8,14 @@
         android:id="@+id/login_username"
         style="@style/edittext"
         android:layout_marginTop="10dp"
-        android:hint="@string/username"
+        android:hint="请输入账号"
         android:text="zxpdmw" />
 
 
     <EditText
         android:id="@+id/login_password"
         style="@style/edittext"
-        android:hint="@string/password"
+        android:hint="请输入密码"
         android:inputType="textPassword"
         android:text="zxpdmw" />
 

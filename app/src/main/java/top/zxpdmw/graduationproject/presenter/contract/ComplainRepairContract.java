@@ -14,7 +14,7 @@ public interface ComplainRepairContract {
 
     interface Presenter extends BasePresenter{
         void AddComplainRepair(ComplainRepair complainRepair);
-        void DeleteComplainRepair(Integer id);
+        void DeleteComplainRepair(String id,String username);
         void EditComplainRepair(ComplainRepair complainRepair);
         void GetComplainRepair(String username);
     }

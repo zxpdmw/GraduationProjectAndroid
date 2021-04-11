@@ -7,7 +7,7 @@
     <include layout="@layout/toolbar"
         android:id="@+id/toolbar"/>
 
-    <androidx.recyclerview.widget.RecyclerView
+    <com.yanzhenjie.recyclerview.SwipeRecyclerView
         android:id="@+id/list_complain_repair"
         android:layout_below="@+id/toolbar"
         android:layout_width="wrap_content"

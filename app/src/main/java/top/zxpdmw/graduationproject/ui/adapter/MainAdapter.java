@@ -17,11 +17,6 @@ import java.util.List;
 
 public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
     List<Module> list;
-    ItemClickListener mItemClickListener;
-
-    public void setOnItemClickListener(ItemClickListener itemClickListener) {
-        this.mItemClickListener = itemClickListener;
-    }
 
 
     public MainAdapter(List<Module> list){
@@ -44,14 +39,6 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
         //设置
         holder.textView.setText(vo.getTitle());
         holder.imageView.setImageResource(vo.getImg_icon());
-        if(mItemClickListener!=null){
-            holder.itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    mItemClickListener.OnItemClickListener(holder.getAdapterPosition());
-                }
-            });
-        }
     }
 
     @Override

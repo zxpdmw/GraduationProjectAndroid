@@ -1,29 +1,24 @@
 package top.zxpdmw.graduationproject.ui.activity.system;
 
 
-import androidx.appcompat.app.AlertDialog;
+import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
+
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.view.ContextThemeWrapper;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import top.zxpdmw.graduationproject.R;
-import top.zxpdmw.graduationproject.bean.HouseKeeping;
 import top.zxpdmw.graduationproject.presenter.ComplainRepairPresenter;
 import top.zxpdmw.graduationproject.presenter.contract.ComplainRepairContract;
 import top.zxpdmw.graduationproject.ui.adapter.ComplainRepairAdapter;
 import top.zxpdmw.graduationproject.bean.ComplainRepair;
-import top.zxpdmw.graduationproject.ui.adapter.ItemClickListener;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -31,12 +26,15 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
-import com.hjq.toast.ToastUtils;
-import com.xuexiang.xui.widget.dialog.DialogLoader;
 import com.xuexiang.xui.widget.dialog.materialdialog.MaterialDialog;
-import com.xuexiang.xui.widget.dialog.strategy.impl.MaterialDialogStrategy;
+import com.yanzhenjie.recyclerview.OnItemClickListener;
+import com.yanzhenjie.recyclerview.OnItemMenuClickListener;
+import com.yanzhenjie.recyclerview.SwipeMenu;
+import com.yanzhenjie.recyclerview.SwipeMenuBridge;
+import com.yanzhenjie.recyclerview.SwipeMenuCreator;
+import com.yanzhenjie.recyclerview.SwipeMenuItem;
+import com.yanzhenjie.recyclerview.SwipeRecyclerView;
 
-import java.time.temporal.ValueRange;
 import java.util.List;
 
 public class ComplainRepairActivity extends AppCompatActivity implements ComplainRepairContract.View {
@@ -45,7 +43,7 @@ public class ComplainRepairActivity extends AppCompatActivity implements Complai
     @BindView(R.id.toolbar_title)
     TextView toolbar_title;
     @BindView(R.id.list_complain_repair)
-    RecyclerView recyclerView;
+    SwipeRecyclerView recyclerView;
     ComplainRepairPresenter complainRepairPresenter = new ComplainRepairPresenter(this);
     Intent intent;
     MaterialDialog.Builder builder;
@@ -57,7 +55,7 @@ public class ComplainRepairActivity extends AppCompatActivity implements Complai
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_complain_repair);
         ButterKnife.bind(this);
-        builder=new MaterialDialog.Builder(this);
+        builder = new MaterialDialog.Builder(this);
         init();
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         complainRepairPresenter.GetComplainRepair(intent.getStringExtra("username"));
@@ -77,22 +75,52 @@ public class ComplainRepairActivity extends AppCompatActivity implements Complai
     }
 
     private void initListView(List<ComplainRepair> complainRepairs) {
-        final ComplainRepairAdapter complainRepairAdapter = new ComplainRepairAdapter(complainRepairs);
-        complainRepairAdapter.setOnItemClickListener(new ItemClickListener() {
+
+        // 创建菜单：
+        SwipeMenuCreator mSwipeMenuCreator = new SwipeMenuCreator() {
             @Override
-            public void OnItemClickListener(int position) {
+            public void onCreateMenu(SwipeMenu leftMenu, SwipeMenu rightMenu, int position) {
+                SwipeMenuItem deleteItem = new SwipeMenuItem(getApplicationContext()); // 各种文字和图标属性设置。
+                deleteItem.setText("删除");
+                deleteItem.setTextSize(25);
+                deleteItem.setTextColor(getResources().getColor(R.color.white));
+                deleteItem.setHeight(MATCH_PARENT);
+                deleteItem.setBackgroundColor(getResources().getColor(R.color.red));
+                deleteItem.setWidth(350);
+                rightMenu.addMenuItem(deleteItem); // 在Item左侧添加一个菜单。
+            }
+        };
+        recyclerView.setSwipeMenuCreator(mSwipeMenuCreator);
+
+        // 菜单点击监听。
+        OnItemMenuClickListener mItemMenuClickListener = new OnItemMenuClickListener() {
+            @Override
+            public void onItemClick(SwipeMenuBridge menuBridge, int position) {
+                // 任何操作必须先关闭菜单，否则可能出现Item菜单打开状态错乱。
+                menuBridge.closeMenu();
+                Log.d("zwy", "onItemClick: " + list.get(position).toString());
+            }
+        };
+
+        recyclerView.setOnItemMenuClickListener(mItemMenuClickListener);
+
+        recyclerView.setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int adapterPosition) {
                 Intent intent = new Intent(ComplainRepairActivity.this, DetailComplainRepairActivity.class);
-                intent.putExtra("cr", list.get(position));
+                intent.putExtra("cr", list.get(adapterPosition));
                 startActivity(intent);
                 overridePendingTransition(R.anim.in_from_right, R.anim.out_of_left);
             }
         });
+
+        final ComplainRepairAdapter complainRepairAdapter = new ComplainRepairAdapter(complainRepairs);
         recyclerView.setAdapter(complainRepairAdapter);
     }
 
     @OnClick(R.id.add_complain_repair)
     void addComplainRepair() {
-        final View view = View.inflate(this, R.layout.activity_add_complain_repair, null);
+        final View view = View.inflate(this, R.layout.add_complain_repair, null);
 
         Button cancel = view.findViewById(R.id.cancel);
         Button add = view.findViewById(R.id.add);
@@ -127,7 +155,7 @@ public class ComplainRepairActivity extends AppCompatActivity implements Complai
 
     @Override
     public void showList(List<ComplainRepair> list) {
-        this.list=list;
+        this.list = list;
         initListView(list);
     }
 

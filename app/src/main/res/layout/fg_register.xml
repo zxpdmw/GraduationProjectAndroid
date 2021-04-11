@@ -7,7 +7,7 @@
 
     <EditText
         android:id="@+id/register_nickname"
-        android:hint="@string/nickname"
+        android:hint="请输入昵称"
         style="@style/edittext"/>
 
 
@@ -31,7 +31,7 @@
     <EditText
         android:id="@+id/register_houseId"
         android:inputType="number"
-        android:hint="@string/houseId"
+        android:hint="请输入房屋号"
         style="@style/edittext"/>
 
 

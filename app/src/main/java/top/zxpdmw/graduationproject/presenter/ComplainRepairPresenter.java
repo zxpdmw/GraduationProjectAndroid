@@ -42,8 +42,18 @@ public class ComplainRepairPresenter implements ComplainRepairContract.Presenter
     }
 
     @Override
-    public void DeleteComplainRepair(Integer id) {
+    public void DeleteComplainRepair(String id,String username) {
+        complainRepairModel.DeleteComplainRepair(id, username, new Callback<CommonList<ComplainRepair>>() {
+            @Override
+            public void onResponse(Call<CommonList<ComplainRepair>> call, Response<CommonList<ComplainRepair>> response) {
 
+            }
+
+            @Override
+            public void onFailure(Call<CommonList<ComplainRepair>> call, Throwable t) {
+
+            }
+        });
     }
 
     @Override

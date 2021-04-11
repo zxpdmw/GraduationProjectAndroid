@@ -63,4 +63,5 @@ dependencies {
     implementation 'com.zyao89:zloading:1.2.0'
     implementation 'com.hjq:toast:5.0'
     implementation 'com.github.xuexiangjys:XUI:1.1.6'
+    implementation 'com.yanzhenjie.recyclerview:x:1.3.2'
 }

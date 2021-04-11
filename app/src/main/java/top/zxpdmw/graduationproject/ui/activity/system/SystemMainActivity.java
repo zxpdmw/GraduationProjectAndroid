@@ -6,16 +6,15 @@ import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.hjq.toast.ToastUtils;
+import com.yanzhenjie.recyclerview.SwipeRecyclerView;
 import com.zyao89.view.zloading.ZLoadingDialog;
 import com.zyao89.view.zloading.Z_TYPE;
 
@@ -38,7 +37,6 @@ import top.zxpdmw.graduationproject.bean.WeatherLife;
 import top.zxpdmw.graduationproject.bean.WeatherNow;
 import top.zxpdmw.graduationproject.presenter.WeatherPresenter;
 import top.zxpdmw.graduationproject.presenter.contract.WeatherContract;
-import top.zxpdmw.graduationproject.ui.adapter.ItemClickListener;
 import top.zxpdmw.graduationproject.ui.adapter.MainAdapter;
 import top.zxpdmw.graduationproject.bean.Module;
 import top.zxpdmw.graduationproject.bean.User;
@@ -58,7 +56,7 @@ public class SystemMainActivity extends AppCompatActivity implements WeatherCont
     @BindView(R.id.toolbar_title)
     TextView textView;
     @BindView(R.id.list_main)
-    RecyclerView recyclerView;
+    SwipeRecyclerView recyclerView;
     @BindView(R.id.weather)
     RelativeLayout relativeLayout;
     @BindView(R.id.weather_icon)
@@ -71,8 +69,6 @@ public class SystemMainActivity extends AppCompatActivity implements WeatherCont
     TextView status;
     @BindView(R.id.time)
     TextView time;
-
-    int count=0;
 
     WeatherPresenter weatherPresenter = new WeatherPresenter(this);
 
@@ -140,43 +136,41 @@ public class SystemMainActivity extends AppCompatActivity implements WeatherCont
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
         final MainAdapter mainAdapter = new MainAdapter(moduleList);
-        mainAdapter.setOnItemClickListener(new ItemClickListener() {
-            @Override
-            public void OnItemClickListener(int position) {
-                final Intent intent = new Intent();
-                switch (position) {
-                    case 0:
-                        intent.setClass(SystemMainActivity.this, NoticeActivity.class);
-                        break;
-                    case 1:
-                        intent.setClass(SystemMainActivity.this, CommunityPageActivity.class);
-                        break;
-                    case 2:
-                        intent.setClass(SystemMainActivity.this, PropertyActivity.class);
-                        intent.putExtra("houseId", user.getHouse_id());
-                        intent.putExtra("nickname", user.getNickname());
-                        break;
-                    case 3:
-                        intent.setClass(SystemMainActivity.this, ComplainRepairActivity.class);
-                        intent.putExtra("username", user.getUsername());
-                        break;
-                    case 4:
-                        intent.setClass(SystemMainActivity.this, HouseKeepingActivity.class);
-                        break;
-                    case 5:
-                        intent.setClass(SystemMainActivity.this, HouseRentSaleActivity.class);
-                        final Bundle bundle = new Bundle();
-                        bundle.putString("username", user.getUsername());
-                        intent.putExtra("bundle", bundle);
-                        break;
-                    case 6:
-                        intent.setClass(SystemMainActivity.this, MyActivity.class);
-                        intent.putExtra("user", user);
-                        break;
-                }
-                startActivity(intent);
-                overridePendingTransition(R.anim.in_from_right, R.anim.out_of_left);
+        recyclerView.setOnItemClickListener((view, adapterPosition) -> {
+            final Intent intent1 = new Intent();
+            switch (adapterPosition) {
+                case 0:
+                    intent1.setClass(SystemMainActivity.this, NoticeActivity.class);
+                    break;
+                case 1:
+                    intent1.setClass(SystemMainActivity.this, CommunityPageActivity.class);
+                    break;
+                case 2:
+                    intent1.setClass(SystemMainActivity.this, PropertyActivity.class);
+                    intent1.putExtra("houseId", user.getHouse_id());
+                    intent1.putExtra("nickname", user.getNickname());
+                    break;
+                case 3:
+                    intent1.setClass(SystemMainActivity.this, ComplainRepairActivity.class);
+                    intent1.putExtra("username", user.getUsername());
+                    break;
+                case 4:
+                    intent1.setClass(SystemMainActivity.this, HouseKeepingActivity.class);
+                    intent1.putExtra("username",user.getUsername());
+                    break;
+                case 5:
+                    intent1.setClass(SystemMainActivity.this, HouseRentSaleActivity.class);
+                    final Bundle bundle = new Bundle();
+                    bundle.putString("username", user.getUsername());
+                    intent1.putExtra("bundle", bundle);
+                    break;
+                case 6:
+                    intent1.setClass(SystemMainActivity.this, MyActivity.class);
+                    intent1.putExtra("user", user);
+                    break;
             }
+            startActivity(intent1);
+            overridePendingTransition(R.anim.in_from_right, R.anim.out_of_left);
         });
         recyclerView.setAdapter(mainAdapter);
     }
