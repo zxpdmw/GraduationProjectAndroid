@@ -27,7 +27,7 @@ public class MyActivity extends AppCompatActivity {
     private Intent intent;
     @BindView(R.id.my_nickename)
     TextView nickname;
-//    @BindView(R.id.toolbar)
+    //    @BindView(R.id.toolbar)
 //    Toolbar toolbar;
     private User user;
 
@@ -45,13 +45,13 @@ public class MyActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_info);
         ButterKnife.bind(this);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
-        List<Module> list= Arrays.asList(Module.HELP,Module.HAOPING,Module.HUANCUN,Module.ABOUT);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        List<Module> list = Arrays.asList(Module.HELP, Module.HAOPING, Module.HUANCUN, Module.ABOUT);
         recyclerView.setAdapter(new MyInfoAdapter(list));
         init();
     }
 
-    private void init(){
+    private void init() {
 //        toolbar.setTitle("我的");
 //        setSupportActionBar(toolbar);
 //        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -59,13 +59,13 @@ public class MyActivity extends AppCompatActivity {
 //            finish();
 //            overridePendingTransition(R.anim.in_from_left, R.anim.out_of_right);
 //        });
-        intent=getIntent();
+        intent = getIntent();
         user = (User) intent.getSerializableExtra("user");
         nickname.setText(user.getNickname());
     }
 
     @OnClick(R.id.edit_password)
-    void setPassword(){
+    void setPassword() {
         final Intent intent = new Intent(this, EditInfoActivity.class);
         intent.putExtra("username", user.getUsername());
         intent.putExtra("data", "");
@@ -76,19 +76,20 @@ public class MyActivity extends AppCompatActivity {
 
 
     @OnClick({R.id.my_touxiang})
-    void setImageView(){
+    void setImageView() {
         final Intent intent = new Intent(this, InfoActivity.class);
         final Bundle bundle = new Bundle();
-        bundle.putSerializable("user",user);
-        intent.putExtra("bundle",bundle);
+        bundle.putSerializable("user", user);
+        intent.putExtra("bundle", bundle);
         startActivity(intent);
         overridePendingTransition(R.anim.in_from_right, R.anim.out_of_left);
 
     }
+
     @OnClick(R.id.unLogin)
-    void setUnLogin(){
+    void setUnLogin() {
         final Intent intent = new Intent(this, MainActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
         overridePendingTransition(R.anim.in_from_left, R.anim.out_of_right);
 

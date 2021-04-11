@@ -9,6 +9,7 @@ import top.zxpdmw.graduationproject.ui.BaseView;
 public interface ComplainRepairContract {
     interface View extends BaseView{
         void showList(List<ComplainRepair> list);
+        void cancel();
     }
 
     interface Presenter extends BasePresenter{

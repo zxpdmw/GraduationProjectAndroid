@@ -17,4 +17,5 @@ public class ComplainRepair implements Serializable {
     private String status;
     private String message;
     private String username;
+    private String create_time;
 }

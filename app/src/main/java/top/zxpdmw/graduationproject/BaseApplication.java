@@ -18,6 +18,8 @@ public class BaseApplication extends Application {
     public void onCreate() {
         super.onCreate();
         // Toast工具类
+        XUI.init(this);
+        XUI.debug(true);
         ToastUtils.init(this);
         ToastUtils.initStyle(new IToastStyle() {
             @Override

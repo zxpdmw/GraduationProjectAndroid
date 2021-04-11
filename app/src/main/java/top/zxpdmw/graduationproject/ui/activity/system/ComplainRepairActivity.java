@@ -22,14 +22,21 @@ import top.zxpdmw.graduationproject.ui.adapter.ItemClickListener;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.hjq.toast.ToastUtils;
+import com.xuexiang.xui.widget.dialog.DialogLoader;
+import com.xuexiang.xui.widget.dialog.materialdialog.MaterialDialog;
+import com.xuexiang.xui.widget.dialog.strategy.impl.MaterialDialogStrategy;
 
+import java.time.temporal.ValueRange;
 import java.util.List;
 
 public class ComplainRepairActivity extends AppCompatActivity implements ComplainRepairContract.View {
@@ -39,21 +46,25 @@ public class ComplainRepairActivity extends AppCompatActivity implements Complai
     TextView toolbar_title;
     @BindView(R.id.list_complain_repair)
     RecyclerView recyclerView;
-    ComplainRepairPresenter complainRepairPresenter=new ComplainRepairPresenter(this);
+    ComplainRepairPresenter complainRepairPresenter = new ComplainRepairPresenter(this);
     Intent intent;
+    MaterialDialog.Builder builder;
+    MaterialDialog show;
+    List<ComplainRepair> list;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_complain_repair);
         ButterKnife.bind(this);
+        builder=new MaterialDialog.Builder(this);
         init();
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         complainRepairPresenter.GetComplainRepair(intent.getStringExtra("username"));
     }
 
     private void init() {
-        intent=getIntent();
+        intent = getIntent();
         toolbar.setTitleTextAppearance(this, R.style.Toolbar_TitleText);
         toolbar.setTitle("");
         toolbar_title.setText("投诉保修");
@@ -65,56 +76,64 @@ public class ComplainRepairActivity extends AppCompatActivity implements Complai
         });
     }
 
-    private void initListView(List<ComplainRepair> complainRepairs){
+    private void initListView(List<ComplainRepair> complainRepairs) {
         final ComplainRepairAdapter complainRepairAdapter = new ComplainRepairAdapter(complainRepairs);
         complainRepairAdapter.setOnItemClickListener(new ItemClickListener() {
             @Override
             public void OnItemClickListener(int position) {
-                ToastUtils.show("zzz");
+                Intent intent = new Intent(ComplainRepairActivity.this, DetailComplainRepairActivity.class);
+                intent.putExtra("cr", list.get(position));
+                startActivity(intent);
+                overridePendingTransition(R.anim.in_from_right, R.anim.out_of_left);
             }
         });
         recyclerView.setAdapter(complainRepairAdapter);
     }
 
     @OnClick(R.id.add_complain_repair)
-    void addComplainRepair(){
-        ContextThemeWrapper contextThemeWrapper =
-                new ContextThemeWrapper(ComplainRepairActivity.this, R.style.dialog);
-        //实例化布局
-        View view = LayoutInflater.from(this).inflate(R.layout.activity_add_complain_repair,null);
-        EditText address = view.findViewById(R.id.address);
-        EditText phone=view.findViewById(R.id.phone);
-        EditText type=view.findViewById(R.id.message);
-        final HouseKeeping houseKeeping = new HouseKeeping();
-        houseKeeping.setAddress(address.getText().toString());
-        houseKeeping.setPhone(phone.getText().toString());
-        houseKeeping.setHk_type(type.getText().toString());
-        //找到并对自定义布局中的控件进行操作的示例
+    void addComplainRepair() {
+        final View view = View.inflate(this, R.layout.activity_add_complain_repair, null);
 
-        //创建对话框
-        AlertDialog dialog = new AlertDialog.Builder(contextThemeWrapper).create();
-//        dialog.setIcon(R.drawable.touxiang);//设置图标
-//        dialog.setTitle("添加投诉报修");//设置标题
-        dialog.setView(view);//添加布局
-        //设置按键
-        dialog.setButton(AlertDialog.BUTTON_POSITIVE, "添加", new DialogInterface.OnClickListener() {
+        Button cancel = view.findViewById(R.id.cancel);
+        Button add = view.findViewById(R.id.add);
+        show = builder.customView(view, false)
+                .show();
+        cancel.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialog, int which) {
-                complainRepairPresenter.AddComplainRepair(null);
+            public void onClick(View v) {
+                show.cancel();
             }
         });
-        dialog.setButton(AlertDialog.BUTTON_NEGATIVE, "取消", new DialogInterface.OnClickListener() {
+
+        add.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
+            public void onClick(View v) {
+                RadioGroup radioGroup = view.findViewById(R.id.radio_group);
+                RadioButton radioButton = view.findViewById(radioGroup.getCheckedRadioButtonId());
+                EditText address = view.findViewById(R.id.address);
+                EditText phone = view.findViewById(R.id.phone);
+                EditText message = view.findViewById(R.id.message);
+                final ComplainRepair complainRepair = new ComplainRepair();
+                complainRepair.setAddress(address.getText().toString());
+                complainRepair.setPhone(phone.getText().toString());
+                complainRepair.setCr_type(radioButton.getText().toString());
+                complainRepair.setMessage(message.getText().toString());
+                complainRepair.setUsername(intent.getStringExtra("username"));
+                complainRepairPresenter.AddComplainRepair(complainRepair);
+                complainRepairPresenter.GetComplainRepair(intent.getStringExtra("username"));
             }
         });
-        dialog.show();
     }
 
     @Override
     public void showList(List<ComplainRepair> list) {
+        this.list=list;
         initListView(list);
+    }
+
+    @Override
+    public void cancel() {
+        show.cancel();
     }
 
     @Override

@@ -1,5 +1,9 @@
 package top.zxpdmw.graduationproject.presenter;
 
+import org.json.JSONObject;
+
+import lombok.SneakyThrows;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -17,7 +21,24 @@ public class ComplainRepairPresenter implements ComplainRepairContract.Presenter
     }
     @Override
     public void AddComplainRepair(ComplainRepair complainRepair) {
+        complainRepairModel.AddComplainRepair(complainRepair, new Callback<ResponseBody>() {
+            @Override
+            @SneakyThrows
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                JSONObject jsonObject=new JSONObject(response.body().string());
+                String code=jsonObject.getString("code");
+                if (code.equals("666")){
+                    view.showMsg(jsonObject.getString("message"));
+                    GetComplainRepair(complainRepair.getUsername());
+                    view.cancel();
+                }
+            }
 
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+            }
+        });
     }
 
     @Override

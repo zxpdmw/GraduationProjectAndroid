@@ -5,4 +5,10 @@
         <item name="android:textSize">30sp</item><!--toolbar标题字体大小-->
         <item name="android:textColor">@color/black</item><!--toolbar标题字体颜色-->
     </style>
+
+    <style name="MainTheme" parent="XUITheme.Phone">
+        <item name="colorPrimary">@color/xui_config_color_main_theme</item>
+        <item name="colorAccent">@color/xui_config_color_main_theme</item>
+        <item name="colorPrimaryDark">@color/xui_config_color_main_theme</item>
+    </style>
 </resources>

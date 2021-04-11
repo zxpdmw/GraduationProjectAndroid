@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.activity.system.DetailNoticeActivity">
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar" />
+
+    <TextView
+        android:id="@+id/notice_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/toolbar"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:maxLines="2"
+        android:text="Notice title"
+        android:textSize="40sp"
+        android:textStyle="bold" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/image_icon"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_below="@+id/notice_title"
+        android:layout_marginLeft="10dp"
+        android:src="@drawable/touxiang" />
+
+    <TextView
+        android:id="@+id/notice_publisher"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/notice_title"
+        android:layout_marginLeft="10dp"
+        android:layout_toRightOf="@+id/image_icon"
+        android:text="Notice Publisher"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/notice_publish_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/notice_publisher"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="15dp"
+        android:layout_toRightOf="@+id/image_icon"
+        android:text="Notice Publish Time"
+        android:textSize="15dp" />
+
+
+    <TextView
+        android:id="@+id/notice_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/image_icon"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="5dp"
+        android:text="Notie Content"
+        android:textSize="25sp" />
+
+
+</RelativeLayout>

@@ -9,30 +9,33 @@
         android:id="@+id/tip"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="请说出你的困扰和诉求"
-        android:layout_marginTop="10dp"
         android:layout_centerHorizontal="true"
-        android:textSize="25sp"
-        android:textColor="@color/black"/>
+        android:layout_marginTop="10dp"
+        android:text="请说出你的困扰和诉求"
+        android:textColor="@color/black"
+        android:textSize="30sp" />
 
     <RadioGroup
         android:id="@+id/radio_group"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/tip"
-        android:orientation="horizontal"
-        android:layout_centerHorizontal="true">
+        android:layout_centerHorizontal="true"
+        android:orientation="horizontal">
+
         <RadioButton
+            android:id="@+id/tousu"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="投诉"
-            android:textSize="30sp"/>
+            android:textSize="30sp" />
 
         <RadioButton
+            android:id="@+id/baoxiu"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="报修"
-            android:textSize="30sp"/>
+            android:textSize="30sp" />
     </RadioGroup>
 
     <EditText
@@ -40,47 +43,58 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/radio_group"
-        android:hint="请说出你的诉求"
-        android:textSize="30sp"
         android:layout_marginLeft="10dp"
-        android:paddingStart="10dp"
         android:layout_marginTop="10dp"
         android:layout_marginRight="10dp"
+        android:hint="请说出你的诉求"
+        android:paddingStart="10dp"
         android:paddingEnd="10dp"
-        />
+        android:textSize="25sp" />
 
     <EditText
         android:id="@+id/address"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/message"
-        android:hint="请输入的您的地址"
-        android:textSize="30sp"
         android:layout_marginLeft="10dp"
-        android:paddingStart="10dp"
         android:layout_marginTop="10dp"
         android:layout_marginRight="10dp"
+        android:hint="请输入的您的地址"
+        android:paddingStart="10dp"
         android:paddingEnd="10dp"
-        />
+        android:textSize="25sp" />
 
     <EditText
         android:id="@+id/phone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/address"
-        android:hint="请输入您的电话"
-        android:textSize="30sp"
         android:layout_marginLeft="10dp"
-        android:paddingStart="10dp"
         android:layout_marginTop="10dp"
         android:layout_marginRight="10dp"
+        android:hint="请输入您的电话"
+        android:paddingStart="10dp"
         android:paddingEnd="10dp"
-        />
+        android:textSize="25sp" />
 
+    <Button
+        android:id="@+id/add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/phone"
+        android:layout_marginLeft="50dp"
+        android:text="添加"
+        android:textSize="20sp" />
 
-
-
-
+    <Button
+        android:id="@+id/cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/phone"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="50dp"
+        android:text="取消"
+        android:textSize="20sp" />
 
 
 </RelativeLayout>
