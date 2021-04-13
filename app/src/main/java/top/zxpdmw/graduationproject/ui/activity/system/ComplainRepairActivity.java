@@ -75,7 +75,6 @@ public class ComplainRepairActivity extends AppCompatActivity implements Complai
     }
 
     private void initListView(List<ComplainRepair> complainRepairs) {
-
         // 创建菜单：
         SwipeMenuCreator mSwipeMenuCreator = new SwipeMenuCreator() {
             @Override
@@ -108,13 +107,23 @@ public class ComplainRepairActivity extends AppCompatActivity implements Complai
         recyclerView.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(View view, int adapterPosition) {
-                Intent intent = new Intent(ComplainRepairActivity.this, DetailComplainRepairActivity.class);
-                intent.putExtra("cr", list.get(adapterPosition));
-                startActivity(intent);
-                overridePendingTransition(R.anim.in_from_right, R.anim.out_of_left);
+                final View detail = View.inflate(getApplicationContext(), R.layout.detail_complain_repair, null);
+                TextView cr_type=detail.findViewById(R.id.cr_type);
+                TextView cr_message=detail.findViewById(R.id.cr_message);
+                TextView cr_address=detail.findViewById(R.id.cr_address);
+                TextView cr_phone=detail.findViewById(R.id.cr_phone);
+                TextView cr_status=detail.findViewById(R.id.cr_status);
+                cr_type.setText(list.get(adapterPosition).getCr_type());
+                cr_message.setText(list.get(adapterPosition).getMessage());
+                cr_address.setText(list.get(adapterPosition).getAddress());
+                cr_phone.setText(list.get(adapterPosition).getPhone());
+                if (list.get(adapterPosition).getStatus().equals("已处理")){
+                    cr_status.setText("已处理");
+                    cr_status.setTextColor(getResources().getColor(R.color.green));
+                }
+                show=builder.customView(detail,false).show();
             }
         });
-
         complainRepairAdapter = new ComplainRepairAdapter(complainRepairs);
         recyclerView.setAdapter(complainRepairAdapter);
     }

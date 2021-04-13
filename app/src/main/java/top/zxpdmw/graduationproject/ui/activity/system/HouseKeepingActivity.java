@@ -164,10 +164,19 @@ public class HouseKeepingActivity extends AppCompatActivity implements HouseKeep
         swipeRecyclerView.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(View view, int adapterPosition) {
-                Intent intent = new Intent(HouseKeepingActivity.this, DetailHouseKeepingActivity.class);
-                intent.putExtra("hk", list.get(adapterPosition));
-                startActivity(intent);
-                overridePendingTransition(R.anim.in_from_right, R.anim.out_of_left);
+                final View detail = View.inflate(getApplicationContext(), R.layout.detail_house_keeping, null);
+                TextView hk_type=detail.findViewById(R.id.hk_type);
+                TextView hk_address=detail.findViewById(R.id.hk_address);
+                TextView hk_phone=detail.findViewById(R.id.hk_phone);
+                TextView hk_status=detail.findViewById(R.id.hk_status);
+                hk_type.setText(list.get(adapterPosition).getHk_type());
+                hk_address.setText(list.get(adapterPosition).getAddress());
+                hk_phone.setText(list.get(adapterPosition).getPhone());
+                if (list.get(adapterPosition).getStatus().equals("已处理")){
+                    hk_status.setTextColor(getResources().getColor(R.color.green));
+                    hk_status.setText("已处理");
+                }
+                show=builder.customView(detail,false).show();
             }
         });
 

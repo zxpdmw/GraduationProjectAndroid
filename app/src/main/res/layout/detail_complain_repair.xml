@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/cr_type"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="投诉"
+        android:textColor="@color/black"
+        android:textSize="40sp" />
+
+
+    <TextView
+        android:id="@+id/cr_message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="早上噪声太大了"
+        android:textSize="35sp"
+        android:layout_below="@+id/cr_type"/>
+
+
+    <TextView
+        android:id="@+id/cr_address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="东区男12栋315"
+        android:textSize="30sp"
+        android:layout_below="@id/cr_message"/>
+
+
+    <TextView
+        android:id="@+id/cr_phone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="17375352129"
+        android:textSize="30sp"
+        android:layout_below="@id/cr_address"/>
+
+    <TextView
+        android:id="@+id/cr_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/cr_phone"
+        android:layout_centerHorizontal="true"
+        android:text="未处理"
+        android:textSize="25sp"
+        android:textColor="@color/red"/>
+
+</RelativeLayout>
