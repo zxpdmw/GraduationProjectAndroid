@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.room.Room;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,11 +18,13 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import top.zxpdmw.graduationproject.AppDataBase;
 import top.zxpdmw.graduationproject.R;
 import top.zxpdmw.graduationproject.bean.Module;
 import top.zxpdmw.graduationproject.bean.User;
 import top.zxpdmw.graduationproject.ui.activity.MainActivity;
 import top.zxpdmw.graduationproject.ui.adapter.MyInfoAdapter;
+import top.zxpdmw.graduationproject.util.DbUtil;
 
 public class MyActivity extends AppCompatActivity {
     private Intent intent;

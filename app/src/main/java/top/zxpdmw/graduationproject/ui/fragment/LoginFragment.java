@@ -2,6 +2,7 @@ package top.zxpdmw.graduationproject.ui.fragment;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +15,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.room.Room;
 
 import com.hjq.toast.ToastUtils;
 import com.zyao89.view.zloading.ZLoadingDialog;
@@ -24,11 +26,15 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
+import lombok.AllArgsConstructor;
+import top.zxpdmw.graduationproject.AppDataBase;
 import top.zxpdmw.graduationproject.R;
 import top.zxpdmw.graduationproject.bean.User;
+import top.zxpdmw.graduationproject.dao.UserDao;
 import top.zxpdmw.graduationproject.presenter.UserPresenter;
 import top.zxpdmw.graduationproject.presenter.contract.UserContract;
 import top.zxpdmw.graduationproject.ui.activity.system.SystemMainActivity;
+import top.zxpdmw.graduationproject.util.DbUtil;
 
 public class LoginFragment extends Fragment implements UserContract.View {
     private Unbinder unbinder;
@@ -121,4 +127,5 @@ public class LoginFragment extends Fragment implements UserContract.View {
     public void showMsg(String msg) {
         ToastUtils.show(msg);
     }
+
 }

@@ -49,7 +49,7 @@ public class ComplainRepairActivity extends AppCompatActivity implements Complai
     MaterialDialog.Builder builder;
     MaterialDialog show;
     List<ComplainRepair> list;
-
+    ComplainRepairAdapter complainRepairAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -90,6 +90,7 @@ public class ComplainRepairActivity extends AppCompatActivity implements Complai
                 rightMenu.addMenuItem(deleteItem); // 在Item左侧添加一个菜单。
             }
         };
+
         recyclerView.setSwipeMenuCreator(mSwipeMenuCreator);
 
         // 菜单点击监听。
@@ -98,7 +99,7 @@ public class ComplainRepairActivity extends AppCompatActivity implements Complai
             public void onItemClick(SwipeMenuBridge menuBridge, int position) {
                 // 任何操作必须先关闭菜单，否则可能出现Item菜单打开状态错乱。
                 menuBridge.closeMenu();
-                Log.d("zwy", "onItemClick: " + list.get(position).toString());
+               complainRepairPresenter.DeleteComplainRepair(list.get(position));
             }
         };
 
@@ -114,7 +115,7 @@ public class ComplainRepairActivity extends AppCompatActivity implements Complai
             }
         });
 
-        final ComplainRepairAdapter complainRepairAdapter = new ComplainRepairAdapter(complainRepairs);
+        complainRepairAdapter = new ComplainRepairAdapter(complainRepairs);
         recyclerView.setAdapter(complainRepairAdapter);
     }
 
@@ -148,7 +149,6 @@ public class ComplainRepairActivity extends AppCompatActivity implements Complai
                 complainRepair.setMessage(message.getText().toString());
                 complainRepair.setUsername(intent.getStringExtra("username"));
                 complainRepairPresenter.AddComplainRepair(complainRepair);
-                complainRepairPresenter.GetComplainRepair(intent.getStringExtra("username"));
             }
         });
     }
@@ -162,6 +162,17 @@ public class ComplainRepairActivity extends AppCompatActivity implements Complai
     @Override
     public void cancel() {
         show.cancel();
+    }
+
+    @Override
+    public void add(ComplainRepair complainRepair) {
+        complainRepairAdapter.add(complainRepair);
+        complainRepairAdapter.notifyItemChanged(0);
+    }
+
+    @Override
+    public void delete(ComplainRepair complainRepair) {
+        complainRepairAdapter.delete(complainRepair);
     }
 
     @Override

@@ -42,7 +42,11 @@ public class HouseKeepingPresenter implements HouseKeepingContract.Presenter {
         houseKeepingModel.AddHouseKeeping(houseKeeping, new Callback<CommonOne>() {
             @Override
             public void onResponse(Call<CommonOne> call, Response<CommonOne> response) {
-
+                int code=response.body().getCode();
+                if (code==666){
+                    view.add(houseKeeping);
+                    view.cancel();
+                }
             }
 
             @Override
@@ -53,15 +57,18 @@ public class HouseKeepingPresenter implements HouseKeepingContract.Presenter {
     }
 
     @Override
-    public void DeleteHouseKeeping(Integer id) {
-        houseKeepingModel.DeleteHouseKeeping(id, new Callback<CommonOne>() {
+    public void DeleteHouseKeeping(HouseKeeping id) {
+        houseKeepingModel.DeleteHouseKeeping(id.getId(), new Callback<CommonList<HouseKeeping>>() {
             @Override
-            public void onResponse(Call<CommonOne> call, Response<CommonOne> response) {
-
+            public void onResponse(Call<CommonList<HouseKeeping>> call, Response<CommonList<HouseKeeping>> response) {
+                int code=response.body().getCode();
+                if (code==666){
+                    view.delete(id);
+                }
             }
 
             @Override
-            public void onFailure(Call<CommonOne> call, Throwable t) {
+            public void onFailure(Call<CommonList<HouseKeeping>> call, Throwable t) {
 
             }
         });

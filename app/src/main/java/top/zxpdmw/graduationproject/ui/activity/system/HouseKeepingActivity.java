@@ -51,6 +51,23 @@ public class HouseKeepingActivity extends AppCompatActivity implements HouseKeep
     @BindView(R.id.add_house_keeping) ImageView imageView;
     @BindView(R.id.list_house_keeping)
     SwipeRecyclerView swipeRecyclerView;
+    HouseKeepingAdapter houseKeepingAdapter;
+
+    @Override
+    public void delete(HouseKeeping houseKeeping) {
+        houseKeepingAdapter.delete(houseKeeping);
+    }
+
+    @Override
+    public void add(HouseKeeping houseKeeping) {
+        houseKeepingAdapter.add(houseKeeping);
+    }
+
+    @Override
+    public void cancel() {
+        show.cancel();
+    }
+
     HouseKeepingPresenter houseKeepingPresenter=new HouseKeepingPresenter(this);
     MaterialDialog.Builder builder;
     MaterialDialog show;
@@ -66,7 +83,7 @@ public class HouseKeepingActivity extends AppCompatActivity implements HouseKeep
         intent=getIntent();
         houseKeepingPresenter.GetHouseKeeping(intent.getStringExtra("username"));
         builder=new MaterialDialog.Builder(this);
-        init();
+        initToolbar();
     }
 
     @OnClick(R.id.add_house_keeping)
@@ -89,13 +106,19 @@ public class HouseKeepingActivity extends AppCompatActivity implements HouseKeep
                 EditText address = view.findViewById(R.id.address);
                 EditText phone = view.findViewById(R.id.phone);
                 EditText message = view.findViewById(R.id.message);
+                final HouseKeeping houseKeeping = new HouseKeeping();
+                houseKeeping.setHk_type(message.getText().toString());
+                houseKeeping.setAddress(address.getText().toString());
+                houseKeeping.setPhone(phone.getText().toString());
+                houseKeeping.setUsername(intent.getStringExtra("username"));
+                houseKeepingPresenter.AddHouseKeeping(houseKeeping);
             }
         });
 
 
     }
 
-    private void init(){
+    private void initToolbar(){
         toolbar.setTitle("");
         toolbar_title.setText("家政服务");
         toolbar.setTitleTextAppearance(this, R.style.Toolbar_TitleText);
@@ -132,7 +155,7 @@ public class HouseKeepingActivity extends AppCompatActivity implements HouseKeep
             public void onItemClick(SwipeMenuBridge menuBridge, int position) {
                 // 任何操作必须先关闭菜单，否则可能出现Item菜单打开状态错乱。
                 menuBridge.closeMenu();
-                Log.d("zwy", "onItemClick: " + list.get(position).toString());
+                houseKeepingPresenter.DeleteHouseKeeping(list.get(position));
             }
         };
 
@@ -148,8 +171,8 @@ public class HouseKeepingActivity extends AppCompatActivity implements HouseKeep
             }
         });
 
-        final HouseKeepingAdapter complainRepairAdapter = new HouseKeepingAdapter(list);
-        swipeRecyclerView.setAdapter(complainRepairAdapter);
+         houseKeepingAdapter= new HouseKeepingAdapter(list);
+        swipeRecyclerView.setAdapter(houseKeepingAdapter);
     }
 
     @Override

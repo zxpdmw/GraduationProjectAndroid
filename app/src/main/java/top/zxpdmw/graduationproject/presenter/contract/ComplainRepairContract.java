@@ -7,15 +7,23 @@ import top.zxpdmw.graduationproject.presenter.BasePresenter;
 import top.zxpdmw.graduationproject.ui.BaseView;
 
 public interface ComplainRepairContract {
-    interface View extends BaseView{
+    interface View extends BaseView {
         void showList(List<ComplainRepair> list);
+
         void cancel();
+
+        void add(ComplainRepair complainRepair);
+
+        void delete(ComplainRepair complainRepair);
     }
 
-    interface Presenter extends BasePresenter{
+    interface Presenter extends BasePresenter {
         void AddComplainRepair(ComplainRepair complainRepair);
-        void DeleteComplainRepair(String id,String username);
+
+        void DeleteComplainRepair(ComplainRepair id);
+
         void EditComplainRepair(ComplainRepair complainRepair);
+
         void GetComplainRepair(String username);
     }
 }

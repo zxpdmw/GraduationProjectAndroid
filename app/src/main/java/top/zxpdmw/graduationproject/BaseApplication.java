@@ -5,11 +5,16 @@ import android.content.Context;
 import android.view.Gravity;
 import android.widget.Toast;
 
+import androidx.room.Room;
+import androidx.room.util.DBUtil;
+
 import com.hjq.toast.IToastStyle;
 import com.hjq.toast.ToastUtils;
 import com.hjq.toast.style.ToastBlackStyle;
 import com.hjq.toast.style.ToastWhiteStyle;
 import com.xuexiang.xui.XUI;
+
+import top.zxpdmw.graduationproject.util.DbUtil;
 
 public class BaseApplication extends Application {
 
@@ -20,6 +25,7 @@ public class BaseApplication extends Application {
         // Toast工具类
         XUI.init(this);
         XUI.debug(true);
+        DbUtil.dataBase= Room.databaseBuilder(this,AppDataBase.class,"graduation").build();
         ToastUtils.init(this);
         ToastUtils.initStyle(new IToastStyle() {
             @Override

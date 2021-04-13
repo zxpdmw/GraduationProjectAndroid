@@ -61,4 +61,14 @@ public class ComplainRepairAdapter extends RecyclerView.Adapter<ComplainRepairAd
             message=view.findViewById(R.id.cr_message);
         }
     }
+
+    public void add(ComplainRepair complainRepair){
+        complainRepairs.add(0,complainRepair);
+        notifyItemChanged(0);
+    }
+
+    public void delete(ComplainRepair position){
+        complainRepairs.remove(position);
+        notifyDataSetChanged();
+    }
 }

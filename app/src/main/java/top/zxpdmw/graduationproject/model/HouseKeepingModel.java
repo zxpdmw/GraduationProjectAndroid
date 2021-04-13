@@ -21,7 +21,7 @@ public class HouseKeepingModel {
 
     final HouseKeepingHttp houseKeepingHttp= HttpManager.retrofit.create(HouseKeepingHttp.class);
 
-    public void DeleteHouseKeeping(Integer id, Callback<CommonOne> callback){
+    public void DeleteHouseKeeping(Integer id, Callback<CommonList<HouseKeeping>> callback){
         houseKeepingHttp.DeleteHouseKeeping(id).enqueue(callback);
     }
 
@@ -41,7 +41,7 @@ public class HouseKeepingModel {
     interface HouseKeepingHttp{
 
         @GET(HOUSE_KEEPING_DELETE)
-        Call<CommonOne> DeleteHouseKeeping(@Query("id")Integer id);
+        Call<CommonList<HouseKeeping>> DeleteHouseKeeping(@Query("id")Integer id);
         @POST(HOUSE_KEEPING_ADD)
         Call<CommonOne> AddHouseKeeping(@Body HouseKeeping houseKeeping);
         @GET(HOUSE_KEEPING_GET_BY_USERNAME)

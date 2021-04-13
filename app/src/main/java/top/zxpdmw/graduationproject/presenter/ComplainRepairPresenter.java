@@ -19,6 +19,7 @@ public class ComplainRepairPresenter implements ComplainRepairContract.Presenter
         this.view=view;
         complainRepairModel=new ComplainRepairModel();
     }
+
     @Override
     public void AddComplainRepair(ComplainRepair complainRepair) {
         complainRepairModel.AddComplainRepair(complainRepair, new Callback<ResponseBody>() {
@@ -29,7 +30,7 @@ public class ComplainRepairPresenter implements ComplainRepairContract.Presenter
                 String code=jsonObject.getString("code");
                 if (code.equals("666")){
                     view.showMsg(jsonObject.getString("message"));
-                    GetComplainRepair(complainRepair.getUsername());
+                    view.add(complainRepair);
                     view.cancel();
                 }
             }
@@ -42,11 +43,14 @@ public class ComplainRepairPresenter implements ComplainRepairContract.Presenter
     }
 
     @Override
-    public void DeleteComplainRepair(String id,String username) {
-        complainRepairModel.DeleteComplainRepair(id, username, new Callback<CommonList<ComplainRepair>>() {
+    public void DeleteComplainRepair(ComplainRepair id) {
+        complainRepairModel.DeleteComplainRepair(id, new Callback<CommonList<ComplainRepair>>() {
             @Override
             public void onResponse(Call<CommonList<ComplainRepair>> call, Response<CommonList<ComplainRepair>> response) {
-
+                int code=response.body().getCode();
+                if (code==666){
+                    view.delete(id);
+                }
             }
 
             @Override
@@ -67,7 +71,6 @@ public class ComplainRepairPresenter implements ComplainRepairContract.Presenter
             @Override
             public void onResponse(Call<CommonList<ComplainRepair>> call, Response<CommonList<ComplainRepair>> response) {
                 int code=response.body().getCode();
-                String message=response.body().getMessage();
                 if (code==666){
                     view.showList(response.body().getData());
                 }

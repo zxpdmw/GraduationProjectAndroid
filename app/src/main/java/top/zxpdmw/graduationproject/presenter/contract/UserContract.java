@@ -10,6 +10,7 @@ public interface UserContract {
      interface View extends BaseView{
          void LoadUser(User user);
          void switchFragment();
+
      }
 
      interface Presenter extends BasePresenter{

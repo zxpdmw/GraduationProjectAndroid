@@ -9,12 +9,15 @@ import top.zxpdmw.graduationproject.ui.BaseView;
 public interface HouseKeepingContract {
     interface View  extends BaseView{
         void showList(List<HouseKeeping> list);
+        void delete(HouseKeeping houseKeeping);
+        void add(HouseKeeping houseKeeping);
+        void cancel();
     }
 
     interface Presenter extends BasePresenter{
         void GetHouseKeeping(String username);
         void AddHouseKeeping(HouseKeeping houseKeeping);
-        void DeleteHouseKeeping(Integer id);
+        void DeleteHouseKeeping(HouseKeeping id);
         void EditHouseKeeping(HouseKeeping houseKeeping);
     }
 }

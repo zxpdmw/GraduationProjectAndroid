@@ -26,8 +26,8 @@ public class ComplainRepairModel {
         complainRepairHttp.GetComplainRepair(username).enqueue(callback);
     }
 
-    public void DeleteComplainRepair(String id,String username,Callback<CommonList<ComplainRepair>> callback){
-        complainRepairHttp.DeleteComplainRepair(id,username).enqueue(callback);
+    public void DeleteComplainRepair(ComplainRepair id,Callback<CommonList<ComplainRepair>> callback){
+        complainRepairHttp.DeleteComplainRepair(id.getId()).enqueue(callback);
     }
 
     interface ComplainRepairHttp{
@@ -38,7 +38,7 @@ public class ComplainRepairModel {
         Call<CommonList<ComplainRepair>> GetComplainRepair(@Query("username")String username);
 
         @GET(COMPLAIN_REPAIR_DELETE)
-        Call<CommonList<ComplainRepair>> DeleteComplainRepair(@Query("id")String id,@Query("username")String username);
+        Call<CommonList<ComplainRepair>> DeleteComplainRepair(@Query("id")Integer id);
 
     }
 }

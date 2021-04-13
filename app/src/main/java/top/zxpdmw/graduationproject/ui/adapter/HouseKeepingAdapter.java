@@ -14,6 +14,7 @@ import java.util.List;
 
 import lombok.AllArgsConstructor;
 import top.zxpdmw.graduationproject.R;
+import top.zxpdmw.graduationproject.bean.ComplainRepair;
 import top.zxpdmw.graduationproject.bean.HouseKeeping;
 
 @AllArgsConstructor
@@ -52,5 +53,15 @@ public class HouseKeepingAdapter extends RecyclerView.Adapter<HouseKeepingAdapte
             type=itemView.findViewById(R.id.hk_type);
             message=itemView.findViewById(R.id.hk_message);
         }
+    }
+
+    public void add(HouseKeeping complainRepair){
+        list.add(0,complainRepair);
+        notifyItemChanged(0);
+    }
+
+    public void delete(HouseKeeping position){
+        list.remove(position);
+        notifyDataSetChanged();
     }
 }
