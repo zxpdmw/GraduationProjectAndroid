@@ -10,6 +10,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import top.zxpdmw.graduationproject.bean.CommonList;
+import top.zxpdmw.graduationproject.bean.CommonOne;
 import top.zxpdmw.graduationproject.bean.HouseRentSale;
 import top.zxpdmw.graduationproject.model.HouseRentSaleModel;
 import top.zxpdmw.graduationproject.presenter.contract.HouseRentSaleContract;
@@ -31,9 +32,8 @@ public class HouseRentSalePresenter implements HouseRentSaleContract.Presenter {
                     int coed=response.body().getCode();
                 if (coed==666){
                     List<HouseRentSale> list=response.body().getData();
+                    Log.d(TAG, "onResponse: "+list);
                     view.showList(list);
-                }else{
-                    view.showNoData();
                 }
             }
             @Override
@@ -51,9 +51,8 @@ public class HouseRentSalePresenter implements HouseRentSaleContract.Presenter {
                 int coed=response.body().getCode();
                 if (coed==666){
                     List<HouseRentSale> list=response.body().getData();
+                    Log.d(TAG, "onResponse: "+list);
                     view.showList(list);
-                }else{
-                    view.showNoData();
                 }
             }
 
@@ -77,6 +76,7 @@ public class HouseRentSalePresenter implements HouseRentSaleContract.Presenter {
                         view.showMsg("您还未发布任何房屋租赁信息");
                     }else {
                         final List<HouseRentSale> data = response.body().getData();
+
                         view.showList(data);
                     }
                 }else{
@@ -102,6 +102,24 @@ public class HouseRentSalePresenter implements HouseRentSaleContract.Presenter {
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+            }
+        });
+    }
+
+    @Override
+    public void DeleteHouse(HouseRentSale houseRentSale) {
+        houseRentSaleModel.DeleteHouse(houseRentSale.getId(), new Callback<CommonOne>() {
+            @Override
+            public void onResponse(Call<CommonOne> call, Response<CommonOne> response) {
+                int code=response.body().getCode();
+                if (code==666){
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<CommonOne> call, Throwable t) {
 
             }
         });

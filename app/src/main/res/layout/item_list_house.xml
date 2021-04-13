@@ -1,53 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:descendantFocusability="blocksDescendants"
-    android:orientation="horizontal">
+    android:descendantFocusability="blocksDescendants">
+
+    <ImageView
+        android:id="@+id/house_image"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:background="@drawable/touxiang"
+        android:baselineAlignBottom="true"
+        android:paddingLeft="8dp"
+        android:layout_marginTop="5dp"/>
+
 
     <TextView
-        android:id="@+id/house_nickname"
-        android:layout_width="64dp"
-        android:layout_height="64dp"
-        android:baselineAlignBottom="true"
-        android:paddingLeft="8dp" />
-
-
-    <LinearLayout
+        android:id="@+id/house_message"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_marginTop="16dp"
+        android:layout_toRightOf="@+id/house_image"
+        android:maxLines="2"
+        android:paddingLeft="8dp"
+        android:text="整租·光辉南里2室1厅"
+        android:textColor="#1D1D1C"
+        android:textSize="30sp" />
 
-        <TextView
-            android:id="@+id/house_message"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingLeft="8dp"
-            android:layout_marginTop="16dp"
-            android:textColor="#1D1D1C"
-            android:maxLines="1"
-            android:textSize="20sp" />
-        <TextView
-            android:id="@+id/house_phone"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingLeft="8dp"
-            android:layout_marginTop="16dp"
-            android:textColor="#1D1D1C"
-            android:maxLines="1"
-            android:textSize="20sp" />
-        <TextView
-            android:id="@+id/house_address"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingLeft="8dp"
-            android:layout_marginTop="16dp"
-            android:textColor="#1D1D1C"
-            android:maxLines="1"
-            android:textSize="20sp" />
+    <TextView
+        android:id="@+id/house_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/house_message"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="16dp"
+        android:layout_toRightOf="@id/house_image"
+        android:paddingLeft="8dp"
+        android:text="3530元/月"
+        android:textColor="#1D1D1C"
+        android:textSize="30sp" />
 
-
-    </LinearLayout>
-
-
-</LinearLayout>
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/house_image"
+        android:layout_marginTop="5dp"
+        android:background="@color/hui" />
+</RelativeLayout>

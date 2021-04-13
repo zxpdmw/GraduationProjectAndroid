@@ -1,5 +1,7 @@
 package top.zxpdmw.graduationproject.ui.fragment.system;
 
+import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,9 +14,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 
 import com.hjq.toast.ToastUtils;
+import com.yanzhenjie.recyclerview.OnItemClickListener;
+import com.yanzhenjie.recyclerview.OnItemMenuClickListener;
+import com.yanzhenjie.recyclerview.SwipeMenu;
+import com.yanzhenjie.recyclerview.SwipeMenuBridge;
+import com.yanzhenjie.recyclerview.SwipeMenuCreator;
+import com.yanzhenjie.recyclerview.SwipeMenuItem;
+import com.yanzhenjie.recyclerview.SwipeRecyclerView;
 
 import java.util.List;
 
@@ -28,11 +38,12 @@ import top.zxpdmw.graduationproject.bean.HouseRentSale;
 import top.zxpdmw.graduationproject.util.ConstUtil;
 
 
-public class HouseListFragment extends Fragment implements HouseRentSaleContract.View, AdapterView.OnItemClickListener {
-    ListView listView;
+public class HouseListFragment extends Fragment implements HouseRentSaleContract.View{
+    SwipeRecyclerView listView;
     HouseRentSalePresenter houseRentSalePresenter =new HouseRentSalePresenter(this);
     FragmentManager fManager;
     List<HouseRentSale> list;
+    HouseRentSaleAdapter houseRentSaleAdapter;
 
     public static HouseListFragment newInstance(int type,FragmentManager fManager){
         HouseListFragment houseListFragment=new HouseListFragment();
@@ -54,6 +65,15 @@ public class HouseListFragment extends Fragment implements HouseRentSaleContract
     @Override
     public void showNoData() {
         ToastUtils.show("没有数据");
+    }
+
+    @Override
+    public void add(HouseRentSale houseRentSale) {
+
+    }
+
+    @Override
+    public void delete(HouseRentSale houseRentSale) {
 
     }
 
@@ -62,6 +82,7 @@ public class HouseListFragment extends Fragment implements HouseRentSaleContract
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fg_house_list,container,false);
         listView=view.findViewById(R.id.house_list);
+        listView.setLayoutManager(new LinearLayoutManager(getActivity()));
         fManager= getActivity().getSupportFragmentManager();
         if (getArguments()!=null){
             final Bundle arguments = getArguments();
@@ -72,16 +93,49 @@ public class HouseListFragment extends Fragment implements HouseRentSaleContract
                 houseRentSalePresenter.HouseSale();
             }else if (type==3){
                 houseRentSalePresenter.HouseByUsername(arguments.getString("username"));
+                SwipeMenuCreator mSwipeMenuCreator = new SwipeMenuCreator() {
+                    @Override
+                    public void onCreateMenu(SwipeMenu leftMenu, SwipeMenu rightMenu, int position) {
+                        SwipeMenuItem deleteItem = new SwipeMenuItem(getActivity()); // 各种文字和图标属性设置。
+                        deleteItem.setText("删除");
+                        deleteItem.setTextSize(25);
+                        deleteItem.setTextColor(getResources().getColor(R.color.white));
+                        deleteItem.setHeight(MATCH_PARENT);
+                        deleteItem.setBackgroundColor(getResources().getColor(R.color.red));
+                        deleteItem.setWidth(350);
+                        rightMenu.addMenuItem(deleteItem); // 在Item左侧添加一个菜单。
+                    }
+                };
+                listView.setSwipeMenuCreator(mSwipeMenuCreator);
+
+                // 菜单点击监听。
+                OnItemMenuClickListener mItemMenuClickListener = new OnItemMenuClickListener() {
+                    @Override
+                    public void onItemClick(SwipeMenuBridge menuBridge, int position) {
+                        // 任何操作必须先关闭菜单，否则可能出现Item菜单打开状态错乱。
+                        menuBridge.closeMenu();
+                        houseRentSalePresenter.DeleteHouse(list.get(position));
+                    }
+                };
+                listView.setOnItemMenuClickListener(mItemMenuClickListener);
             }
         }else{
             ToastUtils.show(ConstUtil.SYSTEM_EXCEPTION);
         }
-        listView.setOnItemClickListener(this);
+        listView.setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int adapterPosition) {
+                final Intent intent = new Intent(getActivity(), DetailHouseActivity.class);
+                intent.putExtra("house",list.get(adapterPosition));
+                startActivity(intent);
+                getActivity().overridePendingTransition(R.anim.in_from_right, R.anim.out_of_left);
+            }
+        });
         return view;
     }
 
     void initListView(List<HouseRentSale> list){
-        HouseRentSaleAdapter houseRentSaleAdapter = new HouseRentSaleAdapter(list,getActivity());
+        houseRentSaleAdapter = new HouseRentSaleAdapter(list);
         listView.setAdapter(houseRentSaleAdapter);
     }
 
@@ -103,7 +157,7 @@ public class HouseListFragment extends Fragment implements HouseRentSaleContract
 
     @Override
     public void showError(String msg) {
-
+        ToastUtils.show(msg);
     }
 
     @Override
@@ -113,28 +167,6 @@ public class HouseListFragment extends Fragment implements HouseRentSaleContract
 
     @Override
     public void showMsg(String msg) {
-
-    }
-
-
-
-    @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//        FragmentTransaction fTransaction = fManager.beginTransaction();
-//        HouseMessageFragment houseMessageFragment = new HouseMessageFragment();
-//        Bundle bd = new Bundle();
-//        bd.putSerializable("content", list.get(position));
-//        houseMessageFragment.setArguments(bd);
-//        //获取Activity的控件
-//        //加上Fragment替换动画
-//        fTransaction.setCustomAnimations(R.anim.fragment_slide_left_enter, R.anim.fragment_slide_left_exit);
-//        fTransaction.replace(R.id.ly_content, houseMessageFragment);
-//        //调用addToBackStack将Fragment添加到栈中
-//        fTransaction.addToBackStack(null);
-//        fTransaction.commit();
-        final Intent intent = new Intent(getActivity(), DetailHouseActivity.class);
-        intent.putExtra("house",list.get(position));
-        startActivity(intent);
-        getActivity().overridePendingTransition(R.anim.in_from_right, R.anim.out_of_left);
+        ToastUtils.show(msg);
     }
 }

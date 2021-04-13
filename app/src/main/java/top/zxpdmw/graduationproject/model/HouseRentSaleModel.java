@@ -43,6 +43,10 @@ public class HouseRentSaleModel {
         houseRentSaleHttp.HouseEdit(houseRentSale).enqueue(callback);
     }
 
+    public void DeleteHouse(Integer id, Callback<CommonOne> callback){
+        houseRentSaleHttp.HouseDelete(id).enqueue(callback);
+    }
+
     interface HouseRentSaleHttp {
         @GET(HOUSE_RENT)
         Call<CommonList<HouseRentSale>> HouseRent();
@@ -61,6 +65,9 @@ public class HouseRentSaleModel {
 
         @GET(HOUSE_RENT_SALE_USERNAME)
         Call<CommonList<HouseRentSale>> HouseByUsername(@Query("username")String username);
+
+        @GET(HOUSE_RENT_SALE_DELETE)
+        Call<CommonOne> HouseDelete(@Query("id")Integer id);
     }
 
 }

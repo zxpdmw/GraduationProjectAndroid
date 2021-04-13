@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class HouseRentSale implements Serializable {
     private Integer id;
-    private String status;
+    private String price;
     private String hr_type;
     private String username;
     private String message;
