@@ -32,7 +32,7 @@
         android:layout_height="wrap_content"
         android:paddingStart="8dp"
         android:paddingLeft="8dp"
-        android:textColor="#B4B4B9"
+        android:textColor="#4d4d4d"
         android:textSize="20sp"
         android:layout_toRightOf="@+id/cr_icon"
         android:layout_below="@+id/cr_type"
