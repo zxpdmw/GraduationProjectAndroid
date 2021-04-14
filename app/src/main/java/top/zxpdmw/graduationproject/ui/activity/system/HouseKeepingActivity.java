@@ -45,11 +45,10 @@ import top.zxpdmw.graduationproject.ui.adapter.HouseKeepingAdapter;
 
 public class HouseKeepingActivity extends AppCompatActivity implements HouseKeepingContract.View {
     @BindView(R.id.toolbar)
-    Toolbar toolbar;
+     Toolbar toolbar;
     @BindView(R.id.toolbar_title)
     TextView toolbar_title;
-    @BindView(R.id.add_house_keeping)
-    ImageView imageView;
+    @BindView(R.id.add_house_keeping) ImageView imageView;
     @BindView(R.id.list_house_keeping)
     SwipeRecyclerView swipeRecyclerView;
     HouseKeepingAdapter houseKeepingAdapter;
@@ -69,7 +68,7 @@ public class HouseKeepingActivity extends AppCompatActivity implements HouseKeep
         show.cancel();
     }
 
-    HouseKeepingPresenter houseKeepingPresenter = new HouseKeepingPresenter(this);
+    HouseKeepingPresenter houseKeepingPresenter=new HouseKeepingPresenter(this);
     MaterialDialog.Builder builder;
     MaterialDialog show;
     List<HouseKeeping> list;
@@ -81,14 +80,14 @@ public class HouseKeepingActivity extends AppCompatActivity implements HouseKeep
         setContentView(R.layout.activity_house_keeping);
         ButterKnife.bind(this);
         swipeRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        intent = getIntent();
+        intent=getIntent();
         houseKeepingPresenter.GetHouseKeeping(intent.getStringExtra("username"));
-        builder = new MaterialDialog.Builder(this);
+        builder=new MaterialDialog.Builder(this);
         initToolbar();
     }
 
     @OnClick(R.id.add_house_keeping)
-    void addHouseKeeping() {
+    void addHouseKeeping(){
         final View view = View.inflate(this, R.layout.add_house_keeping, null);
         Button cancel = view.findViewById(R.id.cancel);
         Button add = view.findViewById(R.id.add);
@@ -119,7 +118,7 @@ public class HouseKeepingActivity extends AppCompatActivity implements HouseKeep
 
     }
 
-    private void initToolbar() {
+    private void initToolbar(){
         toolbar.setTitle("");
         toolbar_title.setText("家政服务");
         toolbar.setTitleTextAppearance(this, R.style.Toolbar_TitleText);
@@ -133,7 +132,7 @@ public class HouseKeepingActivity extends AppCompatActivity implements HouseKeep
 
     @Override
     public void showList(List<HouseKeeping> list) {
-        this.list = list;
+        this.list=list;
         // 创建菜单：
         SwipeMenuCreator mSwipeMenuCreator = new SwipeMenuCreator() {
             @Override
@@ -166,22 +165,22 @@ public class HouseKeepingActivity extends AppCompatActivity implements HouseKeep
             @Override
             public void onItemClick(View view, int adapterPosition) {
                 final View detail = View.inflate(getApplicationContext(), R.layout.detail_house_keeping, null);
-                TextView hk_type = detail.findViewById(R.id.hk_type);
-                TextView hk_address = detail.findViewById(R.id.hk_address);
-                TextView hk_phone = detail.findViewById(R.id.hk_phone);
-                TextView hk_status = detail.findViewById(R.id.hk_status);
+                TextView hk_type=detail.findViewById(R.id.hk_type);
+                TextView hk_address=detail.findViewById(R.id.hk_address);
+                TextView hk_phone=detail.findViewById(R.id.hk_phone);
+                TextView hk_status=detail.findViewById(R.id.hk_status);
                 hk_type.setText(list.get(adapterPosition).getHk_type());
                 hk_address.setText(list.get(adapterPosition).getAddress());
                 hk_phone.setText(list.get(adapterPosition).getPhone());
-                if (list.get(adapterPosition).getStatus().equals("已处理")) {
+                if (list.get(adapterPosition).getStatus().equals("已处理")){
                     hk_status.setTextColor(getResources().getColor(R.color.green));
                     hk_status.setText("已处理");
                 }
-                show = builder.customView(detail, false).show();
+                show=builder.customView(detail,false).show();
             }
         });
 
-        houseKeepingAdapter = new HouseKeepingAdapter(list);
+         houseKeepingAdapter= new HouseKeepingAdapter(list);
         swipeRecyclerView.setAdapter(houseKeepingAdapter);
     }
 
