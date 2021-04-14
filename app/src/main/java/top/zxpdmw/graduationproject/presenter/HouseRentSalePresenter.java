@@ -32,7 +32,6 @@ public class HouseRentSalePresenter implements HouseRentSaleContract.Presenter {
                     int coed=response.body().getCode();
                 if (coed==666){
                     List<HouseRentSale> list=response.body().getData();
-                    Log.d(TAG, "onResponse: "+list);
                     view.showList(list);
                 }
             }
@@ -51,7 +50,6 @@ public class HouseRentSalePresenter implements HouseRentSaleContract.Presenter {
                 int coed=response.body().getCode();
                 if (coed==666){
                     List<HouseRentSale> list=response.body().getData();
-                    Log.d(TAG, "onResponse: "+list);
                     view.showList(list);
                 }
             }
@@ -76,7 +74,6 @@ public class HouseRentSalePresenter implements HouseRentSaleContract.Presenter {
                         view.showMsg("您还未发布任何房屋租赁信息");
                     }else {
                         final List<HouseRentSale> data = response.body().getData();
-
                         view.showList(data);
                     }
                 }else{
