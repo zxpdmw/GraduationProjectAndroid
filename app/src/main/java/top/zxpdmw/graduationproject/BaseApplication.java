@@ -25,7 +25,7 @@ public class BaseApplication extends Application {
         // Toast工具类
         XUI.init(this);
         XUI.debug(true);
-        DbUtil.dataBase= Room.databaseBuilder(this,AppDataBase.class,"graduation").build();
+//        DbUtil.dataBase= Room.databaseBuilder(this,AppDataBase.class,"graduation").build();
         ToastUtils.init(this);
         ToastUtils.initStyle(new IToastStyle() {
             @Override

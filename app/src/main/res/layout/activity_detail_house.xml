@@ -1,9 +1,241 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.activity.system.DetailHouseActivity">
+    tools:context=".ui.activity.system.DetailHouseActivity"
+    android:orientation="vertical">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:background="@color/transparent">
+        <TextView
+            android:id="@+id/toolbar_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:singleLine="true"
+            android:textColor="@color/black"
+            android:textSize="30sp" />
+    </androidx.appcompat.widget.Toolbar>
+
+    <com.bigkoo.convenientbanner.ConvenientBanner
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/convenientBanner"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        app:canLoop="true"
+    />
+
+    <RelativeLayout
+        android:id="@+id/house_main"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2">
+
+        <TextView
+            android:id="@+id/house_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="600元/月"
+            android:textSize="50sp"
+            android:layout_marginLeft="30dp"
+            android:textColor="@color/red"
+            />
+
+        <TextView
+            android:id="@+id/house_message"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/house_price"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="10dp"
+            android:text="合租·东方龙城甘棠苑 1居室 南卧"
+            android:layout_marginRight="30dp"
+            android:textColor="@color/black"
+            android:textSize="30sp"/>
+
+        <View
+            android:id="@+id/one"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/hui"
+            android:layout_below="@id/house_message"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginTop="5dp"/>
+
+        <TextView
+            android:id="@+id/chaoxiang"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/one"
+            android:text="朝向"
+            android:textSize="30sp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="10dp"/>
+
+        <TextView
+            android:id="@+id/chaoxiang_xinxi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="南"
+            android:textSize="30sp"
+            android:textColor="@color/black"
+            android:layout_marginRight="10dp"
+            android:layout_toRightOf="@+id/chaoxiang"
+            android:layout_below="@+id/one"
+            android:layout_marginTop="10dp"/>
+
+        <TextView
+            android:id="@+id/mianji"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/one"
+            android:layout_toRightOf="@id/chaoxiang_xinxi"
+            android:text="面积"
+            android:textSize="30sp"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="60dp"/>
+
+        <TextView
+            android:id="@+id/mianji_xinxi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/one"
+            android:layout_toRightOf="@+id/mianji"
+            android:layout_marginLeft="10dp"
+            android:text="50㎡"
+            android:textSize="30sp"
+            android:textColor="@color/black"
+            android:layout_marginTop="10dp"/>
+
+        <TextView
+            android:id="@+id/louceng"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/chaoxiang_xinxi"
+            android:text="楼层"
+            android:textSize="30sp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="10dp"/>
+
+        <TextView
+            android:id="@+id/louceng_xinxi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="33层"
+            android:textSize="30sp"
+            android:textColor="@color/black"
+            android:layout_marginRight="10dp"
+            android:layout_toRightOf="@+id/chaoxiang"
+            android:layout_below="@+id/chaoxiang_xinxi"
+            android:layout_marginTop="10dp"/>
+
+        <TextView
+            android:id="@+id/ruzhu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/chaoxiang_xinxi"
+            android:layout_toRightOf="@id/chaoxiang_xinxi"
+            android:text="入住"
+            android:textSize="30sp"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="60dp"/>
+
+        <TextView
+            android:id="@+id/ruzhu_xinxi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/chaoxiang_xinxi"
+            android:layout_toRightOf="@+id/mianji"
+            android:layout_marginLeft="10dp"
+            android:text="随时入住"
+            android:textSize="30sp"
+            android:textColor="@color/black"
+            android:layout_marginTop="10dp"/>
+
+
+        <View
+            android:id="@+id/two"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/hui"
+            android:layout_below="@id/louceng"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginTop="5dp"/>
+
+        <TextView
+            android:id="@+id/xiaoqu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/two"
+            android:text="小区:"
+            android:textColor="@color/black"
+            android:textSize="30sp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="10dp"/>
+
+        <TextView
+            android:id="@+id/xiaoqu_xinxi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="30sp"
+            android:layout_marginTop="10dp"
+            android:textColor="#262626"
+            android:layout_toRightOf="@+id/xiaoqu"
+            android:text="东方龙城甘棠苑"
+            android:layout_below="@id/two"/>
+
+        <TextView
+            android:id="@+id/kanfang"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/xiaoqu"
+            android:text="看房:"
+            android:textColor="@color/black"
+            android:textSize="30sp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="10dp"/>
+
+        <TextView
+            android:id="@+id/kanfang_xinxi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="30sp"
+            android:layout_marginTop="10dp"
+            android:textColor="#262626"
+            android:layout_toRightOf="@+id/xiaoqu"
+            android:text="需提前预约"
+            android:layout_below="@id/xiaoqu"/>
+
+
+        <TextView
+            android:id="@+id/dianhua"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/kanfang"
+            android:text="电话:"
+            android:textColor="@color/black"
+            android:textSize="30sp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="10dp"/>
+
+        <TextView
+            android:id="@+id/dianhua_xinxi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="30sp"
+            android:layout_marginTop="10dp"
+            android:textColor="#262626"
+            android:layout_toRightOf="@+id/xiaoqu"
+            android:text="10086"
+            android:layout_below="@id/kanfang"/>
+
+    </RelativeLayout>
+
+</LinearLayout>

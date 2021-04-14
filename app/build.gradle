@@ -64,6 +64,8 @@ dependencies {
     implementation 'com.hjq:toast:5.0'
     implementation 'com.github.xuexiangjys:XUI:1.1.6'
     implementation 'com.yanzhenjie.recyclerview:x:1.3.2'
+//    implementation 'com.github.zhpanvip:BannerViewPager:latestVersion'
+    implementation 'com.bigkoo:convenientbanner:2.1.5'//地址变小写了，额。。。
 
     def room_version = "2.1.0-alpha03"
 

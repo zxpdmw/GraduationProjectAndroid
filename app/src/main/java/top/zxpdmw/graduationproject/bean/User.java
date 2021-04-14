@@ -12,9 +12,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
 public class User implements Serializable {
-    @PrimaryKey(autoGenerate = true)
     private Integer id;
     private String nickname;
     private String username;
