@@ -13,6 +13,7 @@ public interface HouseRentSaleContract {
         void showNoData();
         void add(HouseRentSale houseRentSale);
         void delete(HouseRentSale houseRentSale);
+        void cancel();
     }
 
     interface Presenter extends BasePresenter{
@@ -21,5 +22,6 @@ public interface HouseRentSaleContract {
         void HouseByUsername(String username);
         void HousePublish(HouseRentSale houseRentSale);
         void DeleteHouse(HouseRentSale houseRentSale);
+        void EditHousePrice(HouseRentSale houseRentSale);
     }
 }

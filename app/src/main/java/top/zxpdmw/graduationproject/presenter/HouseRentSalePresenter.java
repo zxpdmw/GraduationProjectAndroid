@@ -114,7 +114,7 @@ public class HouseRentSalePresenter implements HouseRentSaleContract.Presenter {
             public void onResponse(Call<CommonOne> call, Response<CommonOne> response) {
                 int code=response.body().getCode();
                 if (code==666){
-
+                    view.delete(houseRentSale);
                 }
             }
 
@@ -123,5 +123,11 @@ public class HouseRentSalePresenter implements HouseRentSaleContract.Presenter {
 
             }
         });
+    }
+
+    @Override
+    public void EditHousePrice(HouseRentSale houseRentSale) {
+        view.showMsg("价格修改成功");
+        view.cancel();
     }
 }

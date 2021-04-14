@@ -4,10 +4,13 @@ import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,6 +21,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 
 import com.hjq.toast.ToastUtils;
+import com.xuexiang.xui.widget.dialog.materialdialog.MaterialDialog;
 import com.yanzhenjie.recyclerview.OnItemClickListener;
 import com.yanzhenjie.recyclerview.OnItemMenuClickListener;
 import com.yanzhenjie.recyclerview.SwipeMenu;
@@ -44,6 +48,8 @@ public class HouseListFragment extends Fragment implements HouseRentSaleContract
     FragmentManager fManager;
     List<HouseRentSale> list;
     HouseRentSaleAdapter houseRentSaleAdapter;
+    MaterialDialog.Builder builder;
+    MaterialDialog show;
 
     public static HouseListFragment newInstance(int type,FragmentManager fManager){
         HouseListFragment houseListFragment=new HouseListFragment();
@@ -77,6 +83,11 @@ public class HouseListFragment extends Fragment implements HouseRentSaleContract
 
     }
 
+    @Override
+    public void cancel() {
+        show.cancel();
+    }
+
     @SneakyThrows
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -97,13 +108,21 @@ public class HouseListFragment extends Fragment implements HouseRentSaleContract
                     @Override
                     public void onCreateMenu(SwipeMenu leftMenu, SwipeMenu rightMenu, int position) {
                         SwipeMenuItem deleteItem = new SwipeMenuItem(getActivity()); // 各种文字和图标属性设置。
+                        SwipeMenuItem editItem = new SwipeMenuItem(getActivity()); // 各种文字和图标属性设置。
+                        editItem.setText("修改");
+                        editItem.setTextSize(25);
+                        editItem.setTextColor(getResources().getColor(R.color.white));
+                        editItem.setHeight(MATCH_PARENT);
                         deleteItem.setText("删除");
                         deleteItem.setTextSize(25);
                         deleteItem.setTextColor(getResources().getColor(R.color.white));
                         deleteItem.setHeight(MATCH_PARENT);
                         deleteItem.setBackgroundColor(getResources().getColor(R.color.red));
+                        editItem.setBackgroundColor(getResources().getColor(R.color.red));
                         deleteItem.setWidth(350);
+                        editItem.setWidth(350);
                         rightMenu.addMenuItem(deleteItem); // 在Item左侧添加一个菜单。
+                        leftMenu.addMenuItem(editItem); // 在Item左侧添加一个菜单。
                     }
                 };
                 listView.setSwipeMenuCreator(mSwipeMenuCreator);
@@ -114,7 +133,35 @@ public class HouseListFragment extends Fragment implements HouseRentSaleContract
                     public void onItemClick(SwipeMenuBridge menuBridge, int position) {
                         // 任何操作必须先关闭菜单，否则可能出现Item菜单打开状态错乱。
                         menuBridge.closeMenu();
-                        houseRentSalePresenter.DeleteHouse(list.get(position));
+                        final int direction = menuBridge.getDirection();
+                        if (direction==-1){
+                            houseRentSalePresenter.DeleteHouse(list.get(position));
+                        }else{
+                            HouseRentSale houseRentSale=list.get(position);
+                            final View view1=View.inflate(getActivity(),R.layout.edit_house_price,null);
+                            builder=new MaterialDialog.Builder(getActivity());
+                            show=builder.customView(view1,false).show();
+                            Button edit=view1.findViewById(R.id.edit);
+                            Button cancel=view1.findViewById(R.id.cancel);
+                            EditText new_price=view1.findViewById(R.id.new_price);
+                            edit.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    houseRentSale.setPrice(new_price.getText().toString());
+                                    houseRentSalePresenter.EditHousePrice(houseRentSale);
+                                }
+                            });
+
+                            cancel.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    show.cancel();
+                                }
+                            });
+
+
+                        }
+
                     }
                 };
                 listView.setOnItemMenuClickListener(mItemMenuClickListener);
@@ -122,6 +169,7 @@ public class HouseListFragment extends Fragment implements HouseRentSaleContract
         }else{
             ToastUtils.show(ConstUtil.SYSTEM_EXCEPTION);
         }
+
         listView.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(View view, int adapterPosition) {
