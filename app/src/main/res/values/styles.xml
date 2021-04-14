@@ -11,4 +11,5 @@
         <item name="colorAccent">@color/xui_config_color_main_theme</item>
         <item name="colorPrimaryDark">@color/xui_config_color_main_theme</item>
     </style>
+
 </resources>

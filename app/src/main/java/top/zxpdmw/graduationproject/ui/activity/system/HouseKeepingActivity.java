@@ -13,6 +13,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -213,5 +214,11 @@ public class HouseKeepingActivity extends AppCompatActivity implements HouseKeep
     public void onBackPressed() {
         super.onBackPressed();
         overridePendingTransition(R.anim.in_from_left, R.anim.out_of_right);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.add, menu);
+        return true;
     }
 }

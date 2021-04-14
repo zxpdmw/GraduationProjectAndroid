@@ -8,9 +8,13 @@ import androidx.fragment.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
+
+import com.hjq.toast.ToastUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -63,6 +67,14 @@ public class HouseRentSaleActivity extends AppCompatActivity implements View.OnC
         toolbar.setNavigationOnClickListener(v -> {
             finish();
             overridePendingTransition(R.anim.in_from_left, R.anim.out_of_right);
+        });
+
+        toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                ToastUtils.show("被点击了");
+                return false;
+            }
         });
 
         house_sale.setOnClickListener(this);
@@ -129,5 +141,11 @@ public class HouseRentSaleActivity extends AppCompatActivity implements View.OnC
     public void onBackPressed() {
         super.onBackPressed();
         overridePendingTransition(R.anim.in_from_left, R.anim.out_of_right);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.add, menu);
+        return true;
     }
 }

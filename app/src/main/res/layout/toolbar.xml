@@ -1,6 +1,7 @@
 <androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/toolbar"
-    style="@style/Toolbar" >
+    style="@style/Toolbar">
 
     <TextView
         android:id="@+id/toolbar_title"
@@ -9,6 +10,7 @@
         android:layout_gravity="center"
         android:singleLine="true"
         android:textColor="@color/black"
-        android:textSize="30sp" />
+        android:textSize="30sp"
+        app:popupTheme="@style/AppTheme.PopupOverlay"/>
 
 </androidx.appcompat.widget.Toolbar>

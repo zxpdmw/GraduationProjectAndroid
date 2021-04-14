@@ -21,12 +21,6 @@
             android:name=".ui.activity.system.DetailHouseActivity"
             android:exported="true"></activity>
         <activity
-            android:name=".ui.activity.system.DetailHouseKeepingActivity"
-            android:exported="true" />
-        <activity
-            android:name=".ui.activity.system.DetailComplainRepairActivity"
-            android:exported="true" />
-        <activity
             android:name=".ui.activity.system.EditInfoActivity"
             android:exported="true" />
         <activity
