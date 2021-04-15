@@ -18,8 +18,11 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="n">
         <activity
-            android:name=".ui.activity.system.DetailHouseActivity"
+            android:name=".ui.activity.system.PublishHouseActivity"
             android:exported="true"></activity>
+        <activity
+            android:name=".ui.activity.system.DetailHouseActivity"
+            android:exported="true" />
         <activity
             android:name=".ui.activity.system.EditInfoActivity"
             android:exported="true" />

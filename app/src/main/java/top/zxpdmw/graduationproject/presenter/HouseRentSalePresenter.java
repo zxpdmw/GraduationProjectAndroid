@@ -3,6 +3,7 @@ package top.zxpdmw.graduationproject.presenter;
 import android.util.Log;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import lombok.SneakyThrows;
 import okhttp3.ResponseBody;
@@ -91,40 +92,115 @@ public class HouseRentSalePresenter implements HouseRentSaleContract.Presenter {
 
     @Override
     public void HousePublish(HouseRentSale houseRentSale) {
-        houseRentSaleModel.HousePublish(houseRentSale, new Callback<ResponseBody>() {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+        if (houseRentSale.getT().equals("rent")){
+            houseRentSaleModel.HouseRentPublish(houseRentSale, new Callback<CommonOne>() {
+                @Override
+                @SneakyThrows
+                public void onResponse(Call<CommonOne> call, Response<CommonOne> response) {
+                        int code=response.body().getCode();
+                        if (code==666){
+                            view.showMsg("房屋发布成功");
+                            TimeUnit.SECONDS.sleep(1);
+                            view.back();
+                        }
+                }
 
-            }
+                @Override
+                public void onFailure(Call<CommonOne> call, Throwable t) {
 
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                }
+            });
+        }else{
+            houseRentSaleModel.HouseSalePublish(houseRentSale, new Callback<CommonOne>() {
+                @Override
+                @SneakyThrows
+                public void onResponse(Call<CommonOne> call, Response<CommonOne> response) {
+                    int code=response.body().getCode();
+                    if (code==666){
+                        view.showMsg("房屋发布成功");
+                        TimeUnit.SECONDS.sleep(1);
+                        view.back();
+                    }
+                }
 
-            }
-        });
+                @Override
+                public void onFailure(Call<CommonOne> call, Throwable t) {
+
+                }
+            });
+        }
+
     }
 
     @Override
     public void DeleteHouse(HouseRentSale houseRentSale) {
-        houseRentSaleModel.DeleteHouse(houseRentSale.getId(), new Callback<CommonOne>() {
-            @Override
-            public void onResponse(Call<CommonOne> call, Response<CommonOne> response) {
-                int code=response.body().getCode();
-                if (code==666){
+        if (houseRentSale.getT().equals("rent")){
+            houseRentSaleModel.DeleteRentHouse(houseRentSale.getId(), new Callback<CommonOne>() {
+                @Override
+                public void onResponse(Call<CommonOne> call, Response<CommonOne> response) {
                     view.delete(houseRentSale);
                 }
-            }
+                @Override
+                public void onFailure(Call<CommonOne> call, Throwable t) {
 
-            @Override
-            public void onFailure(Call<CommonOne> call, Throwable t) {
+                }
+            });
+        }else{
+            houseRentSaleModel.DeleteSaleHouse(houseRentSale.getId(), new Callback<CommonOne>() {
+                @Override
+                public void onResponse(Call<CommonOne> call, Response<CommonOne> response) {
+                    int code=response.body().getCode();
+                    if (code==666){
+                        view.delete(houseRentSale);
+                    }
+                }
 
-            }
-        });
+                @Override
+                public void onFailure(Call<CommonOne> call, Throwable t) {
+
+                }
+            });
+        }
+
     }
 
     @Override
     public void EditHousePrice(HouseRentSale houseRentSale) {
-        view.showMsg("价格修改成功");
-        view.cancel();
+        if (houseRentSale.getT().equals("sale")){
+            houseRentSaleModel.EditHouseSalePrice(houseRentSale.getId(), houseRentSale.getPrice(), new Callback<CommonOne>() {
+                @Override
+                public void onResponse(Call<CommonOne> call, Response<CommonOne> response) {
+                    int code=response.body().getCode();
+                    if (code==666){
+                        view.showMsg("价格修改成功");
+                        view.cancel();
+                        view.updateData();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<CommonOne> call, Throwable t) {
+
+                }
+            });
+        }else{
+            houseRentSaleModel.EditHouseRentPrice(houseRentSale.getId(), houseRentSale.getPrice(), new Callback<CommonOne>() {
+                @Override
+                public void onResponse(Call<CommonOne> call, Response<CommonOne> response) {
+                    int code=response.body().getCode();
+                    if (code==666){
+                        view.showMsg("价格修改成功");
+                        view.cancel();
+                        view.updateData();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<CommonOne> call, Throwable t) {
+
+                }
+            });
+        }
+
     }
 }

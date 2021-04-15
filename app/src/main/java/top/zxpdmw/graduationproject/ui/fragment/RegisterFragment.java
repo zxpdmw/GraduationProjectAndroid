@@ -74,6 +74,16 @@ public class RegisterFragment extends Fragment implements UserContract.View {
                         ToastUtils.show("请输入房屋号");
             return;
         }
+
+       if (11<=username.getText().toString().length()||username.getText().toString().length()<=5){
+           ToastUtils.show("账号长度不合法");
+           return;
+       }
+       if (11<=password.getText().toString().length()||password.getText().toString().length()<=5){
+           ToastUtils.show("密码长度不合法");
+           return;
+       }
+
         user.setHouse_id(houseId.getText().toString());
         userPresenter.RegisterUser(user);
     }
@@ -83,6 +93,7 @@ public class RegisterFragment extends Fragment implements UserContract.View {
         if (username.getText().toString().length()<=5||username.getText().toString().length()>10){
             username.setError("账号长度不合法!");
         }
+
     }
 
     @OnTextChanged(value = R.id.register_password,callback = OnTextChanged.Callback.AFTER_TEXT_CHANGED)

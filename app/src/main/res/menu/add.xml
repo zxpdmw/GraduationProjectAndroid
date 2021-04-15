@@ -14,4 +14,24 @@
         android:orderInCategory="1"
         android:title="添加"
         app:showAsAction="never" />
+    <item
+        android:id="@+id/toolbar_z"
+        android:icon="@mipmap/ic_launcher"
+        android:orderInCategory="1"
+        android:title="一生"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/toolbar_x"
+        android:icon="@mipmap/ic_launcher"
+        android:orderInCategory="1"
+        android:title="一个"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/toolbar_p"
+        android:icon="@mipmap/ic_launcher"
+        android:orderInCategory="1"
+        android:title="张小培"
+        app:showAsAction="never" />
+
 </menu>

@@ -41,6 +41,8 @@ public class PropertyActivity extends AppCompatActivity implements PropertyContr
     Button p200;
     @BindView(R.id.property_300)
     Button p300;
+    @BindView(R.id.textView)
+    TextView qianfei;
 
     private Intent intent;
     private String houseId;
@@ -100,6 +102,10 @@ public class PropertyActivity extends AppCompatActivity implements PropertyContr
 
     @Override
     public void LoadData(String value) {
+        if (Integer.parseInt(value)<0){
+            qianfei.setText("已欠费!请及时缴费");
+            qianfei.setTextColor(getResources().getColor(R.color.red));
+        }
         balance.setText(value);
     }
 
@@ -126,7 +132,6 @@ public class PropertyActivity extends AppCompatActivity implements PropertyContr
     @Override
     public void showMsg(String msg) {
         ToastUtils.show(msg);
-
     }
 
     @Override

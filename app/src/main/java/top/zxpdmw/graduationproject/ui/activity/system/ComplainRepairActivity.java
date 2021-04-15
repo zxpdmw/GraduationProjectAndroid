@@ -3,6 +3,7 @@ package top.zxpdmw.graduationproject.ui.activity.system;
 
 import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -20,6 +21,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -27,6 +29,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import com.hjq.toast.ToastUtils;
 import com.xuexiang.xui.widget.dialog.materialdialog.MaterialDialog;
 import com.yanzhenjie.recyclerview.OnItemClickListener;
 import com.yanzhenjie.recyclerview.OnItemMenuClickListener;
@@ -153,6 +156,18 @@ public class ComplainRepairActivity extends AppCompatActivity implements Complai
                 EditText phone = view.findViewById(R.id.phone);
                 EditText message = view.findViewById(R.id.message);
                 final ComplainRepair complainRepair = new ComplainRepair();
+                if (message.getText().toString().equals("")){
+                    ToastUtils.show("诉求不能为空");
+                    return;
+                }
+                if (address.getText().toString().equals("")){
+                    ToastUtils.show("地址不能为空");
+                    return;
+                }
+                if (phone.getText().toString().equals("")){
+                    ToastUtils.show("电话不能为空");
+                    return;
+                }
                 complainRepair.setAddress(address.getText().toString());
                 complainRepair.setPhone(phone.getText().toString());
                 complainRepair.setCr_type(radioButton.getText().toString());
@@ -219,5 +234,18 @@ public class ComplainRepairActivity extends AppCompatActivity implements Complai
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.add, menu);
         return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.toolbar_add:
+                addComplainRepair();break;
+            case R.id.toolbar_z:
+            case R.id.toolbar_p:
+            case R.id.toolbar_x:
+                ToastUtils.show("一生一个张小培");break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

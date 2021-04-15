@@ -14,6 +14,8 @@ public interface HouseRentSaleContract {
         void add(HouseRentSale houseRentSale);
         void delete(HouseRentSale houseRentSale);
         void cancel();
+        void back();
+        void updateData();
     }
 
     interface Presenter extends BasePresenter{

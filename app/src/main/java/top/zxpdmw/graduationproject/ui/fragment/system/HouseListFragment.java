@@ -75,17 +75,27 @@ public class HouseListFragment extends Fragment implements HouseRentSaleContract
 
     @Override
     public void add(HouseRentSale houseRentSale) {
-
+        houseRentSaleAdapter.add(houseRentSale);
     }
 
     @Override
     public void delete(HouseRentSale houseRentSale) {
-
+        houseRentSaleAdapter.delete(houseRentSale);
     }
 
     @Override
     public void cancel() {
         show.cancel();
+    }
+
+    @Override
+    public void back() {
+
+    }
+
+    @Override
+    public void updateData() {
+        houseRentSaleAdapter.notifyDataSetChanged();
     }
 
     @SneakyThrows
@@ -135,9 +145,8 @@ public class HouseListFragment extends Fragment implements HouseRentSaleContract
                         menuBridge.closeMenu();
                         final int direction = menuBridge.getDirection();
                         if (direction==-1){
-                            houseRentSalePresenter.DeleteHouse(list.get(position));
+                                houseRentSalePresenter.DeleteHouse(list.get(position));
                         }else{
-                            HouseRentSale houseRentSale=list.get(position);
                             final View view1=View.inflate(getActivity(),R.layout.edit_house_price,null);
                             builder=new MaterialDialog.Builder(getActivity());
                             show=builder.customView(view1,false).show();
@@ -147,6 +156,7 @@ public class HouseListFragment extends Fragment implements HouseRentSaleContract
                             edit.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
+                                    HouseRentSale houseRentSale=list.get(position);
                                     houseRentSale.setPrice(new_price.getText().toString());
                                     houseRentSalePresenter.EditHousePrice(houseRentSale);
                                 }

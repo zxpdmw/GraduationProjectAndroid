@@ -1,5 +1,6 @@
 package top.zxpdmw.graduationproject.ui.activity.system;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentManager;
@@ -69,13 +70,6 @@ public class HouseRentSaleActivity extends AppCompatActivity implements View.OnC
             overridePendingTransition(R.anim.in_from_left, R.anim.out_of_right);
         });
 
-        toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                ToastUtils.show("被点击了");
-                return false;
-            }
-        });
 
         house_sale.setOnClickListener(this);
         house_rent.setOnClickListener(this);
@@ -148,4 +142,24 @@ public class HouseRentSaleActivity extends AppCompatActivity implements View.OnC
         getMenuInflater().inflate(R.menu.add, menu);
         return true;
     }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.toolbar_add:
+                final Intent intent = new Intent(this, PublishHouseActivity.class);
+                intent.putExtra("username",this.bundle.getString("username"));
+                startActivity(intent);
+                overridePendingTransition(R.anim.in_from_right, R.anim.out_of_left);
+                break;
+            case R.id.toolbar_z:
+            case R.id.toolbar_x:
+            case R.id.toolbar_p:
+                ToastUtils.show("一生一个张小培");break;
+
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+
 }

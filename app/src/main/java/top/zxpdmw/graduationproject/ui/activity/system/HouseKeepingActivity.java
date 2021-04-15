@@ -2,6 +2,7 @@ package top.zxpdmw.graduationproject.ui.activity.system;
 
 import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -14,6 +15,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -22,6 +24,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import com.hjq.toast.ToastUtils;
 import com.xuexiang.xui.widget.dialog.materialdialog.MaterialDialog;
 import com.yanzhenjie.recyclerview.OnItemClickListener;
 import com.yanzhenjie.recyclerview.OnItemMenuClickListener;
@@ -107,6 +110,18 @@ public class HouseKeepingActivity extends AppCompatActivity implements HouseKeep
                 EditText address = view.findViewById(R.id.address);
                 EditText phone = view.findViewById(R.id.phone);
                 EditText message = view.findViewById(R.id.message);
+                if (message.getText().toString().equals("")){
+                    ToastUtils.show("诉求不能为空");
+                    return;
+                }
+                if (address.getText().toString().equals("")){
+                    ToastUtils.show("地址不能为空");
+                    return;
+                }
+                if (phone.getText().toString().equals("")){
+                    ToastUtils.show("电话不能为空");
+                    return;
+                }
                 final HouseKeeping houseKeeping = new HouseKeeping();
                 houseKeeping.setHk_type(message.getText().toString());
                 houseKeeping.setAddress(address.getText().toString());
@@ -220,5 +235,17 @@ public class HouseKeepingActivity extends AppCompatActivity implements HouseKeep
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.add, menu);
         return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.toolbar_add:
+                addHouseKeeping();break;
+            case R.id.toolbar_z:
+            case R.id.toolbar_p:
+            case R.id.toolbar_x:
+                ToastUtils.show("一生一个张小培");break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

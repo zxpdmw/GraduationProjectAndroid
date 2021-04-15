@@ -1,5 +1,9 @@
 package top.zxpdmw.graduationproject.model;
 
+import androidx.lifecycle.LiveData;
+
+import java.util.List;
+
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -14,13 +18,15 @@ import top.zxpdmw.graduationproject.http.HttpManager;
 import top.zxpdmw.graduationproject.util.ConstUtil;
 
 public class HouseRentSaleModel {
-    public static final String HOUSE_RENT_SALE="houserentsale/all";
-    public static final String HOUSE_RENT="houserentsale/rent";
-    public static final String HOUSE_SALE="houserentsale/sale";
-    public static final String HOUSE_RENT_SALE_PUBLISH="houserentsale/publishe";
-    public static final String HOUSE_RENT_SALE_DELETE="houserentsale/delete";
-    public static final String HOUSE_RENT_SALE_EDIT_HOUSE="houserentsale/edit";
-    public static final String HOUSE_RENT_SALE_USERNAME="houserentsale/get";
+    public static final String HOUSE_RENT="rent/all";
+    public static final String HOUSE_SALE="sale/all";
+    public static final String HOUSE_RENT_PUBLISH="rent/publish";
+    public static final String HOUSE_SALE_PUBLISH="sale/publish";
+    public static final String HOUSE_RENT_DELETE="rent/delete";
+    public static final String HOUSE_SALE_DELETE="sale/delete";
+    public static final String HOUSE_RENT_EDIT_HOUSE="rent/editprice";
+    public static final String HOUSE_SALE_EDIT_HOUSE="sale/editprice";
+    public static final String USER_ALL_HOUSE="user/allhouse";
     final HouseRentSaleHttp houseRentSaleHttp = HttpManager.retrofit.create(HouseRentSaleHttp.class);
 
     public void HouseRent(Callback<CommonList<HouseRentSale>> callback){
@@ -31,20 +37,31 @@ public class HouseRentSaleModel {
         houseRentSaleHttp.HouseSale().enqueue(callback);
     }
 
-    public void HousePublish(HouseRentSale houseRentSale,Callback<ResponseBody> callback){
-        houseRentSaleHttp.HousePublish(houseRentSale).enqueue(callback);
+    public void HouseSalePublish(HouseRentSale houseRentSale,Callback<CommonOne> callback){
+        houseRentSaleHttp.SalePublish(houseRentSale).enqueue(callback);
+    }
+    public void HouseRentPublish(HouseRentSale houseRentSale,Callback<CommonOne> callback){
+        houseRentSaleHttp.RentPublish(houseRentSale).enqueue(callback);
     }
 
     public void HouseByUsername(String username,Callback<CommonList<HouseRentSale>> callback){
         houseRentSaleHttp.HouseByUsername(username).enqueue(callback);
     }
 
-    public void EditHouseRentSale(HouseRentSale houseRentSale, Callback<CommonOne<HouseRentSale>> callback){
-        houseRentSaleHttp.HouseEdit(houseRentSale).enqueue(callback);
+
+    public void DeleteSaleHouse(Integer id, Callback<CommonOne> callback){
+        houseRentSaleHttp.SaleHouseDelete(id).enqueue(callback);
     }
 
-    public void DeleteHouse(Integer id, Callback<CommonOne> callback){
-        houseRentSaleHttp.HouseDelete(id).enqueue(callback);
+    public void DeleteRentHouse(Integer id, Callback<CommonOne> callback){
+        houseRentSaleHttp.RentHouseDelete(id).enqueue(callback);
+    }
+
+    public void EditHouseRentPrice(Integer id,String price,Callback<CommonOne> callback){
+        houseRentSaleHttp.EditRentHousePrice(id,price).enqueue(callback);
+    }
+    public void EditHouseSalePrice(Integer id,String price,Callback<CommonOne> callback){
+        houseRentSaleHttp.EditSaleHousePrice(id,price).enqueue(callback);
     }
 
     interface HouseRentSaleHttp {
@@ -54,20 +71,26 @@ public class HouseRentSaleModel {
         @GET(HOUSE_SALE)
         Call<CommonList<HouseRentSale>> HouseSale();
 
-        @GET(HOUSE_RENT_SALE)
-        Call<CommonList<HouseRentSale>> HouseRentSale();
+        @POST(HOUSE_SALE_PUBLISH)
+        Call<CommonOne> SalePublish(@Body HouseRentSale houseRentSale);
 
-        @POST(HOUSE_RENT_SALE_PUBLISH)
-        Call<ResponseBody> HousePublish(@Body HouseRentSale houseRentSale);
+        @POST(HOUSE_RENT_PUBLISH)
+        Call<CommonOne> RentPublish(@Body HouseRentSale houseRentSale);
 
-        @POST(HOUSE_RENT_SALE_EDIT_HOUSE)
-        Call<CommonOne<HouseRentSale>> HouseEdit(@Body HouseRentSale houseRentSale);
-
-        @GET(HOUSE_RENT_SALE_USERNAME)
+        @GET(USER_ALL_HOUSE)
         Call<CommonList<HouseRentSale>> HouseByUsername(@Query("username")String username);
 
-        @GET(HOUSE_RENT_SALE_DELETE)
-        Call<CommonOne> HouseDelete(@Query("id")Integer id);
+        @GET(HOUSE_SALE_DELETE)
+        Call<CommonOne> SaleHouseDelete(@Query("id")Integer id);
+
+        @GET(HOUSE_RENT_DELETE)
+        Call<CommonOne> RentHouseDelete(@Query("id")Integer id);
+
+        @GET(HOUSE_RENT_EDIT_HOUSE)
+        Call<CommonOne> EditRentHousePrice(@Query("id")Integer id,@Query("price")String price);
+
+        @GET(HOUSE_SALE_EDIT_HOUSE)
+        Call<CommonOne> EditSaleHousePrice(@Query("id")Integer id,@Query("price")String price);
     }
 
 }

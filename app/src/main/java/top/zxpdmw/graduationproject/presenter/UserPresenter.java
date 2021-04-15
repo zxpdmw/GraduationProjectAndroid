@@ -68,7 +68,6 @@ public class UserPresenter implements UserContract.Presenter {
                 int code = response.body().getCode();
                 String msg = response.body().getMessage();
                 if (code == 666) {
-                    view.showMsg(ConstUtil.TO_LOGIN_ACTIVITY);
                     TimeUnit.SECONDS.sleep(1);
                     view.switchFragment();
                 } else {

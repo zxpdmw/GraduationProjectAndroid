@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -20,6 +21,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import top.zxpdmw.graduationproject.R;
+import top.zxpdmw.graduationproject.bean.HouseRentSale;
 import top.zxpdmw.graduationproject.ui.view.LocalImageHolderView;
 
 public class DetailHouseActivity extends AppCompatActivity {
@@ -30,6 +32,22 @@ public class DetailHouseActivity extends AppCompatActivity {
     @BindView(R.id.convenientBanner)
     ConvenientBanner convenientBanner;
     List<Integer> list = new ArrayList<>();
+    @BindView(R.id.house_price)
+    TextView price;
+    @BindView(R.id.house_message)
+    TextView message;
+    @BindView(R.id.chaoxiang_xinxi)
+    TextView chaoxiang;
+    @BindView(R.id.louceng_xinxi)
+    TextView louceng;
+    @BindView(R.id.ruzhu_xinxi)
+    TextView ruzhu;
+    @BindView(R.id.mianji_xinxi)
+    TextView mianji;
+    @BindView(R.id.xiaoqu_xinxi)
+    TextView xiaoqu;
+    @BindView(R.id.dianhua_xinxi)
+    TextView dianhua;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +74,19 @@ public class DetailHouseActivity extends AppCompatActivity {
                 .startTurning(2000)
                 //设置指示器的方向（左、中、右）
                 .setPageIndicatorAlign(ConvenientBanner.PageIndicatorAlign.ALIGN_PARENT_RIGHT);
+        HouseRentSale house= (HouseRentSale) getIntent().getSerializableExtra("house");
+        xiaoqu.setText(house.getAddress());
+        dianhua.setText(house.getPhone());
+        if (house.getT().equals("sale")){
+            price.setText(house.getPrice() + "元/平");
+        }else{
+            price.setText(house.getPrice()+"元/月");
+        }
+        chaoxiang.setText(house.getOrientation());
+        louceng.setText(house.getFloor());
+        mianji.setText(house.getArea()+"㎡");
+        ruzhu.setText(house.getRuzhu());
+        message.setText(house.getMessage());
     }
 
     private void initToolbar(){

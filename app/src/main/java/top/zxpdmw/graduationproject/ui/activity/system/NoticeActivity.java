@@ -63,15 +63,7 @@ public class NoticeActivity extends AppCompatActivity implements NoticeContract.
                 overridePendingTransition(R.anim.in_from_right, R.anim.out_of_left);
             }
         });
-//        noticeAdapter.setOnItemClickListener(new ItemClickListener() {
-//            @Override
-//            public void OnItemClickListener(int position) {
-//                Intent intent = new Intent(NoticeActivity.this, DetailNoticeActivity.class);
-//                intent.putExtra("notice", noticeList.get(position));
-//                startActivity(intent);
-//                overridePendingTransition(R.anim.in_from_right, R.anim.out_of_left);
-//            }
-//        });
+
 
         recyclerView.setAdapter(noticeAdapter);
     }

@@ -38,7 +38,11 @@ public class HouseRentSaleAdapter extends RecyclerView.Adapter<HouseRentSaleAdap
         HouseRentSale houseRentSale = houseRentSales.get(position);
         holder.imageView.setBackgroundResource(R.drawable.touxiang);
         holder.message.setText(houseRentSale.getMessage());
-        holder.price.setText(houseRentSale.getPrice()+"元/月");
+        if (houseRentSale.getT().equals("sale")){
+            holder.price.setText(houseRentSale.getPrice() + "元/平");
+        }else {
+            holder.price.setText(houseRentSale.getPrice() + "元/月");
+        }
         holder.price.setTextColor(R.color.red);
     }
 

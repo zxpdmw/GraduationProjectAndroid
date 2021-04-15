@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.activity.system.PublishHouseActivity">
+
+    <include
+        android:id="@id/toolbar"
+        layout="@layout/toolbar" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/toolbar"
+        android:layout_above="@+id/publish"
+        android:layout_marginBottom="20dp">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/toolbar">
+
+            <TextView
+                android:id="@+id/xinxi_publish"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="10dp"
+                android:text="信息发布"
+                android:textColor="@color/black"
+                android:textSize="40sp" />
+
+
+            <TextView
+                android:id="@+id/city"
+                style="@style/house_text"
+                android:layout_below="@+id/xinxi_publish"
+                android:text="所在城市" />
+
+
+            <EditText
+                android:id="@+id/city_xinxi"
+                style="@style/house_edit"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/xinxi_publish"
+                android:layout_toRightOf="@id/city"
+                android:background="@null"
+                android:hint="请输入城市" />
+
+            <View
+                android:id="@id/one"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@id/city"
+                android:layout_marginTop="20dp"
+                android:background="@color/hui" />
+
+            <TextView
+                android:id="@+id/xiaoqu"
+                style="@style/house_text"
+                android:layout_below="@id/one"
+                android:text="所在小区" />
+
+
+            <EditText
+                android:id="@+id/xiaoqu_xinxi"
+                style="@style/house_edit"
+                android:layout_below="@id/one"
+                android:layout_toRightOf="@id/xiaoqu"
+                android:hint="请输入小区"
+                android:textColorHint="@color/hui" />
+
+
+            <View
+                android:id="@id/two"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@id/xiaoqu"
+                android:layout_marginTop="20dp"
+                android:background="@color/hui" />
+
+            <TextView
+                android:id="@+id/juti"
+                style="@style/house_text"
+                android:layout_below="@+id/two"
+                android:text="具体地址" />
+
+            <EditText
+                android:id="@+id/juti_xinxi"
+                style="@style/house_edit"
+                android:layout_below="@+id/two"
+                android:layout_toRightOf="@+id/juti"
+                android:hint="请输入地址" />
+
+            <View
+                android:id="@id/three"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@id/juti"
+                android:layout_marginTop="20dp"
+                android:background="@color/hui" />
+
+            <TextView
+                style="@style/house_text"
+                android:layout_below="@id/three"
+                android:text="期望租金" />
+
+            <EditText
+                android:id="@+id/price"
+                style="@style/house_edit"
+                android:layout_below="@+id/three"
+                android:layout_toRightOf="@+id/city"
+                android:inputType="number"
+                android:hint="请输入期望租金" />
+
+            <View
+                android:id="@id/four"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@id/price"
+                android:layout_marginTop="20dp"
+                android:background="@color/hui" />
+
+            <TextView
+                style="@style/house_text"
+                android:layout_below="@id/four"
+                android:text="处置方式" />
+
+            <TextView
+                android:id="@+id/zufangleixing"
+                style="@style/house_edit"
+                android:layout_below="@id/four"
+                android:layout_marginLeft="20dp"
+                android:layout_toRightOf="@id/city"
+                android:text="整租" />
+
+
+            <View
+                android:id="@id/five"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@id/zufangleixing"
+                android:layout_marginTop="20dp"
+                android:background="@color/hui" />
+
+            <TextView
+                android:id="@+id/xiangqing"
+                style="@style/house_text"
+                android:text="房屋简介"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/five"/>
+
+            <EditText
+                android:id="@+id/xiangqing_xinxi"
+                style="@style/house_edit"
+                android:hint="请输入房屋简介"
+                android:layout_below="@id/five"
+                android:layout_toRightOf="@id/xiangqing"/>
+
+            <View
+                android:id="@id/six"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@id/xiangqing"
+                android:layout_marginTop="20dp"
+                android:background="@color/hui" />
+
+            <TextView
+                android:id="@+id/chaoxiang"
+                style="@style/house_text"
+                android:text="房屋朝向"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/six"/>
+
+            <EditText
+                android:id="@id/chaoxiang_xinxi"
+                android:layout_below="@id/six"
+                style="@style/house_edit"
+                android:hint="请输入房屋朝向"
+                android:layout_toRightOf="@id/chaoxiang"/>
+
+
+            <View
+                android:id="@id/seven"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@id/chaoxiang"
+                android:layout_marginTop="20dp"
+                android:background="@color/hui" />
+
+            <TextView
+                style="@style/house_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/seven"
+                android:text="房屋楼层" />
+
+            <EditText
+                android:id="@+id/louceng_xinxi"
+                style="@style/house_edit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/seven"
+                android:layout_toRightOf="@+id/city"
+                android:inputType="number"
+                android:hint="请输入楼层" />
+
+            <View
+                android:id="@id/eight"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@id/louceng_xinxi"
+                android:layout_marginTop="20dp"
+                android:background="@color/hui" />
+
+            <TextView
+                style="@style/house_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/eight"
+                android:text="入住情况" />
+
+            <EditText
+                android:id="@+id/ruzhu_xinxi"
+                style="@style/house_edit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/eight"
+                android:layout_toRightOf="@+id/city"
+                android:hint="请输入入住情况" />
+
+            <View
+                android:id="@id/nine"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@id/ruzhu_xinxi"
+                android:layout_marginTop="20dp"
+                android:background="@color/hui" />
+
+            <TextView
+                style="@style/house_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/nine"
+                android:text="联系方式" />
+
+            <EditText
+                android:id="@+id/phone_xinxi"
+                style="@style/house_edit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/nine"
+                android:layout_toRightOf="@+id/city"
+                android:inputType="number"
+                android:hint="请输入联系方式" />
+        </RelativeLayout>
+    </ScrollView>
+
+
+
+
+    <Button
+        android:id="@+id/publish"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/unlogin"
+        android:text="发布房屋"
+        android:textSize="40sp" />
+
+</RelativeLayout>
