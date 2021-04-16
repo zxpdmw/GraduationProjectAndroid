@@ -110,6 +110,14 @@ public class PropertyActivity extends AppCompatActivity implements PropertyContr
     }
 
     @Override
+    public void checkProperty() {
+        if (Integer.parseInt(balance.getText().toString())>0){
+            qianfei.setTextColor(getResources().getColor(R.color.black));
+            qianfei.setText("暂未查询到欠费");
+       }
+    }
+
+    @Override
     public void dismissLoading() {
 
     }

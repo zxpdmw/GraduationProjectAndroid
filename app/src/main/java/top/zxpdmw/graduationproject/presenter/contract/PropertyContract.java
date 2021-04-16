@@ -7,6 +7,7 @@ public interface PropertyContract {
 
     interface View extends BaseView{
         void LoadData(String property);
+        void checkProperty();
     }
 
     interface Presenter extends BasePresenter{

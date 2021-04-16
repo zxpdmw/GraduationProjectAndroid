@@ -58,6 +58,7 @@ public class PropertyPresenter implements PropertyContract.Presenter {
                     String data = jsonObject.getString("data");
                     Log.d(TAG, data);
                     view.LoadData(data);
+                    view.checkProperty();
                 }
                 Log.d(TAG, message);
                 view.showMsg(message);
